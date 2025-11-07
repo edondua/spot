@@ -1,0 +1,961 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project Spotted.xcodeproj -scheme Spotted -sdk iphonesimulator build
+
+Build settings from command line:
+    SDKROOT = iphonesimulator26.0
+
+2025-11-08 00:35:38.493 xcodebuild[11027:1460861] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, id:dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder, name:Any iOS Simulator Device }
+{ platform:iOS Simulator, arch:arm64, id:2B0A8335-562C-456F-8732-8E9D351704F7, OS:18.5, name:iPad (A16) }
+{ platform:iOS Simulator, arch:x86_64, id:2B0A8335-562C-456F-8732-8E9D351704F7, OS:18.5, name:iPad (A16) }
+{ platform:iOS Simulator, arch:arm64, id:742D2070-9508-4BA7-95F9-E0860FBF40BE, OS:26.0.1, name:iPad (A16) }
+{ platform:iOS Simulator, arch:arm64, id:2AB5E74D-81AC-4504-A851-767715BBA5B8, OS:18.5, name:iPad Air 11-inch (M3) }
+{ platform:iOS Simulator, arch:x86_64, id:2AB5E74D-81AC-4504-A851-767715BBA5B8, OS:18.5, name:iPad Air 11-inch (M3) }
+{ platform:iOS Simulator, arch:arm64, id:8D9C30F7-DBA1-43D2-A4D6-88210B12BC49, OS:26.0.1, name:iPad Air 11-inch (M3) }
+{ platform:iOS Simulator, arch:arm64, id:D8FC6734-7BDA-4501-827A-54C02826FE77, OS:18.5, name:iPad Air 13-inch (M3) }
+{ platform:iOS Simulator, arch:x86_64, id:D8FC6734-7BDA-4501-827A-54C02826FE77, OS:18.5, name:iPad Air 13-inch (M3) }
+{ platform:iOS Simulator, arch:arm64, id:0AAA0137-E989-408F-87CB-D2BA0BF97450, OS:26.0.1, name:iPad Air 13-inch (M3) }
+{ platform:iOS Simulator, arch:arm64, id:97536098-B3B6-4AA6-A937-8219D9B24E79, OS:18.5, name:iPad Pro 11-inch (M4) }
+{ platform:iOS Simulator, arch:x86_64, id:97536098-B3B6-4AA6-A937-8219D9B24E79, OS:18.5, name:iPad Pro 11-inch (M4) }
+{ platform:iOS Simulator, arch:arm64, id:6FD05883-8537-4BB2-9E3A-3C5E2B3AC650, OS:26.0.1, name:iPad Pro 11-inch (M4) }
+{ platform:iOS Simulator, arch:arm64, id:C0287F5D-409F-4C27-A72F-56810F1CE2EB, OS:18.5, name:iPad Pro 13-inch (M4) }
+{ platform:iOS Simulator, arch:x86_64, id:C0287F5D-409F-4C27-A72F-56810F1CE2EB, OS:18.5, name:iPad Pro 13-inch (M4) }
+{ platform:iOS Simulator, arch:arm64, id:E88B3031-507E-42AE-AED4-F2BF8EBD7647, OS:26.0.1, name:iPad Pro 13-inch (M4) }
+{ platform:iOS Simulator, arch:arm64, id:F1746185-9A74-43AB-9983-61923A4916AA, OS:18.5, name:iPad mini (A17 Pro) }
+{ platform:iOS Simulator, arch:x86_64, id:F1746185-9A74-43AB-9983-61923A4916AA, OS:18.5, name:iPad mini (A17 Pro) }
+{ platform:iOS Simulator, arch:arm64, id:1F05FA2B-C4B3-4E58-A99A-ED659DF15EE1, OS:26.0.1, name:iPad mini (A17 Pro) }
+{ platform:iOS Simulator, arch:arm64, id:0DB81596-2EA9-4EF1-82DE-E7F5CC128F25, OS:18.5, name:iPhone 16 }
+{ platform:iOS Simulator, arch:x86_64, id:0DB81596-2EA9-4EF1-82DE-E7F5CC128F25, OS:18.5, name:iPhone 16 }
+{ platform:iOS Simulator, arch:arm64, id:41D948B7-D6D4-486D-AF2A-AA12F773193B, OS:18.5, name:iPhone 16 Plus }
+{ platform:iOS Simulator, arch:x86_64, id:41D948B7-D6D4-486D-AF2A-AA12F773193B, OS:18.5, name:iPhone 16 Plus }
+{ platform:iOS Simulator, arch:arm64, id:8BFE978C-8B3A-49EA-B6D7-C79796386AE0, OS:18.5, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:8BFE978C-8B3A-49EA-B6D7-C79796386AE0, OS:18.5, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:arm64, id:6EA3B018-9273-4B1B-8018-81BF8C602BC6, OS:18.5, name:iPhone 16 Pro Max }
+{ platform:iOS Simulator, arch:x86_64, id:6EA3B018-9273-4B1B-8018-81BF8C602BC6, OS:18.5, name:iPhone 16 Pro Max }
+{ platform:iOS Simulator, arch:arm64, id:92C999C3-F96F-461F-A778-178357C91130, OS:18.5, name:iPhone 16e }
+{ platform:iOS Simulator, arch:x86_64, id:92C999C3-F96F-461F-A778-178357C91130, OS:18.5, name:iPhone 16e }
+{ platform:iOS Simulator, arch:arm64, id:E4AE0A9F-59D9-479F-89C7-698F2623499A, OS:26.0.1, name:iPhone 16e }
+{ platform:iOS Simulator, arch:arm64, id:E637A316-D1BA-47A9-92D4-9DB83669F4AC, OS:26.0.1, name:iPhone 17 }
+{ platform:iOS Simulator, arch:arm64, id:2A9A1625-3D57-4CD5-B59D-0235CC78DBCF, OS:26.0.1, name:iPhone 17 Pro }
+{ platform:iOS Simulator, arch:arm64, id:21200347-4741-4BFC-9FCA-F6F4192CEB7D, OS:26.0.1, name:iPhone 17 Pro Max }
+{ platform:iOS Simulator, arch:arm64, id:DE0C31BD-C94A-455E-AAB9-6FB7AB84406D, OS:26.0.1, name:iPhone Air }
+{ platform:iOS, id:dvtdevice-DVTiPhonePlaceholder-iphoneos:placeholder, name:Any iOS Device }
+{ platform:iOS, arch:arm64, id:00008120-000C2DA13C87C01E, name:dua.com  }
+{ platform:iOS, arch:arm64, id:00008150-000279963C00401C, name:Edon’s iPhone }
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'Spotted' in project 'Spotted' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Resources/Assets.xcassets
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: 99494edc37602d10a8d3a26cc7368c46
+Build description path: /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/XCBuildData/99494edc37602d10a8d3a26cc7368c46.xcbuilddata
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-26257891a6c027eb51374368541b8346.sdkstatcache
+    cd /Users/doruntinaramadani/Desktop/Spotted/Spotted.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-26257891a6c027eb51374368541b8346.sdkstatcache
+
+CreateBuildDirectory /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+    cd /Users/doruntinaramadani/Desktop/Spotted/Spotted.xcodeproj
+    builtin-create-build-directory /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+
+CreateBuildDirectory /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator
+    cd /Users/doruntinaramadani/Desktop/Spotted/Spotted.xcodeproj
+    builtin-create-build-directory /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted-25a16e3f4eef9f5a2b241103bf76a9b8-VFS-iphonesimulator/all-product-headers.yaml
+    cd /Users/doruntinaramadani/Desktop/Spotted/Spotted.xcodeproj
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted-25a16e3f4eef9f5a2b241103bf76a9b8-VFS-iphonesimulator/all-product-headers.yaml
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-project-headers.hmap (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-project-headers.hmap
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-all-target-headers.hmap (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-all-target-headers.hmap
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.hmap (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.hmap
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-DebugDylibPath-normal-x86_64.txt (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-DebugDylibPath-normal-x86_64.txt
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-own-target-headers.hmap (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-own-target-headers.hmap
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-DebugDylibPath-normal-arm64.txt (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-DebugDylibPath-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-all-non-framework-target-headers.hmap (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-generated-files.hmap (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-generated-files.hmap
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.DependencyStaticMetadataFileList (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.DependencyMetadataFileList (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-DebugDylibInstallName-normal-arm64.txt (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-DebugDylibInstallName-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-DebugDylibInstallName-normal-x86_64.txt (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-DebugDylibInstallName-normal-x86_64.txt
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.SwiftFileList (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.SwiftFileList
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.LinkFileList (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.LinkFileList
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted_const_extract_protocols.json (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.SwiftConstValuesFileList (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted-OutputFileMap.json (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted_const_extract_protocols.json (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.SwiftFileList (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.SwiftFileList
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.SwiftConstValuesFileList (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.LinkFileList (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.LinkFileList
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted-OutputFileMap.json (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/Entitlements-Simulated.plist (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    write-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/Entitlements-Simulated.plist
+
+MkDir /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /bin/mkdir -p /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app
+
+ProcessProductPackaging "" /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+    Entitlements:
+    
+    {
+    "application-identifier" = "P9NDFKM3RA.com.spotteasdaad.app";
+}
+    
+    builtin-productPackagingUtility -entitlements -format xml -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent
+
+ProcessProductPackagingDER /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent.der (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /usr/bin/derq query -f xml -i /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent.der --raw
+
+GenerateAssetSymbols /Users/doruntinaramadani/Desktop/Spotted/Spotted/Resources/Assets.xcassets (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/doruntinaramadani/Desktop/Spotted/Spotted/Resources/Assets.xcassets --compile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app --output-format human-readable-text --notices --warnings --export-dependency-info /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_dependencies --output-partial-info-plist /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_generated_info.plist --compress-pngs --enable-on-demand-resources YES --development-region en --target-device iphone --target-device ipad --minimum-deployment-target 17.0 --platform iphonesimulator --bundle-identifier com.spotteasdaad.app --generate-swift-asset-symbol-extensions NO --generate-swift-asset-symbols /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/GeneratedAssetSymbols.swift --generate-objc-asset-symbols /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/GeneratedAssetSymbols.h --generate-asset-symbol-index /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/* com.apple.actool.compilation-results */
+/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/GeneratedAssetSymbols.h
+/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/GeneratedAssetSymbols.swift
+
+
+Ld /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Binary/__preview.dylib normal x86_64 (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target x86_64-apple-ios17.0-simulator -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -O0 -L/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -install_name @rpath/Spotted.debug.dylib -dead_strip -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted_dependency_info.dat -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent.der -Xlinker -no_adhoc_codesign -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Binary/__preview.dylib
+
+Ld /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Binary/__preview.dylib normal arm64 (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0-simulator -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -O0 -L/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -install_name @rpath/Spotted.debug.dylib -dead_strip -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted_dependency_info.dat -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent.der -Xlinker -no_adhoc_codesign -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Binary/__preview.dylib
+
+MkDir /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_output/unthinned (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /bin/mkdir -p /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_output/unthinned
+
+MkDir /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_output/thinned (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /bin/mkdir -p /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_output/thinned
+
+CompileAssetCatalogVariant thinned /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app /Users/doruntinaramadani/Desktop/Spotted/Spotted/Resources/Assets.xcassets (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/doruntinaramadani/Desktop/Spotted/Spotted/Resources/Assets.xcassets --compile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_output/thinned --output-format human-readable-text --notices --warnings --export-dependency-info /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_dependencies_thinned --output-partial-info-plist /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_generated_info.plist_thinned --compress-pngs --enable-on-demand-resources YES --development-region en --target-device iphone --target-device ipad --minimum-deployment-target 17.0 --platform iphonesimulator
+objc[11063]: Class _NoAnimationDelegate is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_23A8464/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.0.simruntime/Contents/Resources/RuntimeRoot/System/Library/Frameworks/SwiftUICore.framework/SwiftUICore (0x1414f4130) and /Library/Developer/CoreSimulator/Volumes/iOS_23A8464/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.0.simruntime/Contents/Resources/RuntimeRoot/System/Library/PrivateFrameworks/UIKitCore.framework/UIKitCore (0x13e65d198). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+/* com.apple.actool.compilation-results */
+/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_generated_info.plist_thinned
+/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_output/thinned/Assets.car
+
+
+SwiftDriver Spotted normal arm64 com.apple.xcode.tools.swift.compiler (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Spotted -Onone -enforce-exclusivity\=checked @/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-26257891a6c027eb51374368541b8346.sdkstatcache -output-file-map /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted_const_extract_protocols.json -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-generated-files.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-own-target-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-all-target-headers.hmap -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-project-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources-normal/arm64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/arm64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources -emit-objc-header -emit-objc-header-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted-Swift.h -working-directory /Users/doruntinaramadani/Desktop/Spotted -experimental-emit-module-separately -disable-cmo
+
+SwiftDriver Spotted normal x86_64 com.apple.xcode.tools.swift.compiler (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Spotted -Onone -enforce-exclusivity\=checked @/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -target x86_64-apple-ios17.0-simulator -g -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-26257891a6c027eb51374368541b8346.sdkstatcache -output-file-map /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted_const_extract_protocols.json -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-generated-files.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-own-target-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-all-target-headers.hmap -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-project-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources-normal/x86_64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/x86_64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources -emit-objc-header -emit-objc-header-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted-Swift.h -working-directory /Users/doruntinaramadani/Desktop/Spotted -experimental-emit-module-separately -disable-cmo
+
+CreateUniversalBinary /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/__preview.dylib normal arm64\ x86_64 (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo -create /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Binary/__preview.dylib /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Binary/__preview.dylib -output /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/__preview.dylib
+
+LinkAssetCatalog /Users/doruntinaramadani/Desktop/Spotted/Spotted/Resources/Assets.xcassets (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-linkAssetCatalog --thinned /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_output/thinned --thinned-dependencies /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_dependencies_thinned --thinned-info-plist-content /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_generated_info.plist_thinned --unthinned /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_output/unthinned --unthinned-dependencies /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_dependencies_unthinned --unthinned-info-plist-content /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_generated_info.plist_unthinned --output /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app --plist-output /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_generated_info.plist
+note: Emplaced /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Assets.car (in target 'Spotted' from project 'Spotted')
+
+ProcessInfoPlistFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Info.plist /Users/doruntinaramadani/Desktop/Spotted/Spotted/Info.plist (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-infoPlistUtility /Users/doruntinaramadani/Desktop/Spotted/Spotted/Info.plist -producttype com.apple.product-type.application -genpkginfo /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/assetcatalog_generated_info.plist -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Info.plist
+
+SwiftCompile normal x86_64 Compiling\ Accessibility.swift,\ CheckInView.swift,\ DataRepository.swift,\ EditProfileView.swift,\ Buttons.swift,\ HapticFeedback.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Accessibility.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CheckInView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Repositories/DataRepository.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/EditProfileView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Buttons.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Utilities/HapticFeedback.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Accessibility.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CheckInView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Repositories/DataRepository.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/EditProfileView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Buttons.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Utilities/HapticFeedback.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 Compiling\ CategoryDetailView.swift,\ Dialogs.swift,\ AppConstants.swift,\ SkeletonView.swift,\ Story.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Discover/CategoryDetailView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Dialogs.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Constants/AppConstants.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/SkeletonView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Story.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Discover/CategoryDetailView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Dialogs.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Constants/AppConstants.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/SkeletonView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Story.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 Compiling\ MatchesView.swift,\ StoryCreationView.swift,\ SettingsView.swift,\ DesignTokens.swift,\ CheckInViewWithMap.swift,\ OnboardingView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/MatchesView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/StoryCreationView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/SettingsView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/DesignTokens.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CheckInViewWithMap.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Onboarding/OnboardingView.swift (in target 'Spotted' from project 'Spotted')
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/MatchesView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/StoryCreationView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/SettingsView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/DesignTokens.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CheckInViewWithMap.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Onboarding/OnboardingView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 Compiling\ LocationManager.swift,\ Date+Extensions.swift,\ User.swift,\ LocationDetailView.swift,\ TestDesignSystemView.swift,\ QuickCheckInButton.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Services/LocationManager.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Extensions/Date+Extensions.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/User.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/LocationDetailView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/TestDesignSystemView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/QuickCheckInButton.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Services/LocationManager.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Extensions/Date+Extensions.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/User.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/LocationDetailView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/TestDesignSystemView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/QuickCheckInButton.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 Compiling\ ProfileImageView.swift,\ ToastView.swift,\ PhotoPickerView.swift,\ Cards.swift,\ CameraCaptureView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/ProfileImageView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/ToastView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/PhotoPickerView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Cards.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CameraCaptureView.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/ProfileImageView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/ToastView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/PhotoPickerView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Cards.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CameraCaptureView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 Compiling\ Category.swift,\ MatchCelebrationView.swift,\ LoadingStates.swift,\ AppViewModel.swift,\ TextFields.swift,\ CheckInDetailView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Category.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/MatchCelebrationView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/LoadingStates.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/ViewModels/AppViewModel.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/TextFields.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CheckInDetailView.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Category.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/MatchCelebrationView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/LoadingStates.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/ViewModels/AppViewModel.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/TextFields.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CheckInDetailView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 Compiling\ ChatView.swift,\ ChatContainerView.swift,\ View+Extensions.swift,\ SpottedAppModern.swift,\ GeneratedAssetSymbols.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/ChatView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/ChatContainerView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Extensions/View+Extensions.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/App/SpottedAppModern.swift /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/ChatView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/ChatView.swift:698:41: warning: 'requestRecordPermission' was deprecated in iOS 17.0: Please use AVAudioApplication requestRecordPermissionWithCompletionHandler
+        AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                                        ^
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/ChatContainerView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/ChatContainerView.swift:17:20: warning: value 'user' was defined but never used; consider replacing with boolean test
+            if let user = otherUser {
+               ~~~~^~~~~~~
+                                    != nil
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Extensions/View+Extensions.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/App/SpottedAppModern.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 Compiling\ Typography.swift,\ ViewModifiers.swift,\ AppViewModelModern.swift,\ ActivityFeedView.swift,\ MapView.swift,\ Badges.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Typography.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/ViewModifiers.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/ViewModels/AppViewModelModern.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Discover/ActivityFeedView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Map/MapView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Badges.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Typography.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/ViewModifiers.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/ViewModels/AppViewModelModern.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Discover/ActivityFeedView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Map/MapView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Map/MapView.swift:37:17: warning: 'init(coordinateRegion:interactionModes:showsUserLocation:userTrackingMode:)' was deprecated in iOS 17.0: Use Map initializers that take a MapContentBuilder instead.
+                Map(coordinateRegion: $region)
+                ^
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Badges.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 Compiling\ MainTabView.swift,\ EmptyStateView.swift,\ SpottedApp.swift,\ DiscoverView.swift,\ CheckIn.swift,\ ProfilePrompt.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/MainTabView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/EmptyStateView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/App/SpottedApp.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Discover/DiscoverView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/CheckIn.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/ProfilePrompt.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/MainTabView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/EmptyStateView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/App/SpottedApp.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Discover/DiscoverView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/CheckIn.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/ProfilePrompt.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftEmitModule normal x86_64 Emitting\ module\ for\ Spotted (in target 'Spotted' from project 'Spotted')
+
+EmitSwiftModule normal x86_64 (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ Spotted (in target 'Spotted' from project 'Spotted')
+
+EmitSwiftModule normal arm64 (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftDriverJobDiscovery normal x86_64 Emitting module for Spotted (in target 'Spotted' from project 'Spotted')
+
+SwiftDriver\ Compilation\ Requirements Spotted normal x86_64 com.apple.xcode.tools.swift.compiler (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Spotted -Onone -enforce-exclusivity\=checked @/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -target x86_64-apple-ios17.0-simulator -g -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-26257891a6c027eb51374368541b8346.sdkstatcache -output-file-map /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted_const_extract_protocols.json -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-generated-files.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-own-target-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-all-target-headers.hmap -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-project-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources-normal/x86_64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/x86_64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources -emit-objc-header -emit-objc-header-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted-Swift.h -working-directory /Users/doruntinaramadani/Desktop/Spotted -experimental-emit-module-separately -disable-cmo
+
+SwiftDriverJobDiscovery normal x86_64 Compiling CategoryDetailView.swift, Dialogs.swift, AppConstants.swift, SkeletonView.swift, Story.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal arm64 Compiling\ CategoryDetailView.swift,\ Dialogs.swift,\ AppConstants.swift,\ SkeletonView.swift,\ Story.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Discover/CategoryDetailView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Dialogs.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Constants/AppConstants.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/SkeletonView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Story.swift (in target 'Spotted' from project 'Spotted')
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Discover/CategoryDetailView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Dialogs.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Constants/AppConstants.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/SkeletonView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Story.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+Copy /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/x86_64-apple-ios-simulator.swiftmodule /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.swiftmodule (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.swiftmodule /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/x86_64-apple-ios-simulator.swiftmodule
+
+SwiftDriverJobDiscovery normal x86_64 Compiling Accessibility.swift, CheckInView.swift, DataRepository.swift, EditProfileView.swift, Buttons.swift, HapticFeedback.swift (in target 'Spotted' from project 'Spotted')
+
+Copy /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/x86_64-apple-ios-simulator.swiftdoc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.swiftdoc (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.swiftdoc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/x86_64-apple-ios-simulator.swiftdoc
+
+Copy /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/x86_64-apple-ios-simulator.abi.json /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.abi.json (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.abi.json /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/x86_64-apple-ios-simulator.abi.json
+
+Copy /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.swiftsourceinfo (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.swiftsourceinfo /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo
+
+SwiftCompile normal arm64 Compiling\ LocationManager.swift,\ Date+Extensions.swift,\ User.swift,\ LocationDetailView.swift,\ TestDesignSystemView.swift,\ QuickCheckInButton.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Services/LocationManager.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Extensions/Date+Extensions.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/User.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/LocationDetailView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/TestDesignSystemView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/QuickCheckInButton.swift (in target 'Spotted' from project 'Spotted')
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Services/LocationManager.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Extensions/Date+Extensions.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/User.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/LocationDetailView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/TestDesignSystemView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/QuickCheckInButton.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 Compiling\ ChatView.swift,\ ChatContainerView.swift,\ View+Extensions.swift,\ SpottedAppModern.swift,\ GeneratedAssetSymbols.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/ChatView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/ChatContainerView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Extensions/View+Extensions.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/App/SpottedAppModern.swift /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'Spotted' from project 'Spotted')
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/ChatView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/ChatView.swift:698:41: warning: 'requestRecordPermission' was deprecated in iOS 17.0: Please use AVAudioApplication requestRecordPermissionWithCompletionHandler
+        AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                                        ^
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/ChatContainerView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/ChatContainerView.swift:17:20: warning: value 'user' was defined but never used; consider replacing with boolean test
+            if let user = otherUser {
+               ~~~~^~~~~~~
+                                    != nil
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Extensions/View+Extensions.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/App/SpottedAppModern.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftDriverJobDiscovery normal x86_64 Compiling Category.swift, MatchCelebrationView.swift, LoadingStates.swift, AppViewModel.swift, TextFields.swift, CheckInDetailView.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal arm64 Compiling\ MatchesView.swift,\ StoryCreationView.swift,\ SettingsView.swift,\ DesignTokens.swift,\ CheckInViewWithMap.swift,\ OnboardingView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/MatchesView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/StoryCreationView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/SettingsView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/DesignTokens.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CheckInViewWithMap.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Onboarding/OnboardingView.swift (in target 'Spotted' from project 'Spotted')
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/MatchesView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/StoryCreationView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/SettingsView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/DesignTokens.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CheckInViewWithMap.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Onboarding/OnboardingView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftDriverJobDiscovery normal x86_64 Compiling LocationManager.swift, Date+Extensions.swift, User.swift, LocationDetailView.swift, TestDesignSystemView.swift, QuickCheckInButton.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal arm64 Compiling\ Typography.swift,\ ViewModifiers.swift,\ AppViewModelModern.swift,\ ActivityFeedView.swift,\ MapView.swift,\ Badges.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Typography.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/ViewModifiers.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/ViewModels/AppViewModelModern.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Discover/ActivityFeedView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Map/MapView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Badges.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Typography.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/ViewModifiers.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/ViewModels/AppViewModelModern.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Discover/ActivityFeedView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Map/MapView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Map/MapView.swift:37:17: warning: 'init(coordinateRegion:interactionModes:showsUserLocation:userTrackingMode:)' was deprecated in iOS 17.0: Use Map initializers that take a MapContentBuilder instead.
+                Map(coordinateRegion: $region)
+                ^
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Badges.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for Spotted (in target 'Spotted' from project 'Spotted')
+
+SwiftDriver\ Compilation\ Requirements Spotted normal arm64 com.apple.xcode.tools.swift.compiler (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Spotted -Onone -enforce-exclusivity\=checked @/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-26257891a6c027eb51374368541b8346.sdkstatcache -output-file-map /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted_const_extract_protocols.json -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-generated-files.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-own-target-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-all-target-headers.hmap -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-project-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources-normal/arm64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/arm64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources -emit-objc-header -emit-objc-header-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted-Swift.h -working-directory /Users/doruntinaramadani/Desktop/Spotted -experimental-emit-module-separately -disable-cmo
+
+SwiftDriverJobDiscovery normal x86_64 Compiling MainTabView.swift, EmptyStateView.swift, SpottedApp.swift, DiscoverView.swift, CheckIn.swift, ProfilePrompt.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal arm64 Compiling\ Accessibility.swift,\ CheckInView.swift,\ DataRepository.swift,\ EditProfileView.swift,\ Buttons.swift,\ HapticFeedback.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Accessibility.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CheckInView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Repositories/DataRepository.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/EditProfileView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Buttons.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Utilities/HapticFeedback.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Accessibility.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CheckInView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Repositories/DataRepository.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/EditProfileView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Buttons.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Utilities/HapticFeedback.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftMergeGeneratedHeaders /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/Spotted-Swift.h /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted-Swift.h /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted-Swift.h (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-swiftHeaderTool -arch arm64 /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted-Swift.h -arch x86_64 /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted-Swift.h -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/Spotted-Swift.h
+
+SwiftDriverJobDiscovery normal x86_64 Compiling Typography.swift, ViewModifiers.swift, AppViewModelModern.swift, ActivityFeedView.swift, MapView.swift, Badges.swift (in target 'Spotted' from project 'Spotted')
+
+Copy /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/arm64-apple-ios-simulator.swiftmodule /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.swiftmodule (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.swiftmodule /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/arm64-apple-ios-simulator.swiftmodule
+
+Copy /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/arm64-apple-ios-simulator.swiftdoc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.swiftdoc (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.swiftdoc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/arm64-apple-ios-simulator.swiftdoc
+
+Copy /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/arm64-apple-ios-simulator.abi.json /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.abi.json (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.abi.json /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/arm64-apple-ios-simulator.abi.json
+
+Copy /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.swiftsourceinfo (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.swiftsourceinfo /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo
+
+SwiftCompile normal arm64 Compiling\ Color+Extensions.swift,\ Message.swift,\ Location.swift,\ MockDataService.swift,\ ProfileView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Extensions/Color+Extensions.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Message.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Location.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Services/MockDataService.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Extensions/Color+Extensions.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Message.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Location.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Services/MockDataService.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 Compiling\ MainTabView.swift,\ EmptyStateView.swift,\ SpottedApp.swift,\ DiscoverView.swift,\ CheckIn.swift,\ ProfilePrompt.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/MainTabView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/EmptyStateView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/App/SpottedApp.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Discover/DiscoverView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/CheckIn.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/ProfilePrompt.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/MainTabView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/EmptyStateView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/App/SpottedApp.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Discover/DiscoverView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/CheckIn.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/ProfilePrompt.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftDriverJobDiscovery normal x86_64 Compiling ChatView.swift, ChatContainerView.swift, View+Extensions.swift, SpottedAppModern.swift, GeneratedAssetSymbols.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal arm64 Compiling\ ProfileImageView.swift,\ ToastView.swift,\ PhotoPickerView.swift,\ Cards.swift,\ CameraCaptureView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/ProfileImageView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/ToastView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/PhotoPickerView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Cards.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CameraCaptureView.swift (in target 'Spotted' from project 'Spotted')
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/ProfileImageView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/ToastView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/Components/PhotoPickerView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/Cards.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CameraCaptureView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftDriverJobDiscovery normal x86_64 Compiling ProfileImageView.swift, ToastView.swift, PhotoPickerView.swift, Cards.swift, CameraCaptureView.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal arm64 Compiling\ Category.swift,\ MatchCelebrationView.swift,\ LoadingStates.swift,\ AppViewModel.swift,\ TextFields.swift,\ CheckInDetailView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Category.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/MatchCelebrationView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/LoadingStates.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/ViewModels/AppViewModel.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/TextFields.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CheckInDetailView.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Category.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Matches/MatchCelebrationView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/LoadingStates.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Common/ViewModels/AppViewModel.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/DesignSystem/Components/TextFields.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal arm64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/CheckIn/CheckInDetailView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftDriverJobDiscovery normal x86_64 Compiling MatchesView.swift, StoryCreationView.swift, SettingsView.swift, DesignTokens.swift, CheckInViewWithMap.swift, OnboardingView.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal x86_64 Compiling\ Color+Extensions.swift,\ Message.swift,\ Location.swift,\ MockDataService.swift,\ ProfileView.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Extensions/Color+Extensions.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Message.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Location.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Services/MockDataService.swift /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Core/Extensions/Color+Extensions.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Message.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Models/Location.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Data/Services/MockDataService.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftCompile normal x86_64 /Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling CategoryDetailView.swift, Dialogs.swift, AppConstants.swift, SkeletonView.swift, Story.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftDriverJobDiscovery normal arm64 Compiling LocationManager.swift, Date+Extensions.swift, User.swift, LocationDetailView.swift, TestDesignSystemView.swift, QuickCheckInButton.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftDriverJobDiscovery normal arm64 Compiling Accessibility.swift, CheckInView.swift, DataRepository.swift, EditProfileView.swift, Buttons.swift, HapticFeedback.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftDriverJobDiscovery normal arm64 Compiling ChatView.swift, ChatContainerView.swift, View+Extensions.swift, SpottedAppModern.swift, GeneratedAssetSymbols.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftDriverJobDiscovery normal arm64 Compiling Color+Extensions.swift, Message.swift, Location.swift, MockDataService.swift, ProfileView.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftDriverJobDiscovery normal arm64 Compiling MainTabView.swift, EmptyStateView.swift, SpottedApp.swift, DiscoverView.swift, CheckIn.swift, ProfilePrompt.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftDriverJobDiscovery normal arm64 Compiling Typography.swift, ViewModifiers.swift, AppViewModelModern.swift, ActivityFeedView.swift, MapView.swift, Badges.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftDriverJobDiscovery normal arm64 Compiling Category.swift, MatchCelebrationView.swift, LoadingStates.swift, AppViewModel.swift, TextFields.swift, CheckInDetailView.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftDriverJobDiscovery normal arm64 Compiling MatchesView.swift, StoryCreationView.swift, SettingsView.swift, DesignTokens.swift, CheckInViewWithMap.swift, OnboardingView.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftDriverJobDiscovery normal x86_64 Compiling Color+Extensions.swift, Message.swift, Location.swift, MockDataService.swift, ProfileView.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftDriver\ Compilation Spotted normal x86_64 com.apple.xcode.tools.swift.compiler (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Spotted -Onone -enforce-exclusivity\=checked @/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -target x86_64-apple-ios17.0-simulator -g -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-26257891a6c027eb51374368541b8346.sdkstatcache -output-file-map /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted_const_extract_protocols.json -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-generated-files.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-own-target-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-all-target-headers.hmap -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-project-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources-normal/x86_64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/x86_64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources -emit-objc-header -emit-objc-header-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted-Swift.h -working-directory /Users/doruntinaramadani/Desktop/Spotted -experimental-emit-module-separately -disable-cmo
+
+Ld /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Binary/Spotted.debug.dylib normal x86_64 (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target x86_64-apple-ios17.0-simulator -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -O0 -L/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -filelist /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.LinkFileList -install_name @rpath/Spotted.debug.dylib -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @executable_path/Frameworks -dead_strip -Xlinker -object_path_lto -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.swiftmodule @/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted-linker-args.resp -Xlinker -alias -Xlinker _main -Xlinker ___debug_main_executable_dylib_entry_point -Xlinker -no_adhoc_codesign -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Binary/Spotted.debug.dylib
+
+SwiftDriverJobDiscovery normal arm64 Compiling ProfileImageView.swift, ToastView.swift, PhotoPickerView.swift, Cards.swift, CameraCaptureView.swift (in target 'Spotted' from project 'Spotted')
+
+SwiftDriver\ Compilation Spotted normal arm64 com.apple.xcode.tools.swift.compiler (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Spotted -Onone -enforce-exclusivity\=checked @/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-26257891a6c027eb51374368541b8346.sdkstatcache -output-file-map /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted_const_extract_protocols.json -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-generated-files.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-own-target-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-all-target-headers.hmap -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-project-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources-normal/arm64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/arm64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources -emit-objc-header -emit-objc-header-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted-Swift.h -working-directory /Users/doruntinaramadani/Desktop/Spotted -experimental-emit-module-separately -disable-cmo
+
+Ld /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Binary/Spotted.debug.dylib normal arm64 (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0-simulator -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -O0 -L/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -filelist /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.LinkFileList -install_name @rpath/Spotted.debug.dylib -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @executable_path/Frameworks -dead_strip -Xlinker -object_path_lto -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.swiftmodule @/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted-linker-args.resp -Xlinker -alias -Xlinker _main -Xlinker ___debug_main_executable_dylib_entry_point -Xlinker -no_adhoc_codesign -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Binary/Spotted.debug.dylib
+
+ConstructStubExecutorLinkFileList /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-ExecutorLinkFileList-normal-arm64.txt (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    construct-stub-executor-link-file-list /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Binary/Spotted.debug.dylib /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor_no_swift_entry_point.a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor.a --output /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-ExecutorLinkFileList-normal-arm64.txt
+note: Using stub executor library with Swift entry point. (in target 'Spotted' from project 'Spotted')
+
+ConstructStubExecutorLinkFileList /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-ExecutorLinkFileList-normal-x86_64.txt (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    construct-stub-executor-link-file-list /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Binary/Spotted.debug.dylib /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor_no_swift_entry_point.a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor.a --output /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-ExecutorLinkFileList-normal-x86_64.txt
+note: Using stub executor library with Swift entry point. (in target 'Spotted' from project 'Spotted')
+
+CreateUniversalBinary /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Spotted.debug.dylib normal arm64\ x86_64 (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo -create /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Binary/Spotted.debug.dylib /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Binary/Spotted.debug.dylib -output /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Spotted.debug.dylib
+
+Ld /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Binary/Spotted normal x86_64 (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target x86_64-apple-ios17.0-simulator -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -O0 -L/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -Xlinker -rpath -Xlinker @executable_path -Xlinker -rpath -Xlinker @executable_path/Frameworks -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -e ___debug_blank_executor_main -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_dylib -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-DebugDylibPath-normal-x86_64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_instlnm -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-DebugDylibInstallName-normal-x86_64.txt -Xlinker -filelist -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-ExecutorLinkFileList-normal-x86_64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent.der /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Binary/Spotted.debug.dylib -Xlinker -no_adhoc_codesign -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Binary/Spotted
+
+Ld /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Binary/Spotted normal arm64 (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0-simulator -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -O0 -L/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -Xlinker -rpath -Xlinker @executable_path -Xlinker -rpath -Xlinker @executable_path/Frameworks -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -e ___debug_blank_executor_main -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_dylib -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-DebugDylibPath-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_instlnm -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-DebugDylibInstallName-normal-arm64.txt -Xlinker -filelist -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-ExecutorLinkFileList-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.app-Simulated.xcent.der /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Binary/Spotted.debug.dylib -Xlinker -no_adhoc_codesign -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Binary/Spotted
+
+GenerateDSYMFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app.dSYM /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Spotted.debug.dylib (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/dsymutil /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Spotted.debug.dylib -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app.dSYM
+
+CreateUniversalBinary /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Spotted normal arm64\ x86_64 (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo -create /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Binary/Spotted /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Binary/Spotted -output /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Spotted
+
+GenerateDSYMFile /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app.dSYM /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Spotted (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/dsymutil -q /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Spotted -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app.dSYM
+
+ExtractAppIntentsMetadata (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name Spotted --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk --xcode-version 17A400 --platform-family iOS --deployment-target 17.0 --bundle-identifier com.spotteasdaad.app --output /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app --target-triple arm64-apple-ios17.0-simulator --target-triple x86_64-apple-ios17.0-simulator --binary-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Spotted --dependency-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted_dependency_info.dat --dependency-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted_dependency_info.dat --stringsdata-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --stringsdata-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.SwiftFileList --source-file-list /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.SwiftFileList --metadata-file-list /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.DependencyMetadataFileList --static-metadata-file-list /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.DependencyStaticMetadataFileList --swift-const-vals-list /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.SwiftConstValuesFileList --swift-const-vals-list /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+2025-11-08 00:36:03.584 appintentsmetadataprocessor[11228:1462066] Starting appintentsmetadataprocessor export
+2025-11-08 00:36:03.591 appintentsmetadataprocessor[11228:1462066] warning: Metadata extraction skipped. No AppIntents.framework dependency found.
+
+CopySwiftLibs /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-swiftStdLibTool --copy --verbose --sign - --scan-executable /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Spotted.debug.dylib --scan-folder /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Frameworks --scan-folder /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/PlugIns --scan-folder /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/SystemExtensions --scan-folder /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Extensions --platform iphonesimulator --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Frameworks --strip-bitcode --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os --back-deploy-swift-span
+
+AppIntentsSSUTraining (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsnltrainingprocessor --infoplist-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Info.plist --temp-dir-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/ssu --bundle-id com.spotteasdaad.app --product-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app --extracted-metadata-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Metadata.appintents --metadata-file-list /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted.DependencyMetadataFileList --archive-ssu-assets
+2025-11-08 00:36:03.657 appintentsnltrainingprocessor[11230:1462083] Parsing options for appintentsnltrainingprocessor
+2025-11-08 00:36:03.660 appintentsnltrainingprocessor[11230:1462083] No AppShortcuts found - Skipping.
+
+CodeSign /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Spotted.debug.dylib (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/Spotted.debug.dylib
+
+CodeSign /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/__preview.dylib (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app/__preview.dylib
+
+CodeSign /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app
+
+RegisterExecutionPolicyException /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-RegisterExecutionPolicyException /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app
+
+Validate /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-validationUtility /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app -shallow-bundle -infoplist-subpath Info.plist
+
+Touch /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    /usr/bin/touch -c /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/Spotted.app
+
+** BUILD SUCCEEDED **
+

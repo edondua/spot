@@ -1,0 +1,14 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project Spotted.xcodeproj -scheme Spotted -sdk iphonesimulator build
+
+Build settings from command line:
+    SDKROOT = iphonesimulator26.0
+
+2025-11-07 21:58:43.933 xcodebuild[9084:1429199] Error Domain=NSCocoaErrorDomain Code=3840 "JSON text did not start with array or object and option to allow fragments not set. around line 1, column 0." UserInfo={NSDebugDescription=JSON text did not start with array or object and option to allow fragments not set. around line 1, column 0., NSJSONSerializationErrorIndex=0}
+2025-11-07 21:58:43.939 xcodebuild[9084:1429199] Writing error result bundle to /var/folders/m_/hg0tyr913kq7w2nm73cg8dkw0000gn/T/ResultBundle_2025-07-11_21-58-0043.xcresult
+xcodebuild: error: Unable to read project 'Spotted.xcodeproj'.
+	Reason: The project ‘Spotted’ is damaged and cannot be opened due to a parse error. Examine the project file for invalid edits or unresolved source control conflicts.
+
+Path: /Users/doruntinaramadani/Desktop/Spotted/Spotted.xcodeproj
+
+

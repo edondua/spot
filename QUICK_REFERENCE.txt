@@ -1,0 +1,55 @@
+╔════════════════════════════════════════════════════════════════╗
+║           XCODE FIX - QUICK REFERENCE CARD                     ║
+╠════════════════════════════════════════════════════════════════╣
+║                                                                ║
+║  STEP 1: Run Script                                            ║
+║  ────────────────────                                          ║
+║  Terminal:                                                     ║
+║    cd /Users/doruntinaramadani/Desktop/Spotted                 ║
+║    ./nuclear_fix.sh                                            ║
+║                                                                ║
+║  (Waits for Xcode to open...)                                  ║
+║                                                                ║
+║                                                                ║
+║  STEP 2: Delete Red Files                                      ║
+║  ───────────────────────                                       ║
+║  In Xcode left sidebar:                                        ║
+║    1. Click red file                                           ║
+║    2. Press DELETE                                             ║
+║    3. Click "Remove Reference"                                 ║
+║    4. Repeat until NO red files                                ║
+║                                                                ║
+║                                                                ║
+║  STEP 3: Re-add Files                                          ║
+║  ──────────────────────                                        ║
+║  1. Right-click blue "Spotted" folder                          ║
+║  2. "Add Files to 'Spotted'..."                                ║
+║  3. Select inner "Spotted" folder (single click)               ║
+║  4. Check these options:                                       ║
+║     ☐ Copy items (UNCHECK)                                     ║
+║     ⦿ Create groups (SELECT)                                   ║
+║     ☑ Spotted target (CHECK)                                   ║
+║  5. Click "Add"                                                ║
+║                                                                ║
+║                                                                ║
+║  STEP 4: Build                                                 ║
+║  ─────────────                                                 ║
+║  Press: Cmd + B                                                ║
+║  Should say: "Build Succeeded" ✅                              ║
+║                                                                ║
+║                                                                ║
+║  STEP 5: Test Design System                                    ║
+║  ─────────────────────────────                                 ║
+║  1. Open: TestDesignSystemView.swift                           ║
+║  2. Click Preview Resume (▶️)                                  ║
+║  3. See beautiful components! 🎨                               ║
+║                                                                ║
+║                                                                ║
+║  DONE! 🎉                                                      ║
+║  ─────────                                                     ║
+║  Design System is ready to use!                                ║
+║  Read: DESIGN_SYSTEM.md for docs                               ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+Print this or keep it visible while working!

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Spotted</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Spotted needs camera access to take photos for your check-ins and share moments with other users.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Spotted needs your location to show you nearby hotspots and people around you.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Spotted needs your location to show you nearby hotspots and people around you.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Spotted needs access to your photo library to let you select and share photos.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Spotted needs microphone access to send voice messages to your matches.</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<true/>
+	</dict>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string></string>
+		<key>UIImageName</key>
+		<string></string>
+		<key>UILaunchScreen</key>
+		<dict>
+			<key>UIImageRespectsSafeAreaInsets</key>
+			<true/>
+			<key>UINavigationBar</key>
+			<dict>
+				<key>UIImageName</key>
+				<string></string>
+			</dict>
+		</dict>
+	</dict>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+</dict>
+</plist>

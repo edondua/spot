@@ -1,0 +1,120 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project Spotted.xcodeproj -scheme Spotted -sdk iphonesimulator build
+
+Build settings from command line:
+    SDKROOT = iphonesimulator26.0
+
+2025-11-07 21:41:32.601 xcodebuild[5859:1399666] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, id:dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder, name:Any iOS Simulator Device }
+{ platform:iOS Simulator, arch:arm64, id:2B0A8335-562C-456F-8732-8E9D351704F7, OS:18.5, name:iPad (A16) }
+{ platform:iOS Simulator, arch:x86_64, id:2B0A8335-562C-456F-8732-8E9D351704F7, OS:18.5, name:iPad (A16) }
+{ platform:iOS Simulator, arch:arm64, id:742D2070-9508-4BA7-95F9-E0860FBF40BE, OS:26.0.1, name:iPad (A16) }
+{ platform:iOS Simulator, arch:arm64, id:2AB5E74D-81AC-4504-A851-767715BBA5B8, OS:18.5, name:iPad Air 11-inch (M3) }
+{ platform:iOS Simulator, arch:x86_64, id:2AB5E74D-81AC-4504-A851-767715BBA5B8, OS:18.5, name:iPad Air 11-inch (M3) }
+{ platform:iOS Simulator, arch:arm64, id:8D9C30F7-DBA1-43D2-A4D6-88210B12BC49, OS:26.0.1, name:iPad Air 11-inch (M3) }
+{ platform:iOS Simulator, arch:arm64, id:D8FC6734-7BDA-4501-827A-54C02826FE77, OS:18.5, name:iPad Air 13-inch (M3) }
+{ platform:iOS Simulator, arch:x86_64, id:D8FC6734-7BDA-4501-827A-54C02826FE77, OS:18.5, name:iPad Air 13-inch (M3) }
+{ platform:iOS Simulator, arch:arm64, id:0AAA0137-E989-408F-87CB-D2BA0BF97450, OS:26.0.1, name:iPad Air 13-inch (M3) }
+{ platform:iOS Simulator, arch:arm64, id:97536098-B3B6-4AA6-A937-8219D9B24E79, OS:18.5, name:iPad Pro 11-inch (M4) }
+{ platform:iOS Simulator, arch:x86_64, id:97536098-B3B6-4AA6-A937-8219D9B24E79, OS:18.5, name:iPad Pro 11-inch (M4) }
+{ platform:iOS Simulator, arch:arm64, id:6FD05883-8537-4BB2-9E3A-3C5E2B3AC650, OS:26.0.1, name:iPad Pro 11-inch (M4) }
+{ platform:iOS Simulator, arch:arm64, id:C0287F5D-409F-4C27-A72F-56810F1CE2EB, OS:18.5, name:iPad Pro 13-inch (M4) }
+{ platform:iOS Simulator, arch:x86_64, id:C0287F5D-409F-4C27-A72F-56810F1CE2EB, OS:18.5, name:iPad Pro 13-inch (M4) }
+{ platform:iOS Simulator, arch:arm64, id:E88B3031-507E-42AE-AED4-F2BF8EBD7647, OS:26.0.1, name:iPad Pro 13-inch (M4) }
+{ platform:iOS Simulator, arch:arm64, id:F1746185-9A74-43AB-9983-61923A4916AA, OS:18.5, name:iPad mini (A17 Pro) }
+{ platform:iOS Simulator, arch:x86_64, id:F1746185-9A74-43AB-9983-61923A4916AA, OS:18.5, name:iPad mini (A17 Pro) }
+{ platform:iOS Simulator, arch:arm64, id:1F05FA2B-C4B3-4E58-A99A-ED659DF15EE1, OS:26.0.1, name:iPad mini (A17 Pro) }
+{ platform:iOS Simulator, arch:arm64, id:0DB81596-2EA9-4EF1-82DE-E7F5CC128F25, OS:18.5, name:iPhone 16 }
+{ platform:iOS Simulator, arch:x86_64, id:0DB81596-2EA9-4EF1-82DE-E7F5CC128F25, OS:18.5, name:iPhone 16 }
+{ platform:iOS Simulator, arch:arm64, id:41D948B7-D6D4-486D-AF2A-AA12F773193B, OS:18.5, name:iPhone 16 Plus }
+{ platform:iOS Simulator, arch:x86_64, id:41D948B7-D6D4-486D-AF2A-AA12F773193B, OS:18.5, name:iPhone 16 Plus }
+{ platform:iOS Simulator, arch:arm64, id:8BFE978C-8B3A-49EA-B6D7-C79796386AE0, OS:18.5, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:8BFE978C-8B3A-49EA-B6D7-C79796386AE0, OS:18.5, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:arm64, id:6EA3B018-9273-4B1B-8018-81BF8C602BC6, OS:18.5, name:iPhone 16 Pro Max }
+{ platform:iOS Simulator, arch:x86_64, id:6EA3B018-9273-4B1B-8018-81BF8C602BC6, OS:18.5, name:iPhone 16 Pro Max }
+{ platform:iOS Simulator, arch:arm64, id:92C999C3-F96F-461F-A778-178357C91130, OS:18.5, name:iPhone 16e }
+{ platform:iOS Simulator, arch:x86_64, id:92C999C3-F96F-461F-A778-178357C91130, OS:18.5, name:iPhone 16e }
+{ platform:iOS Simulator, arch:arm64, id:E4AE0A9F-59D9-479F-89C7-698F2623499A, OS:26.0.1, name:iPhone 16e }
+{ platform:iOS Simulator, arch:arm64, id:E637A316-D1BA-47A9-92D4-9DB83669F4AC, OS:26.0.1, name:iPhone 17 }
+{ platform:iOS Simulator, arch:arm64, id:2A9A1625-3D57-4CD5-B59D-0235CC78DBCF, OS:26.0.1, name:iPhone 17 Pro }
+{ platform:iOS Simulator, arch:arm64, id:21200347-4741-4BFC-9FCA-F6F4192CEB7D, OS:26.0.1, name:iPhone 17 Pro Max }
+{ platform:iOS Simulator, arch:arm64, id:DE0C31BD-C94A-455E-AAB9-6FB7AB84406D, OS:26.0.1, name:iPhone Air }
+{ platform:iOS, id:dvtdevice-DVTiPhonePlaceholder-iphoneos:placeholder, name:Any iOS Device }
+{ platform:iOS, arch:arm64, id:00008120-000C2DA13C87C01E, name:dua.com  }
+{ platform:iOS, arch:arm64, id:00008150-000279963C00401C, name:Edon’s iPhone }
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'Spotted' in project 'Spotted' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-26257891a6c027eb51374368541b8346.sdkstatcache
+    cd /Users/doruntinaramadani/Desktop/Spotted/Spotted.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -o /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-26257891a6c027eb51374368541b8346.sdkstatcache
+
+SwiftDriver Spotted normal x86_64 com.apple.xcode.tools.swift.compiler (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Spotted -Onone -enforce-exclusivity\=checked @/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -target x86_64-apple-ios17.0-simulator -g -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-26257891a6c027eb51374368541b8346.sdkstatcache -output-file-map /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted_const_extract_protocols.json -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-generated-files.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-own-target-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-all-target-headers.hmap -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-project-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources-normal/x86_64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/x86_64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources -emit-objc-header -emit-objc-header-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/x86_64/Spotted-Swift.h -working-directory /Users/doruntinaramadani/Desktop/Spotted -experimental-emit-module-separately -disable-cmo
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift:271:5: error: attribute 'private' can only be used in a non-local scope
+    private var matchActionSection: some View {
+    ^
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift:799:1: error: expected '}' in struct
+
+^
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift:38:37: note: to match this opening '{'
+private struct ProfileContent: View {
+                                    ^
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift:271:5: error: attribute 'private' can only be used in a non-local scope
+    private var matchActionSection: some View {
+    ^
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift:799:1: error: expected '}' in struct
+
+^
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift:38:37: note: to match this opening '{'
+private struct ProfileContent: View {
+                                    ^
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift:271:5: error: Attribute 'private' can only be used in a non-local scope
+    private var matchActionSection: some View {
+    ^ (in target 'Spotted' from project 'Spotted')
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift:799:1: error: Expected '}' in struct
+
+^ (in target 'Spotted' from project 'Spotted')
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift:38:37: note: To match this opening '{'
+private struct ProfileContent: View {
+                                    ^ (in target 'Spotted' from project 'Spotted')
+
+SwiftDriver Spotted normal arm64 com.apple.xcode.tools.swift.compiler (in target 'Spotted' from project 'Spotted')
+    cd /Users/doruntinaramadani/Desktop/Spotted
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Spotted -Onone -enforce-exclusivity\=checked @/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -F /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-26257891a6c027eb51374368541b8346.sdkstatcache -output-file-map /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted_const_extract_protocols.json -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-generated-files.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-own-target-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-all-target-headers.hmap -Xcc -iquote -Xcc /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Spotted-project-headers.hmap -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources-normal/arm64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources/arm64 -Xcc -I/Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/DerivedSources -emit-objc-header -emit-objc-header-path /Users/doruntinaramadani/Library/Developer/Xcode/DerivedData/Spotted-brcxybqlpflvpncnqryylsihpvhi/Build/Intermediates.noindex/Spotted.build/Debug-iphonesimulator/Spotted.build/Objects-normal/arm64/Spotted-Swift.h -working-directory /Users/doruntinaramadani/Desktop/Spotted -experimental-emit-module-separately -disable-cmo
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift:271:5: error: Attribute 'private' can only be used in a non-local scope
+    private var matchActionSection: some View {
+    ^ (in target 'Spotted' from project 'Spotted')
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift:799:1: error: Expected '}' in struct
+
+^ (in target 'Spotted' from project 'Spotted')
+/Users/doruntinaramadani/Desktop/Spotted/Spotted/Presentation/Features/Profile/ProfileView.swift:38:37: note: To match this opening '{'
+private struct ProfileContent: View {
+                                    ^ (in target 'Spotted' from project 'Spotted')
+
+** BUILD FAILED **
+
+
+The following build commands failed:
+	SwiftDriver Spotted normal x86_64 com.apple.xcode.tools.swift.compiler (in target 'Spotted' from project 'Spotted')
+	SwiftDriver Spotted normal arm64 com.apple.xcode.tools.swift.compiler (in target 'Spotted' from project 'Spotted')
+	Building project Spotted with scheme Spotted
+(3 failures)
