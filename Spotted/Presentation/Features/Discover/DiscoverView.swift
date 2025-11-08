@@ -6,6 +6,8 @@ struct DiscoverView: View {
     @State private var showFilters = false
     @State private var isLoading = true
     @State private var isRefreshing = false
+    @State private var searchText = ""
+    @FocusState private var isSearchFocused: Bool
 
     // Filter settings (synced with Settings)
     @AppStorage("maxDistance") private var maxDistance: Double = 50
@@ -59,6 +61,17 @@ struct DiscoverView: View {
     // Filtered users
     var filteredUsers: [User] {
         viewModel.allUsers.filter { user in
+            // Search filter
+            var searchMatch = true
+            if !searchText.isEmpty {
+                let lowercasedSearch = searchText.lowercased()
+                searchMatch = user.name.lowercased().contains(lowercasedSearch) ||
+                              user.bio.lowercased().contains(lowercasedSearch) ||
+                              user.interests.contains { $0.lowercased().contains(lowercasedSearch) } ||
+                              user.job?.lowercased().contains(lowercasedSearch) == true ||
+                              user.company?.lowercased().contains(lowercasedSearch) == true
+            }
+
             // Age filter
             let ageMatch = user.age >= Int(minAge) && user.age <= Int(maxAge)
 
@@ -110,7 +123,7 @@ struct DiscoverView: View {
                 }
             }
 
-            return ageMatch && distanceMatch && interestsMatch && drinkingMatch && smokingMatch && kidsMatch
+            return searchMatch && ageMatch && distanceMatch && interestsMatch && drinkingMatch && smokingMatch && kidsMatch
         }
     }
 
@@ -118,12 +131,8 @@ struct DiscoverView: View {
         filteredUsers.filter { $0.isCurrentlySpontaneous }
     }
 
-    var body: some View {
-        NavigationStack {
-            Group {
-                if isLoading {
-                    // Skeleton loading state
-                    ScrollView {
+    private var loadingView: some View {
+        ScrollView {
                         VStack(spacing: 20) {
                             // Featured category skeleton
                             VStack(alignment: .leading, spacing: 16) {
@@ -168,24 +177,37 @@ struct DiscoverView: View {
                             .padding(.horizontal)
                         }
                         .padding(.vertical)
-                    }
-                } else {
-                    // Actual content
-                    ScrollView {
-                        VStack(spacing: 20) {
-                            // 1. Featured Category - BIG CARD FIRST
-                            VStack(alignment: .leading, spacing: 16) {
-                                Text("Find Your Vibe")
-                                    .font(.system(size: 24, weight: .bold))
-                                    .padding(.horizontal)
+        }
+    }
 
-                                // Featured category (first one - larger)
-                                if let featuredCategory = DiscoveryCategory.allCases.first {
-                                    NavigationLink(destination: CategoryDetailView(category: featuredCategory)) {
-                                        FeaturedCategoryBox(category: featuredCategory)
+    var body: some View {
+        NavigationStack {
+            Group {
+                if isLoading {
+                    loadingView
+                } else {
+                    // Actual content - Show search results if searching, otherwise show discovery
+                    if !searchText.isEmpty {
+                        // Search results view
+                        searchResultsView
+                    } else {
+                        // Normal discovery content
+                        ScrollView {
+                            VStack(spacing: 20) {
+                                // 1. Featured Category - BIG CARD FIRST
+                                VStack(alignment: .leading, spacing: 16) {
+                                    Text("Find Your Vibe")
+                                        .font(.system(size: 24, weight: .bold))
+                                        .padding(.horizontal)
+
+                                    // Featured category (first one - larger)
+                                    if let featuredCategory = DiscoveryCategory.allCases.first {
+                                        NavigationLink(destination: CategoryDetailView(category: featuredCategory)) {
+                                            FeaturedCategoryBox(category: featuredCategory)
+                                        }
+                                        .buttonStyle(PlainButtonStyle())
+                                        .padding(.horizontal)
                                     }
-                                    .buttonStyle(PlainButtonStyle())
-                                    .padding(.horizontal)
                                 }
                             }
 
@@ -211,12 +233,13 @@ struct DiscoverView: View {
                         }
                         .padding(.vertical)
                     }
-                    .refreshable {
-                        await refreshData()
-                    }
                 }
             }
+            .refreshable {
+                await refreshData()
+            }
             .navigationTitle("Discover")
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search people, interests, jobs...")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -449,6 +472,63 @@ struct DiscoverView: View {
                 }
                 .padding(.horizontal)
             }
+        }
+    }
+
+    // Search Results View
+    private var searchResultsView: some View {
+        ScrollView {
+            VStack(spacing: 16) {
+                // Search results header
+                HStack {
+                    Text("Results for \"\(searchText)\"")
+                        .font(.system(size: 20, weight: .bold))
+
+                    Spacer()
+
+                    Text("\(filteredUsers.count) people")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundColor(.secondary)
+                }
+                .padding(.horizontal)
+                .padding(.top)
+
+                if filteredUsers.isEmpty {
+                    // Empty state
+                    VStack(spacing: 16) {
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 60))
+                            .foregroundColor(.secondary.opacity(0.5))
+                            .padding(.top, 60)
+
+                        Text("No results found")
+                            .font(.system(size: 20, weight: .semibold))
+
+                        Text("Try searching for different names, interests, or jobs")
+                            .font(.system(size: 15))
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 40)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 40)
+                } else {
+                    // Results grid
+                    LazyVGrid(columns: [
+                        GridItem(.flexible(), spacing: 12),
+                        GridItem(.flexible(), spacing: 12)
+                    ], spacing: 16) {
+                        ForEach(filteredUsers) { user in
+                            NavigationLink(destination: UserProfileView(user: user)) {
+                                SearchResultCard(user: user)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+            }
+            .padding(.bottom)
         }
     }
 }
@@ -1224,6 +1304,60 @@ struct LegacyFlowLayout: Layout {
             self.frames = frames
             self.size = CGSize(width: maxWidth, height: currentY + lineHeight)
         }
+    }
+}
+
+// MARK: - Search Result Card
+struct SearchResultCard: View {
+    let user: User
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // Profile image
+            ProfileImageView(user: user, size: 180)
+                .frame(height: 220)
+                .clipped()
+
+            // User info
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: 4) {
+                    Text(user.name)
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.primary)
+                        .lineLimit(1)
+
+                    if user.isVerified {
+                        Image(systemName: "checkmark.seal.fill")
+                            .font(.system(size: 12))
+                            .foregroundColor(.blue)
+                    }
+                }
+
+                Text("\(user.age)")
+                    .font(.system(size: 14))
+                    .foregroundColor(.secondary)
+
+                // Interests preview
+                if !user.interests.isEmpty {
+                    HStack(spacing: 4) {
+                        ForEach(user.interests.prefix(2), id: \.self) { interest in
+                            Text(interest)
+                                .font(.system(size: 11, weight: .medium))
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(Color(red: 252/255, green: 108/255, blue: 133/255).opacity(0.15))
+                                .foregroundColor(Color(red: 252/255, green: 108/255, blue: 133/255))
+                                .cornerRadius(8)
+                        }
+                    }
+                    .padding(.top, 4)
+                }
+            }
+            .padding(12)
+        }
+        .background(Color(UIColor.secondarySystemBackground))
+        .cornerRadius(16)
+        .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
     }
 }
 
