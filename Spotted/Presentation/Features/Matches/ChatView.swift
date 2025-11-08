@@ -459,22 +459,32 @@ struct MessageBubble: View {
                 }
             }
 
-            // Waveform visualization (Telegram style - more bars)
+            // Waveform visualization with progress (Telegram/WhatsApp style)
             HStack(alignment: .center, spacing: 2) {
                 ForEach(0..<25, id: \.self) { index in
+                    let barProgress = Double(index) / 25.0
+                    let isPlayed = barProgress < audioPlayer.progress
+
                     RoundedRectangle(cornerRadius: 1.5)
-                        .fill(isCurrentUser ? Color.white.opacity(0.7) : Color.gray.opacity(0.6))
-                        .frame(width: 2, height: waveformHeight(for: index))
+                        .fill(
+                            isPlayed ?
+                                (isCurrentUser ? Color.white : Color(red: 252/255, green: 108/255, blue: 133/255)) :
+                                (isCurrentUser ? Color.white.opacity(0.4) : Color.gray.opacity(0.4))
+                        )
+                        .frame(width: 2, height: waveformHeight(for: index, isPlaying: audioPlayer.isPlaying))
+                        .animation(.easeInOut(duration: 0.3), value: audioPlayer.progress)
+                        .animation(.easeInOut(duration: 0.2).repeatForever(autoreverses: true), value: audioPlayer.isPlaying)
                 }
             }
             .frame(width: 120)
 
-            // Duration
+            // Duration (shows current time when playing, total duration otherwise)
             if let duration = message.voiceMemoDuration {
-                Text(formatDuration(duration))
+                Text(audioPlayer.isPlaying ? formatDuration(audioPlayer.currentTime) : formatDuration(duration))
                     .font(.system(size: 13, weight: .medium))
                     .foregroundColor(isCurrentUser ? .white.opacity(0.9) : .secondary)
                     .monospacedDigit()
+                    .animation(.none, value: audioPlayer.currentTime)
             }
         }
         .padding(.horizontal, 12)
@@ -487,10 +497,18 @@ struct MessageBubble: View {
         .cornerRadius(18)
     }
 
-    private func waveformHeight(for index: Int) -> CGFloat {
+    private func waveformHeight(for index: Int, isPlaying: Bool) -> CGFloat {
         // Create a more realistic waveform pattern
         let baseHeights: [CGFloat] = [4, 8, 12, 16, 14, 10, 6, 8, 14, 18, 16, 12, 10, 14, 16, 12, 8, 6, 10, 14, 12, 8, 6, 4, 6]
-        return baseHeights[index % baseHeights.count]
+        let baseHeight = baseHeights[index % baseHeights.count]
+
+        // Add subtle pulsing animation during playback
+        if isPlaying {
+            let variation = CGFloat.random(in: -2...2)
+            return max(4, baseHeight + variation)
+        }
+
+        return baseHeight
     }
 
     private func formatDuration(_ duration: TimeInterval) -> String {
@@ -778,15 +796,21 @@ class AudioRecorderService: NSObject, ObservableObject, AVAudioRecorderDelegate 
 // MARK: - Audio Player Service
 class AudioPlayerService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     @Published var isPlaying = false
+    @Published var currentTime: TimeInterval = 0
+    @Published var duration: TimeInterval = 0
+    @Published var progress: Double = 0 // 0.0 to 1.0
 
     private var audioPlayer: AVAudioPlayer?
+    private var progressTimer: Timer?
 
     func play(url: URL) {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.delegate = self
+            duration = audioPlayer?.duration ?? 0
             audioPlayer?.play()
             isPlaying = true
+            startProgressTimer()
             print("AudioPlayer: Playing audio from \(url.path)")
         } catch {
             print("AudioPlayer: Failed to play audio - \(error)")
@@ -796,10 +820,27 @@ class AudioPlayerService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     func pause() {
         audioPlayer?.pause()
         isPlaying = false
+        stopProgressTimer()
+    }
+
+    private func startProgressTimer() {
+        progressTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
+            guard let self = self, let player = self.audioPlayer else { return }
+            self.currentTime = player.currentTime
+            self.progress = player.duration > 0 ? player.currentTime / player.duration : 0
+        }
+    }
+
+    private func stopProgressTimer() {
+        progressTimer?.invalidate()
+        progressTimer = nil
     }
 
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         isPlaying = false
+        currentTime = 0
+        progress = 0
+        stopProgressTimer()
     }
 }
 
