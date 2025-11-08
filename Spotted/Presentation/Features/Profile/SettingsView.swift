@@ -57,6 +57,53 @@ struct SettingsView: View {
                             Spacer()
                         }
                     }
+
+                    // Verification Option
+                    if !viewModel.currentUser.isVerified {
+                        NavigationLink(destination: ProfileVerificationView()) {
+                            HStack(spacing: 12) {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.blue.opacity(0.1))
+                                        .frame(width: 32, height: 32)
+
+                                    Image(systemName: "checkmark.seal.fill")
+                                        .font(.system(size: 16, weight: .semibold))
+                                        .foregroundColor(.blue)
+                                }
+
+                                Text("Get Verified")
+                                    .font(.system(size: 16))
+
+                                Spacer()
+
+                                Image(systemName: "sparkles")
+                                    .font(.system(size: 14, weight: .semibold))
+                                    .foregroundColor(.blue)
+                            }
+                        }
+                    } else {
+                        HStack(spacing: 12) {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.green.opacity(0.1))
+                                    .frame(width: 32, height: 32)
+
+                                Image(systemName: "checkmark.seal.fill")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .foregroundColor(.green)
+                            }
+
+                            Text("Verified")
+                                .font(.system(size: 16, weight: .semibold))
+
+                            Spacer()
+
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.green)
+                        }
+                    }
                 } header: {
                     Text("Account")
                 }

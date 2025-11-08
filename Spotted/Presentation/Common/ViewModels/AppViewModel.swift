@@ -347,6 +347,19 @@ class AppViewModel: ObservableObject {
         print("AppViewModel: Photos updated - \(photos.count) photos")
     }
 
+    func verifyCurrentUser() {
+        var updatedUser = currentUser
+        updatedUser.isVerified = true
+        currentUser = updatedUser
+
+        print("AppViewModel: User verified - \(currentUser.name)")
+
+        // Show success toast
+        Task { @MainActor in
+            ToastManager.shared.showSuccess("Profile verified! ✓")
+        }
+    }
+
     func logout() {
         // Reset to default/demo user
         // In production, this would clear auth tokens and navigate to login screen

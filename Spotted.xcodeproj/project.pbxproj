@@ -64,6 +64,7 @@
 		8F3B2C4D5E6F7A8B9C0D1E2A /* ChatContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2A1B3C4D5E6F7A8B9C0D1E /* ChatContainerView.swift */; };
 		52C83C852EBE841C00507F64 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C83C122EBE841C00507F64 /* View+Extensions.swift */; };
 		52C83C862EBE841C00507F64 /* SpottedAppModern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C83C012EBE841C00507F64 /* SpottedAppModern.swift */; };
+		669F06207368422FAF785575 /* ProfileVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB614079C064A47AED96327 /* ProfileVerificationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,6 +127,7 @@
 		52C83C4F2EBE841C00507F64 /* TestDesignSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDesignSystemView.swift; sourceTree = "<group>"; };
 		958278EBF0D44B0EB5526E40 /* Spotted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotted.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A2B3C4D5E6F7890A1B2C3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCB614079C064A47AED96327 /* ProfileVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVerificationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -361,6 +363,7 @@
 		52C83C492EBE841C00507F64 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				FCB614079C064A47AED96327 /* ProfileVerificationView.swift */,
 				52C83C462EBE841C00507F64 /* EditProfileView.swift */,
 				52C83C472EBE841C00507F64 /* ProfileView.swift */,
 				52C83C482EBE841C00507F64 /* SettingsView.swift */,
@@ -498,6 +501,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				669F06207368422FAF785575 /* ProfileVerificationView.swift in Sources */,
 				52C83C512EBE841C00507F64 /* Accessibility.swift in Sources */,
 				52C83C522EBE841C00507F64 /* CheckInView.swift in Sources */,
 				52C83C532EBE841C00507F64 /* DataRepository.swift in Sources */,
