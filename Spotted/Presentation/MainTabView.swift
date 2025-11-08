@@ -37,6 +37,7 @@ struct MainTabView: View {
         }
         .accentColor(.pink)
         .toastView()
+        .offlineBanner()
         .fullScreenCover(isPresented: Binding(
             get: { viewModel.celebratingMatchWithUserId != nil },
             set: { if !$0 { viewModel.celebratingMatchWithUserId = nil } }

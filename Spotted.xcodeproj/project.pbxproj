@@ -66,6 +66,8 @@
 		52C83C862EBE841C00507F64 /* SpottedAppModern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C83C012EBE841C00507F64 /* SpottedAppModern.swift */; };
 		669F06207368422FAF785575 /* ProfileVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB614079C064A47AED96327 /* ProfileVerificationView.swift */; };
 		E2DFD08E70DC42C188D40A7C /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C32503FDA4150B173943A /* PersistenceManager.swift */; };
+		8C216B7306254294837919D7 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B821F45EEC45E1B4926394 /* NetworkMonitor.swift */; };
+		7807F155072C40B7B56EA772 /* OfflineBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77117A60BF684187AED184F9 /* OfflineBanner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +132,8 @@
 		F1A2B3C4D5E6F7890A1B2C3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCB614079C064A47AED96327 /* ProfileVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVerificationView.swift; sourceTree = "<group>"; };
 		1F2C32503FDA4150B173943A /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		10B821F45EEC45E1B4926394 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		77117A60BF684187AED184F9 /* OfflineBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBanner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +175,7 @@
 		52C83C0B2EBE841C00507F64 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				77117A60BF684187AED184F9 /* OfflineBanner.swift */,
 				52C83C052EBE841C00507F64 /* Badges.swift */,
 				52C83C062EBE841C00507F64 /* Buttons.swift */,
 				52C83C072EBE841C00507F64 /* Cards.swift */,
@@ -257,6 +262,7 @@
 		52C83C242EBE841C00507F64 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				10B821F45EEC45E1B4926394 /* NetworkMonitor.swift */,
 				52C83C222EBE841C00507F64 /* LocationManager.swift */,
 				52C83C232EBE841C00507F64 /* MockDataService.swift */,
 			);
@@ -512,6 +518,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7807F155072C40B7B56EA772 /* OfflineBanner.swift in Sources */,
+				8C216B7306254294837919D7 /* NetworkMonitor.swift in Sources */,
 				E2DFD08E70DC42C188D40A7C /* PersistenceManager.swift in Sources */,
 				669F06207368422FAF785575 /* ProfileVerificationView.swift in Sources */,
 				52C83C512EBE841C00507F64 /* Accessibility.swift in Sources */,
