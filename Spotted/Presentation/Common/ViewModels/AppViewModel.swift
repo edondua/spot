@@ -41,14 +41,48 @@ class AppViewModel: ObservableObject {
 
     // MARK: - Services
     private let mockDataService = MockDataService.shared
+    private let persistenceManager = PersistenceManager.shared
+    private var cancellables = Set<AnyCancellable>()
 
     init() {
-        // Initialize with mock data
-        self.currentUser = mockDataService.generateCurrentUser()
+        // Try to load persisted data first
+        do {
+            if let savedUser = try persistenceManager.loadCurrentUser() {
+                self.currentUser = savedUser
+                print("AppViewModel: Loaded persisted user data")
+            } else {
+                self.currentUser = mockDataService.generateCurrentUser()
+                print("AppViewModel: Using mock user data")
+            }
+
+            // Load other persisted data
+            self.conversations = try persistenceManager.loadConversations()
+            self.matches = try persistenceManager.loadMatches()
+            self.likedUsers = try persistenceManager.loadLikedUsers()
+
+            let friendData = try persistenceManager.loadFriendData()
+            self.friends = friendData.friends
+            self.sentFriendRequests = friendData.sentRequests
+            self.receivedFriendRequests = friendData.receivedRequests
+
+            self.blockedUsers = try persistenceManager.loadBlockedUsers()
+            self.favoriteUsers = try persistenceManager.loadFavoriteUsers()
+
+            print("AppViewModel: Loaded all persisted data")
+        } catch {
+            // If loading fails, use mock data
+            self.currentUser = mockDataService.generateCurrentUser()
+            self.conversations = mockDataService.generateMockConversations(users: mockDataService.generateMockUsers())
+            self.matches = mockDataService.generateMockMatches(users: mockDataService.generateMockUsers())
+            print("AppViewModel: Error loading persisted data, using mock data: \(error)")
+        }
+
+        // Always use mock data for these
         self.allUsers = mockDataService.generateMockUsers()
         self.locations = mockDataService.zurichLocations
-        self.conversations = mockDataService.generateMockConversations(users: mockDataService.generateMockUsers())
-        self.matches = mockDataService.generateMockMatches(users: mockDataService.generateMockUsers())
+
+        // Set up auto-save on data changes
+        setupAutoSave()
     }
 
     // MARK: - Check-in Methods
@@ -569,5 +603,148 @@ class AppViewModel: ObservableObject {
     // MARK: - Hotspot Recommendations
     func getHotspotRecommendations() -> [Location] {
         locations.sorted { $0.activeUsers > $1.activeUsers }.prefix(5).map { $0 }
+    }
+
+    // MARK: - Persistence Methods
+
+    private func setupAutoSave() {
+        // Save current user when it changes
+        $currentUser
+            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
+            .sink { [weak self] user in
+                self?.saveCurrentUser(user)
+            }
+            .store(in: &cancellables)
+
+        // Save conversations when they change
+        $conversations
+            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
+            .sink { [weak self] conversations in
+                self?.saveConversations(conversations)
+            }
+            .store(in: &cancellables)
+
+        // Save matches when they change
+        $matches
+            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
+            .sink { [weak self] matches in
+                self?.saveMatches(matches)
+            }
+            .store(in: &cancellables)
+
+        // Save liked users when they change
+        $likedUsers
+            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
+            .sink { [weak self] likedUsers in
+                self?.saveLikedUsers(likedUsers)
+            }
+            .store(in: &cancellables)
+
+        // Save friend data when it changes
+        Publishers.CombineLatest3($friends, $sentFriendRequests, $receivedFriendRequests)
+            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
+            .sink { [weak self] friends, sentRequests, receivedRequests in
+                self?.saveFriendData(friends: friends, sentRequests: sentRequests, receivedRequests: receivedRequests)
+            }
+            .store(in: &cancellables)
+
+        // Save blocked users when they change
+        $blockedUsers
+            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
+            .sink { [weak self] blockedUsers in
+                self?.saveBlockedUsers(blockedUsers)
+            }
+            .store(in: &cancellables)
+
+        // Save favorite users when they change
+        $favoriteUsers
+            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
+            .sink { [weak self] favoriteUsers in
+                self?.saveFavoriteUsers(favoriteUsers)
+            }
+            .store(in: &cancellables)
+
+        print("AppViewModel: Auto-save configured")
+    }
+
+    private func saveCurrentUser(_ user: User) {
+        Task {
+            do {
+                try persistenceManager.saveCurrentUser(user)
+            } catch {
+                print("AppViewModel: Error saving current user: \(error)")
+            }
+        }
+    }
+
+    private func saveConversations(_ conversations: [Conversation]) {
+        Task {
+            do {
+                try persistenceManager.saveConversations(conversations)
+            } catch {
+                print("AppViewModel: Error saving conversations: \(error)")
+            }
+        }
+    }
+
+    private func saveMatches(_ matches: [Match]) {
+        Task {
+            do {
+                try persistenceManager.saveMatches(matches)
+            } catch {
+                print("AppViewModel: Error saving matches: \(error)")
+            }
+        }
+    }
+
+    private func saveLikedUsers(_ likedUsers: Set<String>) {
+        Task {
+            do {
+                try persistenceManager.saveLikedUsers(likedUsers)
+            } catch {
+                print("AppViewModel: Error saving liked users: \(error)")
+            }
+        }
+    }
+
+    private func saveFriendData(friends: Set<String>, sentRequests: Set<String>, receivedRequests: Set<String>) {
+        Task {
+            do {
+                try persistenceManager.saveFriendData(friends: friends, sentRequests: sentRequests, receivedRequests: receivedRequests)
+            } catch {
+                print("AppViewModel: Error saving friend data: \(error)")
+            }
+        }
+    }
+
+    private func saveBlockedUsers(_ blockedUsers: Set<String>) {
+        Task {
+            do {
+                try persistenceManager.saveBlockedUsers(blockedUsers)
+            } catch {
+                print("AppViewModel: Error saving blocked users: \(error)")
+            }
+        }
+    }
+
+    private func saveFavoriteUsers(_ favoriteUsers: Set<String>) {
+        Task {
+            do {
+                try persistenceManager.saveFavoriteUsers(favoriteUsers)
+            } catch {
+                print("AppViewModel: Error saving favorite users: \(error)")
+            }
+        }
+    }
+
+    func clearAllPersistedData() {
+        Task {
+            do {
+                try persistenceManager.clearAllData()
+                print("AppViewModel: Cleared all persisted data")
+            } catch {
+                print("AppViewModel: Error clearing data: \(error)")
+            }
+        }
     }
 }
