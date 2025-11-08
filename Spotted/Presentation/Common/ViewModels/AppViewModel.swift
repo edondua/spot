@@ -18,6 +18,11 @@ class AppViewModel: ObservableObject {
     @Published var favoriteUsers: Set<String> = []
     @Published var profileViews: [String: [String]] = [:] // userId: [viewerUserIds]
 
+    // Friend system
+    @Published var friends: Set<String> = [] // User IDs of confirmed friends
+    @Published var sentFriendRequests: Set<String> = [] // Pending requests sent by current user
+    @Published var receivedFriendRequests: Set<String> = [] // Pending requests from others
+
     // MARK: - Computed Properties
     var unreadMessagesCount: Int {
         conversations.reduce(0) { count, conversation in
@@ -443,6 +448,80 @@ class AppViewModel: ObservableObject {
 
     func getFavoriteUsersList() -> [User] {
         return allUsers.filter { favoriteUsers.contains($0.id) }
+    }
+
+    // MARK: - Friend System Methods
+    func sendFriendRequest(to userId: String) {
+        guard !friends.contains(userId),
+              !sentFriendRequests.contains(userId),
+              !blockedUsers.contains(userId) else {
+            return
+        }
+
+        sentFriendRequests.insert(userId)
+
+        Task { @MainActor in
+            ToastManager.shared.showSuccess("Friend request sent!")
+        }
+    }
+
+    func acceptFriendRequest(from userId: String) {
+        guard receivedFriendRequests.contains(userId) else { return }
+
+        receivedFriendRequests.remove(userId)
+        friends.insert(userId)
+
+        Task { @MainActor in
+            ToastManager.shared.showSuccess("Friend request accepted!")
+        }
+    }
+
+    func rejectFriendRequest(from userId: String) {
+        receivedFriendRequests.remove(userId)
+
+        Task { @MainActor in
+            ToastManager.shared.showInfo("Friend request declined")
+        }
+    }
+
+    func removeFriend(_ userId: String) {
+        friends.remove(userId)
+
+        Task { @MainActor in
+            ToastManager.shared.showInfo("Friend removed")
+        }
+    }
+
+    func cancelFriendRequest(to userId: String) {
+        sentFriendRequests.remove(userId)
+    }
+
+    func isFriend(_ userId: String) -> Bool {
+        return friends.contains(userId)
+    }
+
+    func hasSentFriendRequest(to userId: String) -> Bool {
+        return sentFriendRequests.contains(userId)
+    }
+
+    func hasReceivedFriendRequest(from userId: String) -> Bool {
+        return receivedFriendRequests.contains(userId)
+    }
+
+    func getFriendsList() -> [User] {
+        return allUsers.filter { friends.contains($0.id) }
+    }
+
+    func getMutualFriends(with userId: String) -> [User] {
+        // In a real app, we'd get the other user's friends from the server
+        // For now, simulate some mutual friends
+        let otherUserFriends = Set(allUsers.prefix(10).map { $0.id })
+        let mutualFriendIds = friends.intersection(otherUserFriends)
+        return allUsers.filter { mutualFriendIds.contains($0.id) }
+    }
+
+    func getFriendRequestsList() -> [User] {
+        return allUsers.filter { receivedFriendRequests.contains($0.id) }
     }
 
     // MARK: - Story Methods

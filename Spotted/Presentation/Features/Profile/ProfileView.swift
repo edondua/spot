@@ -151,6 +151,8 @@ private struct ProfileContent: View {
             photoCard(at: 5)
             favoriteHangoutsSection
             if allowsSocialActions {
+                mutualFriendsSection
+                friendButtonSection
                 matchActionSection
             }
         }
@@ -265,6 +267,165 @@ private struct ProfileContent: View {
                         .padding(.vertical, 4)
                     }
                 }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var mutualFriendsSection: some View {
+        let mutualFriends = viewModel.getMutualFriends(with: user.id)
+
+        if !mutualFriends.isEmpty {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Mutual Friends")
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundColor(.primary)
+
+                HStack(spacing: 12) {
+                    // Show up to 5 friend avatars
+                    HStack(spacing: -12) {
+                        ForEach(Array(mutualFriends.prefix(5).enumerated()), id: \.element.id) { index, friend in
+                            ProfileImageView(user: friend, size: 40)
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color(.systemBackground), lineWidth: 2)
+                                )
+                                .zIndex(Double(5 - index))
+                        }
+                    }
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        if mutualFriends.count == 1 {
+                            Text(mutualFriends[0].name)
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundColor(.primary)
+                        } else {
+                            Text("\(mutualFriends.count) mutual friends")
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundColor(.primary)
+                        }
+
+                        Text("Friends on Spotted")
+                            .font(.system(size: 13))
+                            .foregroundColor(.secondary)
+                    }
+
+                    Spacer()
+                }
+                .padding(16)
+                .background(Color(.systemGray6).opacity(0.5))
+                .cornerRadius(12)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var friendButtonSection: some View {
+        let isFriend = viewModel.isFriend(user.id)
+        let hasSentRequest = viewModel.hasSentFriendRequest(to: user.id)
+        let hasReceivedRequest = viewModel.hasReceivedFriendRequest(from: user.id)
+
+        VStack(spacing: 12) {
+            if hasReceivedRequest {
+                // Show accept/reject buttons
+                HStack(spacing: 12) {
+                    Button(action: {
+                        viewModel.acceptFriendRequest(from: user.id)
+                    }) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 16, weight: .bold))
+                            Text("Accept Friend Request")
+                                .font(.system(size: 16, weight: .bold))
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .foregroundColor(.white)
+                        .background(Color(red: 252/255, green: 108/255, blue: 133/255))
+                        .cornerRadius(14)
+                    }
+                    .buttonStyle(ScaleButtonStyle())
+
+                    Button(action: {
+                        viewModel.rejectFriendRequest(from: user.id)
+                    }) {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundColor(.secondary)
+                            .frame(width: 50, height: 50)
+                            .background(Color(.systemGray5))
+                            .cornerRadius(14)
+                    }
+                    .buttonStyle(ScaleButtonStyle())
+                }
+            } else if isFriend {
+                // Show friends status
+                Button(action: {
+                    // Could show options to unfriend
+                }) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size: 18, weight: .bold))
+                        Text("Friends")
+                            .font(.system(size: 16, weight: .bold))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .foregroundColor(Color(red: 252/255, green: 108/255, blue: 133/255))
+                    .background(Color(.systemGray6))
+                    .cornerRadius(14)
+                }
+                .buttonStyle(ScaleButtonStyle())
+                .disabled(true)
+            } else if hasSentRequest {
+                // Show pending status
+                Button(action: {
+                    viewModel.cancelFriendRequest(to: user.id)
+                }) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "clock")
+                            .font(.system(size: 18, weight: .bold))
+                        Text("Friend Request Sent")
+                            .font(.system(size: 16, weight: .bold))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .foregroundColor(.secondary)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(14)
+                }
+                .buttonStyle(ScaleButtonStyle())
+            } else {
+                // Show add friend button
+                Button(action: {
+                    viewModel.sendFriendRequest(to: user.id)
+                }) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "person.badge.plus")
+                            .font(.system(size: 18, weight: .bold))
+                        Text("Add Friend")
+                            .font(.system(size: 16, weight: .bold))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .foregroundColor(.white)
+                    .background(
+                        LinearGradient(
+                            colors: [
+                                Color(red: 252/255, green: 108/255, blue: 133/255),
+                                Color(red: 255/255, green: 149/255, blue: 0/255)
+                            ],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .cornerRadius(14)
+                }
+                .buttonStyle(ScaleButtonStyle())
+                .simultaneousGesture(TapGesture().onEnded {
+                    let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                    impactMed.impactOccurred()
+                })
             }
         }
     }
