@@ -15,10 +15,30 @@ struct SettingsView: View {
     @AppStorage("showDistance") private var showDistance = true
     @AppStorage("showAge") private var showAge = true
     @AppStorage("incognitoMode") private var incognitoMode = false
+    @StateObject private var themeManager = ThemeManager.shared
 
     var body: some View {
         NavigationStack {
             List {
+                // Appearance Section
+                Section {
+                    Picker("Theme", selection: $themeManager.appTheme) {
+                        ForEach(ThemeManager.AppTheme.allCases) { theme in
+                            HStack(spacing: 12) {
+                                Image(systemName: theme.icon)
+                                    .font(.system(size: 16))
+                                Text(theme.rawValue)
+                            }
+                            .tag(theme)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                } header: {
+                    Text("Appearance")
+                } footer: {
+                    Text("Choose between light, dark, or automatic theme based on your system settings")
+                }
+
                 // Account Section
                 Section {
                     NavigationLink(destination: EditProfileView()) {
