@@ -98,10 +98,7 @@ struct LocationDetailView: View {
                         Spacer()
 
                         Button(action: {
-                            // Show coming soon toast
-                            Task { @MainActor in
-                                ToastManager.shared.showInfo("Story creation coming soon!")
-                            }
+                            showStoryCreation = true
                         }) {
                             HStack(spacing: 6) {
                                 Image(systemName: "plus.circle.fill")
@@ -183,11 +180,10 @@ struct LocationDetailView: View {
         }
         .navigationTitle(location.name)
         .navigationBarTitleDisplayMode(.inline)
-        // Story creation feature - coming soon
-        // .sheet(isPresented: $showStoryCreation) {
-        //     StoryCreationView(location: location)
-        //         .environmentObject(viewModel)
-        // }
+        .sheet(isPresented: $showStoryCreation) {
+            StoryCreationView(location: location)
+                .environmentObject(viewModel)
+        }
     }
 }
 
