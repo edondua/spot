@@ -722,7 +722,9 @@ struct ScaleButtonStyle: ButtonStyle {
 
 // MARK: - User Profile View (for non-current users)
 struct UserProfileView: View {
+    @EnvironmentObject var viewModel: AppViewModel
     let user: User
+    @State private var showUserActions = false
 
     var body: some View {
         ProfileContent(
@@ -730,6 +732,26 @@ struct UserProfileView: View {
             isCurrentUser: false,
             allowsSocialActions: true
         )
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    showUserActions = true
+                }) {
+                    Image(systemName: "ellipsis.circle")
+                        .font(.system(size: 20))
+                        .foregroundColor(Color(red: 252/255, green: 108/255, blue: 133/255))
+                }
+            }
+        }
+        .sheet(isPresented: $showUserActions) {
+            UserActionSheet(user: user)
+                .environmentObject(viewModel)
+        }
+        .onAppear {
+            // Track profile view
+            viewModel.trackProfileView(userId: user.id)
+        }
     }
 }
 
@@ -794,4 +816,185 @@ struct ProfileCompletionBanner: View {
 
 #Preview {
     ProfileView(user: MockDataService.shared.generateCurrentUser(), isCurrentUser: true)
+}
+
+// MARK: - User Action Sheet
+/// Reusable action sheet for user actions (block, report, favorite)
+struct UserActionSheet: View {
+    @EnvironmentObject var viewModel: AppViewModel
+    @Environment(\.dismiss) var dismiss
+    let user: User
+
+    @State private var showReportReasons = false
+    @State private var showBlockConfirmation = false
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Handle
+            RoundedRectangle(cornerRadius: 3)
+                .fill(Color(.systemGray4))
+                .frame(width: 40, height: 5)
+                .padding(.top, 10)
+
+            // Header
+            VStack(spacing: 12) {
+                ProfileImageView(user: user, size: 60)
+
+                Text(user.name)
+                    .font(.system(size: 18, weight: .semibold))
+            }
+            .padding(.vertical, 20)
+
+            Divider()
+
+            // Actions
+            VStack(spacing: 0) {
+                // Favorite
+                UserActionButton(
+                    icon: viewModel.favoriteUsers.contains(user.id) ? "star.fill" : "star",
+                    title: viewModel.favoriteUsers.contains(user.id) ? "Remove from Favorites" : "Add to Favorites",
+                    color: .yellow
+                ) {
+                    viewModel.toggleFavorite(user.id)
+                    dismiss()
+                }
+
+                Divider()
+                    .padding(.leading, 60)
+
+                // Report
+                UserActionButton(
+                    icon: "exclamationmark.shield",
+                    title: "Report",
+                    color: .orange
+                ) {
+                    showReportReasons = true
+                }
+
+                Divider()
+                    .padding(.leading, 60)
+
+                // Block
+                UserActionButton(
+                    icon: "hand.raised.fill",
+                    title: "Block",
+                    color: .red
+                ) {
+                    showBlockConfirmation = true
+                }
+            }
+
+            Spacer()
+        }
+        .presentationDetents([.height(350)])
+        .sheet(isPresented: $showReportReasons) {
+            ReportReasonsSheet(user: user, onReport: {
+                dismiss()
+            })
+        }
+        .alert("Block \(user.name)?", isPresented: $showBlockConfirmation) {
+            Button("Cancel", role: .cancel) {}
+            Button("Block", role: .destructive) {
+                viewModel.blockUser(user.id)
+                dismiss()
+            }
+        } message: {
+            Text("They won't be able to see your profile or message you. You can unblock them later from Settings.")
+        }
+    }
+}
+
+// MARK: - User Action Button
+struct UserActionButton: View {
+    let icon: String
+    let title: String
+    let color: Color
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 16) {
+                Image(systemName: icon)
+                    .font(.system(size: 20))
+                    .foregroundColor(color)
+                    .frame(width: 44, height: 44)
+                    .background(color.opacity(0.1))
+                    .cornerRadius(22)
+
+                Text(title)
+                    .font(.system(size: 16))
+                    .foregroundColor(.primary)
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.secondary)
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 12)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+}
+
+// MARK: - Report Reasons Sheet
+struct ReportReasonsSheet: View {
+    @EnvironmentObject var viewModel: AppViewModel
+    @Environment(\.dismiss) var dismiss
+    let user: User
+    let onReport: () -> Void
+
+    @State private var selectedReason: String?
+
+    let reportReasons = [
+        ("Inappropriate content", "photo.on.rectangle.angled"),
+        ("Harassment or bullying", "exclamationmark.bubble"),
+        ("Spam or scam", "envelope.badge"),
+        ("Fake profile", "person.crop.circle.badge.xmark"),
+        ("Underage user", "18.circle"),
+        ("Other", "ellipsis.circle")
+    ]
+
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(reportReasons, id: \.0) { reason, icon in
+                    Button(action: {
+                        selectedReason = reason
+                        viewModel.reportUser(user.id, reason: reason)
+                        dismiss()
+                        onReport()
+                    }) {
+                        HStack(spacing: 16) {
+                            Image(systemName: icon)
+                                .font(.system(size: 20))
+                                .foregroundColor(.red)
+                                .frame(width: 32)
+
+                            Text(reason)
+                                .font(.system(size: 16))
+                                .foregroundColor(.primary)
+
+                            Spacer()
+                        }
+                        .padding(.vertical, 8)
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+            }
+            .navigationTitle("Report \(user.name)")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+            }
+        }
+        .presentationDetents([.medium])
+    }
 }

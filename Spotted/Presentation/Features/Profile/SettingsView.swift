@@ -438,6 +438,7 @@ struct SettingsView: View {
 
 // MARK: - Blocked Users View
 struct BlockedUsersView: View {
+    @EnvironmentObject var viewModel: AppViewModel
     @State private var blockedUsers: [User] = []
 
     var body: some View {
@@ -476,7 +477,8 @@ struct BlockedUsersView: View {
                         Spacer()
 
                         Button("Unblock") {
-                            // Unblock user
+                            viewModel.unblockUser(user.id)
+                            loadBlockedUsers()
                         }
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(Color(red: 252/255, green: 108/255, blue: 133/255))
@@ -487,6 +489,13 @@ struct BlockedUsersView: View {
         }
         .navigationTitle("Blocked Users")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            loadBlockedUsers()
+        }
+    }
+
+    private func loadBlockedUsers() {
+        blockedUsers = viewModel.getBlockedUsersList()
     }
 }
 

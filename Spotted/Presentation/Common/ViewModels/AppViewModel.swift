@@ -13,6 +13,10 @@ class AppViewModel: ObservableObject {
     @Published var likedUsers: Set<String> = []
     @Published var lastLikedUserId: String?
     @Published var celebratingMatchWithUserId: String?
+    @Published var blockedUsers: Set<String> = []
+    @Published var reportedUsers: Set<String> = []
+    @Published var favoriteUsers: Set<String> = []
+    @Published var profileViews: [String: [String]] = [:] // userId: [viewerUserIds]
 
     // MARK: - Computed Properties
     var unreadMessagesCount: Int {
@@ -356,6 +360,89 @@ class AppViewModel: ObservableObject {
         // 2. Clear UserDefaults
         // 3. Navigate to login/welcome screen
         // 4. Clear any cached data
+    }
+
+    // MARK: - Block/Report/Favorite Methods
+    func blockUser(_ userId: String) {
+        blockedUsers.insert(userId)
+
+        // Remove from matches
+        matches.removeAll { match in
+            match.users.contains(userId)
+        }
+
+        // Remove conversations
+        conversations.removeAll { conversation in
+            conversation.participants.contains(userId)
+        }
+
+        // Remove from liked
+        likedUsers.remove(userId)
+
+        print("AppViewModel: Blocked user \(userId)")
+
+        Task { @MainActor in
+            ToastManager.shared.showSuccess("User blocked successfully")
+        }
+    }
+
+    func unblockUser(_ userId: String) {
+        blockedUsers.remove(userId)
+
+        print("AppViewModel: Unblocked user \(userId)")
+
+        Task { @MainActor in
+            ToastManager.shared.showSuccess("User unblocked")
+        }
+    }
+
+    func reportUser(_ userId: String, reason: String) {
+        reportedUsers.insert(userId)
+
+        print("AppViewModel: Reported user \(userId) for: \(reason)")
+
+        // In production: Send report to backend
+        Task { @MainActor in
+            ToastManager.shared.showSuccess("Report submitted. Thank you for helping keep Spotted safe.")
+        }
+    }
+
+    func toggleFavorite(_ userId: String) {
+        if favoriteUsers.contains(userId) {
+            favoriteUsers.remove(userId)
+            Task { @MainActor in
+                ToastManager.shared.showInfo("Removed from favorites")
+            }
+        } else {
+            favoriteUsers.insert(userId)
+            Task { @MainActor in
+                ToastManager.shared.showSuccess("Added to favorites ⭐")
+            }
+        }
+    }
+
+    func trackProfileView(userId: String) {
+        // Track that current user viewed this profile
+        if profileViews[userId] == nil {
+            profileViews[userId] = []
+        }
+
+        if !profileViews[userId]!.contains(currentUser.id) {
+            profileViews[userId]?.append(currentUser.id)
+            print("AppViewModel: Tracked profile view for user \(userId)")
+        }
+    }
+
+    func getProfileViewCount(for userId: String) -> Int {
+        return profileViews[userId]?.count ?? 0
+    }
+
+    func getBlockedUsersList() -> [User] {
+        return allUsers.filter { blockedUsers.contains($0.id) }
+    }
+
+    func getFavoriteUsersList() -> [User] {
+        return allUsers.filter { favoriteUsers.contains($0.id) }
     }
 
     // MARK: - Story Methods
