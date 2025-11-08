@@ -217,16 +217,17 @@ struct DiscoverView: View {
                             // 3. Live Activity Feed
                             ActivityFeedView()
 
-                            // 4. Rest of category boxes
+                            // 4. Rest of category boxes with staggered animation
                             LazyVGrid(columns: [
                                 GridItem(.flexible(), spacing: 12),
                                 GridItem(.flexible(), spacing: 12)
                             ], spacing: 12) {
-                                ForEach(Array(DiscoveryCategory.allCases.dropFirst())) { category in
+                                ForEach(Array(DiscoveryCategory.allCases.dropFirst().enumerated()), id: \.element.id) { index, category in
                                     NavigationLink(destination: CategoryDetailView(category: category)) {
                                         CategoryBox(category: category)
                                     }
                                     .buttonStyle(PlainButtonStyle())
+                                    .slideIn(delay: Double(index) * 0.1)
                                 }
                             }
                             .padding(.horizontal)
@@ -513,16 +514,17 @@ struct DiscoverView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 40)
                 } else {
-                    // Results grid
+                    // Results grid with staggered animation
                     LazyVGrid(columns: [
                         GridItem(.flexible(), spacing: 12),
                         GridItem(.flexible(), spacing: 12)
                     ], spacing: 16) {
-                        ForEach(filteredUsers) { user in
+                        ForEach(Array(filteredUsers.enumerated()), id: \.element.id) { index, user in
                             NavigationLink(destination: UserProfileView(user: user)) {
                                 SearchResultCard(user: user)
                             }
                             .buttonStyle(PlainButtonStyle())
+                            .slideIn(delay: Double(index) * 0.05)
                         }
                     }
                     .padding(.horizontal)
@@ -1358,6 +1360,7 @@ struct SearchResultCard: View {
         .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
+        .pressableScale()
     }
 }
 

@@ -33,10 +33,11 @@ struct MatchesView: View {
 
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 16) {
-                                    ForEach(viewModel.matches) { match in
+                                    ForEach(Array(viewModel.matches.enumerated()), id: \.element.id) { index, match in
                                         if let otherUserId = match.users.first(where: { $0 != viewModel.currentUser.id }),
                                            let otherUser = viewModel.getUser(by: otherUserId) {
                                             MatchCircle(match: match, otherUser: otherUser)
+                                                .slideIn(delay: Double(index) * 0.1)
                                         }
                                     }
                                 }
@@ -59,13 +60,14 @@ struct MatchesView: View {
                             emptyMessagesView
                         } else {
                             VStack(spacing: 0) {
-                                ForEach(filteredConversations) { conversation in
+                                ForEach(Array(filteredConversations.enumerated()), id: \.element.id) { index, conversation in
                                     if let otherUserId = conversation.participants.first(where: { $0 != viewModel.currentUser.id }),
                                        let otherUser = viewModel.getUser(by: otherUserId) {
                                         NavigationLink(destination: ChatContainerView(conversation: conversation)) {
                                             ConversationRow(conversation: conversation, otherUser: otherUser)
                                         }
                                         .buttonStyle(PlainButtonStyle())
+                                        .slideIn(delay: Double(index) * 0.05)
 
                                         Divider()
                                             .padding(.leading, 90)
