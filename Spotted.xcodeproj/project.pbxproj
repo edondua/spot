@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8CF07E61D17A44B3819165EB /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2ED1EAC70344EAA7B3C68F /* AnalyticsManager.swift */; };
 		52C83C502EBE841C00507F64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52C83C4D2EBE841C00507F64 /* Assets.xcassets */; };
 		52C83C512EBE841C00507F64 /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C83C0C2EBE841C00507F64 /* Accessibility.swift */; };
 		52C83C522EBE841C00507F64 /* CheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C83C342EBE841C00507F64 /* CheckInView.swift */; };
@@ -71,6 +72,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB2ED1EAC70344EAA7B3C68F /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		52C83C002EBE841C00507F64 /* SpottedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpottedApp.swift; sourceTree = "<group>"; };
 		52C83C012EBE841C00507F64 /* SpottedAppModern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpottedAppModern.swift; sourceTree = "<group>"; };
 		52C83C032EBE841C00507F64 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
@@ -261,11 +263,10 @@
 		};
 		52C83C242EBE841C00507F64 /* Services */ = {
 			isa = PBXGroup;
-			children = (
-				10B821F45EEC45E1B4926394 /* NetworkMonitor.swift */,
+			children = (10B821F45EEC45E1B4926394 /* NetworkMonitor.swift */,
 				52C83C222EBE841C00507F64 /* LocationManager.swift */,
 				52C83C232EBE841C00507F64 /* MockDataService.swift */,
-			);
+				EB2ED1EAC70344EAA7B3C68F /* AnalyticsManager.swift */,);
 			path = Services;
 			sourceTree = "<group>";
 		};
@@ -517,8 +518,7 @@
 		C8C13F855C344466A38C0246 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
-			files = (
-				7807F155072C40B7B56EA772 /* OfflineBanner.swift in Sources */,
+			files = (7807F155072C40B7B56EA772 /* OfflineBanner.swift in Sources */,
 				8C216B7306254294837919D7 /* NetworkMonitor.swift in Sources */,
 				E2DFD08E70DC42C188D40A7C /* PersistenceManager.swift in Sources */,
 				669F06207368422FAF785575 /* ProfileVerificationView.swift in Sources */,
@@ -578,7 +578,8 @@
 				52C83C852EBE841C00507F64 /* View+Extensions.swift in Sources */,
 				52C83C862EBE841C00507F64 /* SpottedAppModern.swift in Sources */,
 			
-				61A91F2240494A76906BB4BF /* AnimationPresets.swift in Sources */,);
+				61A91F2240494A76906BB4BF /* AnimationPresets.swift in Sources */,
+				8CF07E61D17A44B3819165EB /* AnalyticsManager.swift in Sources */,);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */

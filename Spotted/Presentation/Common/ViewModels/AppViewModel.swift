@@ -42,6 +42,7 @@ class AppViewModel: ObservableObject {
     // MARK: - Services
     private let mockDataService = MockDataService.shared
     private let persistenceManager = PersistenceManager.shared
+    private let analyticsManager = AnalyticsManager.shared
     private var cancellables = Set<AnyCancellable>()
 
     init() {
@@ -125,6 +126,9 @@ class AppViewModel: ObservableObject {
         print("AppViewModel: Check-in completed for \(currentUser.name) at \(location.name)")
         print("AppViewModel: Location now has \(locations.first(where: { $0.id == location.id })?.activeUsers ?? 0) active users")
 
+        // Track analytics
+        analyticsManager.track(.checkedIn(location: location.name, userId: currentUser.id))
+
         // Show success toast
         Task { @MainActor in
             ToastManager.shared.showSuccess("Checked in at \(location.name)! 📍")
@@ -136,6 +140,9 @@ class AppViewModel: ObservableObject {
            let index = locations.firstIndex(where: { $0.id == checkIn.location.id }) {
             locations[index].activeUsers = max(0, locations[index].activeUsers - 1)
             print("AppViewModel: Checked out from \(checkIn.location.name)")
+
+            // Track analytics
+            analyticsManager.track(.checkedOut(location: checkIn.location.name, userId: currentUser.id))
         }
 
         currentUser.currentCheckIn = nil
@@ -168,6 +175,9 @@ class AppViewModel: ObservableObject {
     func likeUser(_ user: User) {
         likedUsers.insert(user.id)
         lastLikedUserId = user.id
+
+        // Track analytics
+        analyticsManager.track(.userLiked(userId: user.id, fromUserId: currentUser.id))
 
         // Simulate mutual like (30% chance for demo)
         if Double.random(in: 0...1) < 0.3 {
@@ -222,11 +232,17 @@ class AppViewModel: ObservableObject {
         )
         matches.append(match)
 
+        // Track analytics
+        analyticsManager.track(.matchCreated(userId: currentUser.id, matchedUserId: user.id))
+
         // Create conversation
         let conversation = Conversation(
             participants: [currentUser.id, user.id]
         )
         conversations.append(conversation)
+
+        // Track conversation started
+        analyticsManager.track(.conversationStarted(userId: currentUser.id, withUserId: user.id))
     }
 
     func isLiked(_ userId: String) -> Bool {
@@ -246,6 +262,9 @@ class AppViewModel: ObservableObject {
         // Create message with "sending" status
         let message = Message(senderId: currentUser.id, text: text, status: .sending)
         conversations[index].messages.append(message)
+
+        // Track analytics
+        analyticsManager.track(.messageSent(conversationId: conversationId, messageType: "text"))
 
         // Simulate sending with delay
         Task {
@@ -281,6 +300,10 @@ class AppViewModel: ObservableObject {
             voiceMemoDuration: duration
         )
         conversations[index].messages.append(message)
+
+        // Track analytics
+        analyticsManager.track(.voiceMessageRecorded(duration: duration))
+        analyticsManager.track(.messageSent(conversationId: conversationId, messageType: "voice"))
     }
 
     func sendGift(to conversationId: String, giftEmoji: String) {
@@ -433,6 +456,9 @@ class AppViewModel: ObservableObject {
 
         print("AppViewModel: Blocked user \(userId)")
 
+        // Track analytics
+        analyticsManager.track(.userBlocked(userId: currentUser.id, blockedUserId: userId))
+
         Task { @MainActor in
             ToastManager.shared.showSuccess("User blocked successfully")
         }
@@ -453,6 +479,9 @@ class AppViewModel: ObservableObject {
 
         print("AppViewModel: Reported user \(userId) for: \(reason)")
 
+        // Track analytics
+        analyticsManager.track(.userReported(userId: currentUser.id, reportedUserId: userId, reason: reason))
+
         // In production: Send report to backend
         Task { @MainActor in
             ToastManager.shared.showSuccess("Report submitted. Thank you for helping keep Spotted safe.")
@@ -462,11 +491,13 @@ class AppViewModel: ObservableObject {
     func toggleFavorite(_ userId: String) {
         if favoriteUsers.contains(userId) {
             favoriteUsers.remove(userId)
+            analyticsManager.track(.userUnfavorited(userId: currentUser.id, unfavoritedUserId: userId))
             Task { @MainActor in
                 ToastManager.shared.showInfo("Removed from favorites")
             }
         } else {
             favoriteUsers.insert(userId)
+            analyticsManager.track(.userFavorited(userId: currentUser.id, favoritedUserId: userId))
             Task { @MainActor in
                 ToastManager.shared.showSuccess("Added to favorites ⭐")
             }
@@ -507,6 +538,9 @@ class AppViewModel: ObservableObject {
 
         sentFriendRequests.insert(userId)
 
+        // Track analytics
+        analyticsManager.track(.friendRequestSent(fromUserId: currentUser.id, toUserId: userId))
+
         Task { @MainActor in
             ToastManager.shared.showSuccess("Friend request sent!")
         }
@@ -518,6 +552,9 @@ class AppViewModel: ObservableObject {
         receivedFriendRequests.remove(userId)
         friends.insert(userId)
 
+        // Track analytics
+        analyticsManager.track(.friendRequestAccepted(fromUserId: userId, toUserId: currentUser.id))
+
         Task { @MainActor in
             ToastManager.shared.showSuccess("Friend request accepted!")
         }
@@ -525,6 +562,9 @@ class AppViewModel: ObservableObject {
 
     func rejectFriendRequest(from userId: String) {
         receivedFriendRequests.remove(userId)
+
+        // Track analytics
+        analyticsManager.track(.friendRequestDeclined(fromUserId: userId, toUserId: currentUser.id))
 
         Task { @MainActor in
             ToastManager.shared.showInfo("Friend request declined")
