@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43380423A421414A840A543E /* BackendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5F00850BEF4B5EA8C36632 /* BackendService.swift */; };
+		118049FDD5BC437F9C855AD7 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C22F83D7FFE4680B1E11A05 /* FirebaseService.swift */; };
 		8CF07E61D17A44B3819165EB /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2ED1EAC70344EAA7B3C68F /* AnalyticsManager.swift */; };
 		52C83C502EBE841C00507F64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52C83C4D2EBE841C00507F64 /* Assets.xcassets */; };
 		52C83C512EBE841C00507F64 /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C83C0C2EBE841C00507F64 /* Accessibility.swift */; };
@@ -72,6 +74,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E5F00850BEF4B5EA8C36632 /* BackendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendService.swift; sourceTree = "<group>"; };
+		1C22F83D7FFE4680B1E11A05 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		EB2ED1EAC70344EAA7B3C68F /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		52C83C002EBE841C00507F64 /* SpottedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpottedApp.swift; sourceTree = "<group>"; };
 		52C83C012EBE841C00507F64 /* SpottedAppModern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpottedAppModern.swift; sourceTree = "<group>"; };
@@ -266,7 +270,9 @@
 			children = (10B821F45EEC45E1B4926394 /* NetworkMonitor.swift */,
 				52C83C222EBE841C00507F64 /* LocationManager.swift */,
 				52C83C232EBE841C00507F64 /* MockDataService.swift */,
-				EB2ED1EAC70344EAA7B3C68F /* AnalyticsManager.swift */,);
+				EB2ED1EAC70344EAA7B3C68F /* AnalyticsManager.swift */,
+				1C22F83D7FFE4680B1E11A05 /* FirebaseService.swift */,
+				5E5F00850BEF4B5EA8C36632 /* BackendService.swift */,);
 			path = Services;
 			sourceTree = "<group>";
 		};
@@ -579,7 +585,9 @@
 				52C83C862EBE841C00507F64 /* SpottedAppModern.swift in Sources */,
 			
 				61A91F2240494A76906BB4BF /* AnimationPresets.swift in Sources */,
-				8CF07E61D17A44B3819165EB /* AnalyticsManager.swift in Sources */,);
+				8CF07E61D17A44B3819165EB /* AnalyticsManager.swift in Sources */,
+				118049FDD5BC437F9C855AD7 /* FirebaseService.swift in Sources */,
+				43380423A421414A840A543E /* BackendService.swift in Sources */,);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
