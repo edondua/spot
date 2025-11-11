@@ -16,7 +16,22 @@ struct CheckInDetailView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        VStack(spacing: 0) {
+            // Header with dismiss button
+            HStack {
+                Spacer()
+
+                Button(action: {
+                    isPresented = false
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.system(size: 28))
+                        .foregroundColor(.gray)
+                }
+                .padding()
+            }
+            .background(Color(.systemBackground))
+
             ScrollView {
                 VStack(spacing: 24) {
                     // Location Header
@@ -145,14 +160,6 @@ struct CheckInDetailView: View {
                     }
                     .padding(.horizontal)
                     .padding(.bottom)
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Cancel") {
-                        isPresented = false
-                    }
                 }
             }
         }
