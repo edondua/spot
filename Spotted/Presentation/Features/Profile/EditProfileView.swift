@@ -73,37 +73,36 @@ struct EditProfileView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 24) {
-                    // Profile Photo Section
-                    profilePhotoSection
+        ScrollView {
+            VStack(spacing: 24) {
+                // Profile Photo Section
+                profilePhotoSection
 
-                    Divider()
+                Divider()
 
-                    // Basic Info
-                    basicInfoSection
+                // Basic Info
+                basicInfoSection
 
-                    Divider()
+                Divider()
 
-                    // Interests
-                    interestsSection
+                // Interests
+                interestsSection
 
-                    Divider()
+                Divider()
 
-                    // Stats
-                    statsSection
+                // Stats
+                statsSection
 
-                    Divider()
+                Divider()
 
-                    // Lifestyle
-                    lifestyleSection
-                }
-                .padding()
+                // Lifestyle
+                lifestyleSection
             }
-            .navigationTitle("Edit Profile")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
+            .padding()
+        }
+        .navigationTitle("Edit Profile")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
                         dismiss()
@@ -130,7 +129,6 @@ struct EditProfileView: View {
             .onAppear {
                 initializeFields(from: viewModel.currentUser)
             }
-        }
     }
 
     private func loadPhoto(from item: PhotosPickerItem) {

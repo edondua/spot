@@ -19,31 +19,30 @@ struct ProfileVerificationView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color(UIColor.systemBackground)
-                    .ignoresSafeArea()
+        ZStack {
+            Color(UIColor.systemBackground)
+                .ignoresSafeArea()
 
-                VStack(spacing: 0) {
-                    switch verificationStep {
-                    case .intro:
-                        introView
-                    case .instructions:
-                        instructionsView
-                    case .camera:
-                        cameraView
-                    case .processing:
-                        processingView
-                    case .success:
-                        successView
-                    case .failed:
-                        failedView
-                    }
+            VStack(spacing: 0) {
+                switch verificationStep {
+                case .intro:
+                    introView
+                case .instructions:
+                    instructionsView
+                case .camera:
+                    cameraView
+                case .processing:
+                    processingView
+                case .success:
+                    successView
+                case .failed:
+                    failedView
                 }
             }
-            .navigationTitle("Verify Your Profile")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
+        }
+        .navigationTitle("Verify Your Profile")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     if verificationStep != .processing && verificationStep != .success {
                         Button("Cancel") {
@@ -52,7 +51,6 @@ struct ProfileVerificationView: View {
                     }
                 }
             }
-        }
         .sheet(isPresented: $showCamera) {
             ImagePicker(selectedImage: $capturedImage)
         }
