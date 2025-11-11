@@ -154,7 +154,12 @@ struct CheckInView: View {
 
 // MARK: - Hotspot Card
 struct HotspotCard: View {
+    @EnvironmentObject var viewModel: AppViewModel
     let location: Location
+
+    var heatLevel: HeatLevel {
+        viewModel.getHeatLevel(for: location.id)
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -163,9 +168,9 @@ struct HotspotCard: View {
                     .font(.title2)
                     .foregroundColor(.pink)
                 Spacer()
-                Text("\(location.activeUsers)")
-                    .font(.headline)
-                    .foregroundColor(.pink)
+                // Show heatmap emoji
+                Text(heatLevel.emoji)
+                    .font(.title3)
             }
 
             Text(location.name)
@@ -173,13 +178,31 @@ struct HotspotCard: View {
                 .lineLimit(2)
                 .frame(height: 44, alignment: .topLeading)
 
-            Text(location.type.rawValue)
-                .font(.caption)
-                .foregroundColor(.secondary)
+            HStack {
+                Text(location.type.rawValue)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Spacer()
+                // Show active users count
+                HStack(spacing: 4) {
+                    Image(systemName: "person.fill")
+                        .font(.caption2)
+                    Text("\(location.activeUsers)")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                }
+                .foregroundColor(heatLevel.color)
+            }
         }
         .padding()
         .frame(width: 180, height: 140)
-        .background(Color(.systemBackground))
+        .background(
+            LinearGradient(
+                colors: [heatLevel.color.opacity(0.1), Color(.systemBackground)],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
     }
@@ -187,20 +210,33 @@ struct HotspotCard: View {
 
 // MARK: - Location Row
 struct LocationRow: View {
+    @EnvironmentObject var viewModel: AppViewModel
     let location: Location
+
+    var heatLevel: HeatLevel {
+        viewModel.getHeatLevel(for: location.id)
+    }
 
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: location.type.icon)
                 .font(.title2)
-                .foregroundColor(.pink)
+                .foregroundColor(heatLevel.color)
                 .frame(width: 40, height: 40)
-                .background(Color.pink.opacity(0.1))
+                .background(heatLevel.color.opacity(0.1))
                 .cornerRadius(10)
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(location.name)
-                    .font(.headline)
+                HStack(spacing: 6) {
+                    Text(location.name)
+                        .font(.headline)
+
+                    // Heatmap indicator
+                    if heatLevel != .cool {
+                        Text(heatLevel.emoji)
+                            .font(.caption)
+                    }
+                }
 
                 Text(location.address)
                     .font(.caption)
@@ -213,15 +249,15 @@ struct LocationRow: View {
             VStack(alignment: .trailing, spacing: 4) {
                 Text("\(location.activeUsers)")
                     .font(.headline)
-                    .foregroundColor(.pink)
+                    .foregroundColor(heatLevel.color)
 
-                Text("spotted")
+                Text(heatLevel.description)
                     .font(.caption2)
                     .foregroundColor(.secondary)
             }
         }
         .padding()
-        .background(Color(.systemGray6))
+        .background(heatLevel.color.opacity(0.05))
         .cornerRadius(12)
     }
 }

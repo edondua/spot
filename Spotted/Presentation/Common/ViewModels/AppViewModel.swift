@@ -23,6 +23,10 @@ class AppViewModel: ObservableObject {
     @Published var sentFriendRequests: Set<String> = [] // Pending requests sent by current user
     @Published var receivedFriendRequests: Set<String> = [] // Pending requests from others
 
+    // Heatmap data - tracks check-in frequency per location
+    @Published var checkInHeatmap: [String: Int] = [:] // locationId: check-in count
+    @Published var recentCheckIns: [CheckIn] = [] // Last 50 check-ins for heatmap visualization
+
     // MARK: - Computed Properties
     var unreadMessagesCount: Int {
         conversations.reduce(0) { count, conversation in
@@ -37,6 +41,32 @@ class AppViewModel: ObservableObject {
         // Count matches from last 24 hours
         let dayAgo = Date().addingTimeInterval(-24 * 60 * 60)
         return matches.filter { $0.timestamp > dayAgo }.count
+    }
+
+    // Get heatmap intensity for a location (0.0 to 1.0)
+    func getHeatmapIntensity(for locationId: String) -> Double {
+        guard !checkInHeatmap.isEmpty else { return 0.0 }
+
+        let maxCheckIns = checkInHeatmap.values.max() ?? 1
+        let locationCheckIns = checkInHeatmap[locationId] ?? 0
+
+        return Double(locationCheckIns) / Double(maxCheckIns)
+    }
+
+    // Get heat level for UI display
+    func getHeatLevel(for locationId: String) -> HeatLevel {
+        let intensity = getHeatmapIntensity(for: locationId)
+
+        switch intensity {
+        case 0.8...1.0:
+            return .veryHot
+        case 0.5..<0.8:
+            return .hot
+        case 0.2..<0.5:
+            return .warm
+        default:
+            return .cool
+        }
     }
 
     // MARK: - Services
@@ -132,6 +162,9 @@ class AppViewModel: ObservableObject {
         // Track analytics
         analyticsManager.track(.checkedIn(location: location.name, userId: currentUser.id))
 
+        // Update heatmap data
+        updateHeatmapForCheckIn(checkIn)
+
         // Show success toast
         Task { @MainActor in
             ToastManager.shared.showSuccess("Checked in at \(location.name)! 📍")
@@ -139,6 +172,20 @@ class AppViewModel: ObservableObject {
 
         // Trigger haptic feedback for better UX
         HapticFeedback.success()
+    }
+
+    private func updateHeatmapForCheckIn(_ checkIn: CheckIn) {
+        // Increment check-in count for this location
+        let locationId = checkIn.location.id
+        checkInHeatmap[locationId, default: 0] += 1
+
+        // Add to recent check-ins (keep last 50)
+        recentCheckIns.insert(checkIn, at: 0)
+        if recentCheckIns.count > 50 {
+            recentCheckIns.removeLast()
+        }
+
+        print("AppViewModel: Heatmap updated - \(checkIn.location.name) now has \(checkInHeatmap[locationId] ?? 0) total check-ins")
     }
 
     func checkOut() {
@@ -710,6 +757,34 @@ class AppViewModel: ObservableObject {
 
             print("AppViewModel: Demo relationships set up - \(friends.count) friends, \(receivedFriendRequests.count) requests, \(matches.count) matches")
         }
+
+        // Set up demo heatmap data if empty
+        if checkInHeatmap.isEmpty {
+            setupDemoHeatmap()
+        }
+    }
+
+    private func setupDemoHeatmap() {
+        print("AppViewModel: Setting up demo heatmap data")
+
+        // Simulate historical check-ins at various locations
+        let popularLocations = locations.prefix(5)
+        for (index, location) in popularLocations.enumerated() {
+            // More popular locations get more check-ins
+            let checkInCount = (5 - index) * Int.random(in: 3...8)
+            checkInHeatmap[location.id] = checkInCount
+
+            print("AppViewModel: Heatmap - \(location.name) has \(checkInCount) historical check-ins")
+        }
+
+        // Add some recent check-ins
+        for user in allUsers.prefix(10) {
+            if let checkIn = user.currentCheckIn {
+                recentCheckIns.append(checkIn)
+            }
+        }
+
+        print("AppViewModel: Heatmap initialized with \(checkInHeatmap.count) locations and \(recentCheckIns.count) recent check-ins")
     }
 
     private func setupAutoSave() {
