@@ -213,7 +213,7 @@ class AppViewModel: ObservableObject {
         }
 
         // Trigger haptic feedback
-        HapticFeedback.light()
+        HapticFeedback.impact(.light)
     }
 
     // MARK: - Discovery Methods
