@@ -82,6 +82,9 @@ class AppViewModel: ObservableObject {
         self.allUsers = mockDataService.generateMockUsers()
         self.locations = mockDataService.zurichLocations
 
+        // Set up demo relationships if no persisted data exists
+        setupDemoRelationshipsIfNeeded()
+
         // Set up auto-save on data changes
         setupAutoSave()
     }
@@ -646,6 +649,50 @@ class AppViewModel: ObservableObject {
     }
 
     // MARK: - Persistence Methods
+
+    private func setupDemoRelationshipsIfNeeded() {
+        // Only set up demo data if we don't have any existing relationships
+        guard friends.isEmpty && sentFriendRequests.isEmpty &&
+              receivedFriendRequests.isEmpty && matches.isEmpty else {
+            print("AppViewModel: Existing relationships found, skipping demo setup")
+            return
+        }
+
+        print("AppViewModel: Setting up demo relationships")
+
+        // Add some friends (first 3 users)
+        if allUsers.count >= 5 {
+            friends.insert(allUsers[0].id)
+            friends.insert(allUsers[1].id)
+            friends.insert(allUsers[2].id)
+
+            // Add received friend requests (next 2 users)
+            receivedFriendRequests.insert(allUsers[3].id)
+            receivedFriendRequests.insert(allUsers[4].id)
+
+            // Add some sent requests if we have more users
+            if allUsers.count >= 7 {
+                sentFriendRequests.insert(allUsers[5].id)
+                sentFriendRequests.insert(allUsers[6].id)
+            }
+
+            // Add some matches with existing conversations
+            if conversations.isEmpty && allUsers.count >= 2 {
+                conversations = mockDataService.generateMockConversations(users: allUsers)
+            }
+            if matches.isEmpty && allUsers.count >= 3 {
+                matches = mockDataService.generateMockMatches(users: allUsers)
+            }
+
+            // Like a few users
+            if allUsers.count >= 10 {
+                likedUsers.insert(allUsers[7].id)
+                likedUsers.insert(allUsers[8].id)
+            }
+
+            print("AppViewModel: Demo relationships set up - \(friends.count) friends, \(receivedFriendRequests.count) requests, \(matches.count) matches")
+        }
+    }
 
     private func setupAutoSave() {
         // Save current user when it changes
