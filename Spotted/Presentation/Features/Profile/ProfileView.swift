@@ -628,7 +628,7 @@ struct PromptCard: View {
             .cornerRadius(16)
 
             // Like button for prompts
-            if showLikeButton && user != nil && !viewModel.hasMatch(with: user!.id) {
+            if let user = user, showLikeButton && !viewModel.hasMatch(with: user.id) {
                 Button(action: {
                     likePrompt()
                 }) {

@@ -50,12 +50,14 @@ class ToastManager: ObservableObject {
     private init() {}
 
     func show(_ message: String, type: ToastType = .info, duration: TimeInterval = 3.0) {
-        currentToast = ToastItem(message: message, type: type, duration: duration)
+        let toast = ToastItem(message: message, type: type, duration: duration)
+        currentToast = toast
 
         // Auto-dismiss after duration
         Task {
             try? await Task.sleep(nanoseconds: UInt64(duration * 1_000_000_000))
-            if currentToast?.id == currentToast?.id {
+            // Only dismiss if it's still the same toast
+            if currentToast?.id == toast.id {
                 withAnimation {
                     currentToast = nil
                 }

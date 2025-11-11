@@ -578,7 +578,7 @@ class AppViewModel: ObservableObject {
             profileViews[userId] = []
         }
 
-        if !profileViews[userId]!.contains(currentUser.id) {
+        if let views = profileViews[userId], !views.contains(currentUser.id) {
             profileViews[userId]?.append(currentUser.id)
             print("AppViewModel: Tracked profile view for user \(userId)")
         }
