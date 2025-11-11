@@ -76,7 +76,41 @@ struct PhotoPlaceholderView: View {
 
     var body: some View {
         Group {
-            if let uiImage = resolvedImage() {
+            // Check if photoId is a remote URL
+            if photoId.hasPrefix("http://") || photoId.hasPrefix("https://") {
+                AsyncImage(url: URL(string: photoId)) { phase in
+                    switch phase {
+                    case .empty:
+                        // Loading placeholder
+                        ZStack {
+                            Rectangle()
+                                .fill(gradientForPhoto(photoId))
+                            ProgressView()
+                                .tint(.white)
+                        }
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    case .failure:
+                        // Failed to load - show gradient placeholder
+                        ZStack {
+                            Rectangle()
+                                .fill(gradientForPhoto(photoId))
+                            VStack(spacing: 12) {
+                                Image(systemName: photoIcon)
+                                    .font(.system(size: 60))
+                                    .foregroundColor(.white.opacity(0.5))
+                                Text("Photo Unavailable")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .foregroundColor(.white.opacity(0.7))
+                            }
+                        }
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+            } else if let uiImage = resolvedImage() {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()

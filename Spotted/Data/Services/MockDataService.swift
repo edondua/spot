@@ -310,13 +310,21 @@ class MockDataService {
             let sexualities = ["Straight", "Gay", "Lesbian", "Bisexual", "Queer", "Pansexual"]
             let kidsOptions = ["Don't have kids", "Have kids", "Want kids", "Don't want kids", "Open to kids"]
 
+            // Generate realistic portrait URLs from randomuser.me API
+            let gender = index % 2 == 0 ? "women" : "men"
+            let baseId = index % 70 // randomuser.me has 0-99 portraits per gender
+            let photos = (0..<6).map { photoIndex -> String in
+                let portraitId = (baseId + photoIndex) % 70
+                return "https://randomuser.me/api/portraits/\(gender)/\(portraitId).jpg"
+            }
+
             let user = User(
                 id: "user_\(index)",
                 name: nameAge.0,
                 age: nameAge.1,
                 bio: bios[index % bios.count],
-                photos: ["photo_\(index)_1", "photo_\(index)_2", "photo_\(index)_3", "photo_\(index)_4", "photo_\(index)_5", "photo_\(index)_6"],
-                profilePhoto: "photo_\(index)_1",
+                photos: photos,
+                profilePhoto: photos[0],
                 ethnicity: ethnicities[index % ethnicities.count],
                 isVerified: index % 3 == 0,
                 favoriteHangouts: favoriteLocations,
@@ -411,13 +419,18 @@ class MockDataService {
             ProfilePrompt(question: "The way to win me over is", answer: "Good conversation over fondue")
         ]
 
+        // Generate portrait URLs for current user
+        let currentUserPhotos = (65..<71).map { portraitId -> String in
+            return "https://randomuser.me/api/portraits/women/\(portraitId).jpg"
+        }
+
         return User(
             id: "current_user",
             name: "You",
             age: 28,
             bio: "Looking for authentic connections in Zurich",
-            photos: ["current_1", "current_2", "current_3", "current_4", "current_5", "current_6"],
-            profilePhoto: "current_1",
+            photos: currentUserPhotos,
+            profilePhoto: currentUserPhotos[0],
             ethnicity: "Swiss",
             isVerified: true,
             favoriteHangouts: Array(zurichLocations.prefix(3)),
