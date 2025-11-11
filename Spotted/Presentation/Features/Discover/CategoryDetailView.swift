@@ -8,9 +8,11 @@ struct CategoryDetailView: View {
     @State private var rotation: Double = 0
 
     var categoryUsers: [User] {
-        viewModel.allUsers.filter { user in
+        let filtered = viewModel.allUsers.filter { user in
             user.interests.contains(category.rawValue)
         }
+        print("CategoryDetailView: Found \(filtered.count) users for category '\(category.rawValue)' out of \(viewModel.allUsers.count) total users")
+        return filtered
     }
 
     var body: some View {

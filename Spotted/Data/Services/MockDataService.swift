@@ -106,6 +106,8 @@ class MockDataService {
 
     // MARK: - Mock Users
     func generateMockUsers() -> [User] {
+        print("MockDataService: Generating mock users...")
+
         let names = [
             ("Lara", 27), ("Marco", 29), ("Sophie", 25), ("David", 31),
             ("Emma", 26), ("Lukas", 28), ("Nina", 24), ("Felix", 30),
@@ -164,7 +166,7 @@ class MockDataService {
 
         let ethnicities = ["Swiss", "German", "Italian", "French", "Spanish", "Mixed", nil, nil]
 
-        return names.enumerated().map { index, nameAge in
+        let users = names.enumerated().map { index, nameAge in
             let favoriteLocations = Array(zurichLocations.shuffled().prefix(Int.random(in: 2...4)))
 
             // Some users have active check-ins (increased for demo)
@@ -308,7 +310,7 @@ class MockDataService {
             let sexualities = ["Straight", "Gay", "Lesbian", "Bisexual", "Queer", "Pansexual"]
             let kidsOptions = ["Don't have kids", "Have kids", "Want kids", "Don't want kids", "Open to kids"]
 
-            return User(
+            let user = User(
                 id: "user_\(index)",
                 name: nameAge.0,
                 age: nameAge.1,
@@ -339,7 +341,21 @@ class MockDataService {
                 spontaneousActivity: isSpontaneous ? spontaneousActivities.randomElement() : nil,
                 lastActivity: lastActivity
             )
+
+            print("MockDataService: User \(index) - \(user.name) has interests: \(user.interests.joined(separator: ", "))")
+            return user
         }
+
+        print("MockDataService: Generated \(users.count) users total")
+
+        // Count users per category for debugging
+        let allInterests = ["Short-term Fun", "Long-term Partner", "Gamers", "Creatives", "Foodies", "Travel Buddies", "Binge Watchers", "Sports", "Music Lovers", "Spiritual"]
+        for interest in allInterests {
+            let count = users.filter { $0.interests.contains(interest) }.count
+            print("MockDataService: '\(interest)' has \(count) users")
+        }
+
+        return users
     }
 
     // MARK: - Mock Conversations

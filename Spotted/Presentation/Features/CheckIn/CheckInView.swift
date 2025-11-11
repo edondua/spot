@@ -5,6 +5,7 @@ struct CheckInView: View {
     @State private var selectedLocation: Location?
     @State private var showingCheckInSheet = false
     @State private var searchText = ""
+    @State private var refreshID = UUID()
 
     var filteredLocations: [Location] {
         if searchText.isEmpty {
@@ -24,6 +25,7 @@ struct CheckInView: View {
                         // Current Check-in Status
                         if let checkIn = viewModel.currentUser.currentCheckIn {
                             currentCheckInCard(checkIn: checkIn)
+                                .transition(.move(edge: .top).combined(with: .opacity))
                         }
 
                         // Hotspots Header
@@ -74,11 +76,16 @@ struct CheckInView: View {
                 .searchable(text: $searchText, prompt: "Search locations...")
             }
             .navigationTitle("Spotted")
+            .animation(.spring(response: 0.4, dampingFraction: 0.8), value: viewModel.currentUser.currentCheckIn?.id)
             .sheet(isPresented: $showingCheckInSheet) {
+                // Refresh view when sheet dismisses
+                refreshID = UUID()
+            } content: {
                 if let location = selectedLocation {
                     CheckInDetailView(location: location, isPresented: $showingCheckInSheet)
                 }
             }
+            .id(refreshID)
         }
     }
 

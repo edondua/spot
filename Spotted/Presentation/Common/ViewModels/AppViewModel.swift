@@ -108,10 +108,9 @@ class AppViewModel: ObservableObject {
             imageUrl: imageUrl
         )
 
-        // Update current user
-        var updatedUser = currentUser
-        updatedUser.currentCheckIn = checkIn
-        currentUser = updatedUser
+        // Update current user - use objectWillChange to ensure SwiftUI updates
+        objectWillChange.send()
+        currentUser.currentCheckIn = checkIn
 
         // Add location to array if it doesn't exist (for custom locations)
         if !locations.contains(where: { $0.id == location.id }) {
@@ -128,6 +127,7 @@ class AppViewModel: ObservableObject {
 
         print("AppViewModel: Check-in completed for \(currentUser.name) at \(location.name)")
         print("AppViewModel: Location now has \(locations.first(where: { $0.id == location.id })?.activeUsers ?? 0) active users")
+        print("AppViewModel: CheckIn details - ID: \(checkIn.id), Expires at: \(checkIn.expiresAt)")
 
         // Track analytics
         analyticsManager.track(.checkedIn(location: location.name, userId: currentUser.id))
@@ -136,19 +136,37 @@ class AppViewModel: ObservableObject {
         Task { @MainActor in
             ToastManager.shared.showSuccess("Checked in at \(location.name)! 📍")
         }
+
+        // Trigger haptic feedback for better UX
+        HapticFeedback.success()
     }
 
     func checkOut() {
-        if let checkIn = currentUser.currentCheckIn,
-           let index = locations.firstIndex(where: { $0.id == checkIn.location.id }) {
-            locations[index].activeUsers = max(0, locations[index].activeUsers - 1)
-            print("AppViewModel: Checked out from \(checkIn.location.name)")
-
-            // Track analytics
-            analyticsManager.track(.checkedOut(location: checkIn.location.name, userId: currentUser.id))
+        guard let checkIn = currentUser.currentCheckIn else {
+            print("AppViewModel: No active check-in to check out from")
+            return
         }
 
+        // Decrement location active users
+        if let index = locations.firstIndex(where: { $0.id == checkIn.location.id }) {
+            locations[index].activeUsers = max(0, locations[index].activeUsers - 1)
+            print("AppViewModel: Checked out from \(checkIn.location.name)")
+        }
+
+        // Track analytics
+        analyticsManager.track(.checkedOut(location: checkIn.location.name, userId: currentUser.id))
+
+        // Update current user - use objectWillChange to ensure SwiftUI updates
+        objectWillChange.send()
         currentUser.currentCheckIn = nil
+
+        // Show success toast
+        Task { @MainActor in
+            ToastManager.shared.showSuccess("Checked out successfully! 👋")
+        }
+
+        // Trigger haptic feedback
+        HapticFeedback.light()
     }
 
     // MARK: - Discovery Methods
