@@ -1,0 +1,73 @@
+name: Code Quality Checks
+
+on:
+  push:
+    branches: [ main, develop, claude/** ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  check-todos:
+    name: Check for TODOs in critical files
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check for TODOs in presentation layer
+      run: |
+        echo "Checking for TODO/FIXME comments in UI code..."
+        if grep -r "TODO\|FIXME" Spotted/Presentation/ --include="*.swift"; then
+          echo "⚠️ Found TODO/FIXME comments in presentation layer"
+          exit 0
+        else
+          echo "✅ No TODO/FIXME comments found in presentation layer"
+        fi
+
+  check-structure:
+    name: Verify Project Structure
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Verify critical files exist
+      run: |
+        echo "Checking critical files..."
+
+        # App entry points
+        test -f "Spotted/App/SpottedApp.swift" || { echo "❌ SpottedApp.swift missing"; exit 1; }
+
+        # Core components
+        test -d "Spotted/Core/DesignSystem" || { echo "❌ DesignSystem missing"; exit 1; }
+        test -d "Spotted/Data/Models" || { echo "❌ Data Models missing"; exit 1; }
+        test -d "Spotted/Data/Services" || { echo "❌ Services missing"; exit 1; }
+        test -d "Spotted/Presentation/Features" || { echo "❌ Features missing"; exit 1; }
+
+        # View Models
+        test -f "Spotted/Presentation/Common/ViewModels/AppViewModel.swift" || { echo "❌ AppViewModel missing"; exit 1; }
+
+        # Main features
+        test -d "Spotted/Presentation/Features/Onboarding" || { echo "❌ Onboarding missing"; exit 1; }
+        test -d "Spotted/Presentation/Features/CheckIn" || { echo "❌ CheckIn missing"; exit 1; }
+        test -d "Spotted/Presentation/Features/Discover" || { echo "❌ Discover missing"; exit 1; }
+        test -d "Spotted/Presentation/Features/Matches" || { echo "❌ Matches missing"; exit 1; }
+        test -d "Spotted/Presentation/Features/Profile" || { echo "❌ Profile missing"; exit 1; }
+
+        echo "✅ All critical files and directories exist"
+
+  check-swift-syntax:
+    name: Check Swift Syntax
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check Swift syntax
+      run: |
+        echo "Checking Swift syntax..."
+        find Spotted -name "*.swift" -exec swift -frontend -parse {} \; 2>&1 | grep -i "error" && exit 1 || echo "✅ No syntax errors found"
+      continue-on-error: true

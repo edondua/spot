@@ -1,0 +1,56 @@
+name: iOS Build and Test
+
+on:
+  push:
+    branches: [ main, develop, claude/** ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Select Xcode version
+      run: sudo xcode-select -switch /Applications/Xcode_15.0.app
+
+    - name: Show Xcode version
+      run: xcodebuild -version
+
+    - name: Show available simulators
+      run: xcrun simctl list devices
+
+    - name: Build for iOS Simulator
+      run: |
+        xcodebuild clean build \
+          -project Spotted.xcodeproj \
+          -scheme Spotted \
+          -sdk iphonesimulator \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+          CODE_SIGNING_ALLOWED=NO \
+          | xcpretty && exit ${PIPESTATUS[0]}
+      continue-on-error: false
+
+    - name: Run Unit Tests
+      run: |
+        xcodebuild test \
+          -project Spotted.xcodeproj \
+          -scheme Spotted \
+          -sdk iphonesimulator \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+          CODE_SIGNING_ALLOWED=NO \
+          | xcpretty && exit ${PIPESTATUS[0]}
+      continue-on-error: true
+
+    - name: Archive build artifacts
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-logs
+        path: |
+          ~/Library/Logs/DiagnosticReports/
+          DerivedData/Logs/

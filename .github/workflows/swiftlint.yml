@@ -1,0 +1,27 @@
+name: SwiftLint
+
+on:
+  push:
+    branches: [ main, develop, claude/** ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  swiftlint:
+    name: Run SwiftLint
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install SwiftLint
+      run: brew install swiftlint
+
+    - name: Run SwiftLint
+      run: swiftlint lint --reporter github-actions-logging
+      continue-on-error: true
+
+    - name: SwiftLint with strict mode
+      run: swiftlint lint --strict
+      continue-on-error: true

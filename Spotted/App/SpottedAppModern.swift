@@ -3,6 +3,18 @@ import SwiftUI
 // MARK: - Modern App Entry Point with Dependency Injection
 // NOTE: Uncomment @main below to use the modern version instead of the basic version
 // Remember to comment out @main in SpottedApp.swift first!
+//
+// ⚠️ COMPATIBILITY NOTICE:
+// This Modern app architecture uses AppViewModelModern with dependency injection.
+// However, some shared views (ProfileView, LocationDetailView, UserProfileView, MatchCircle)
+// expect AppViewModel as @EnvironmentObject, which creates a type mismatch.
+//
+// To activate this modern architecture, you need to either:
+// 1. Create Modern-compatible versions of these views, OR
+// 2. Make these views generic to work with both ViewModel types, OR
+// 3. Use only the custom Modern views defined in this file
+//
+// Current Status: SpottedApp.swift is the active app entry point
 
 // @main
 struct SpottedAppModern: App {
