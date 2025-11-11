@@ -79,8 +79,20 @@ class AppViewModel: ObservableObject {
         // Try to load persisted data first
         do {
             if let savedUser = try persistenceManager.loadCurrentUser() {
-                self.currentUser = savedUser
-                print("AppViewModel: Loaded persisted user data")
+                // Check if user has old photo IDs (need migration to new URLs)
+                let hasOldPhotos = savedUser.photos.first?.hasPrefix("photo_") ?? false ||
+                                   savedUser.photos.first?.hasPrefix("current_") ?? false
+
+                if hasOldPhotos {
+                    // Migrate to new photo URLs
+                    print("AppViewModel: Migrating user to new photo URLs")
+                    self.currentUser = mockDataService.generateCurrentUser()
+                    // Save the new user to persist the migration
+                    try? persistenceManager.saveCurrentUser(self.currentUser)
+                } else {
+                    self.currentUser = savedUser
+                    print("AppViewModel: Loaded persisted user data")
+                }
             } else {
                 self.currentUser = mockDataService.generateCurrentUser()
                 print("AppViewModel: Using mock user data")
