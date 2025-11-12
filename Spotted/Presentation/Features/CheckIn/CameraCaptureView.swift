@@ -264,8 +264,19 @@ class CameraService: NSObject, ObservableObject {
             }
             setupCamera()
         case .notDetermined:
-            print("CameraService: Permission not determined")
-            isAuthorized = false
+            print("CameraService: Permission not determined — requesting now")
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+                print("CameraService: Permission request (auto) result: \(granted)")
+                DispatchQueue.main.async {
+                    self?.isAuthorized = granted
+                    print("CameraService: Updated isAuthorized (auto) to \(granted)")
+                }
+                if granted {
+                    self?.setupCamera()
+                } else {
+                    print("CameraService: Permission denied (auto)")
+                }
+            }
         case .denied, .restricted:
             print("CameraService: Permission denied or restricted")
             DispatchQueue.main.async {
@@ -829,6 +840,7 @@ struct LocationPickerSheet: View {
     @State private var locationName: String = ""
     @State private var region: MKCoordinateRegion
     @State private var showNameInput = false
+    @State private var mapCameraPosition: MapCameraPosition
 
     init(currentLocation: CLLocationCoordinate2D?, selectedLocation: Binding<Location?>, customLocationName: Binding<String>) {
         self.currentLocation = currentLocation
@@ -837,17 +849,24 @@ struct LocationPickerSheet: View {
 
         // Initialize region with current location or default
         let coordinate = currentLocation ?? CLLocationCoordinate2D(latitude: 47.3769, longitude: 8.5417) // Zurich default
-        _region = State(initialValue: MKCoordinateRegion(
+        let initialRegion = MKCoordinateRegion(
             center: coordinate,
             span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        ))
+        )
+        _region = State(initialValue: initialRegion)
+        _mapCameraPosition = State(initialValue: .region(initialRegion))
     }
 
     var body: some View {
         ZStack {
             // Interactive Map
-            Map(coordinateRegion: $region)
-                .edgesIgnoringSafeArea(.all)
+            Map(position: $mapCameraPosition) {
+            }
+            .mapStyle(.standard)
+            .edgesIgnoringSafeArea(.all)
+            .onMapCameraChange { context in
+                region = context.region
+            }
 
             // Center pin (fixed in center, map moves underneath)
             VStack {

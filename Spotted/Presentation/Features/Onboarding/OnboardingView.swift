@@ -364,7 +364,32 @@ struct ProfileCreationWizard: View {
     @State private var selectedInterests: Set<String> = []
     @State private var showMainApp = false
 
-    let allInterests = ["Short-term Fun", "Long-term Partner", "Gamers", "Creatives", "Foodies", "Travel Buddies", "Binge Watchers", "Sports", "Music Lovers", "Spiritual"]
+    let allInterests = [
+        "🎉 Short-term Fun",
+        "💕 Long-term Partner",
+        "🎮 Gamers",
+        "🎨 Creatives",
+        "🍕 Foodies",
+        "✈️ Travel Buddies",
+        "📺 Binge Watchers",
+        "⚽️ Sports",
+        "🎵 Music Lovers",
+        "🧘 Spiritual",
+        "☕️ Coffee Addict",
+        "🏋️ Fitness",
+        "📚 Bookworms",
+        "🎬 Movie Buffs",
+        "🌱 Nature Lovers",
+        "🐾 Pet Lovers",
+        "🎭 Theater & Arts",
+        "💃 Dancing",
+        "🍷 Wine Tasting",
+        "🎤 Karaoke",
+        "📸 Photography",
+        "🎲 Board Games",
+        "🧗 Adventure Seekers",
+        "🍜 Cooking"
+    ]
 
     var canProceed: Bool {
         switch currentStep {
@@ -637,6 +662,8 @@ struct ProfileCreationStep3: View {
     @State private var photoItems: [PhotosPickerItem] = []
     @State private var selectedImages: [UIImage] = []
     @State private var showCamera = false
+    @State private var showPhotoSourcePicker = false
+    @State private var showPhotoPicker = false
 
     var body: some View {
         ScrollView {
@@ -681,7 +708,7 @@ struct ProfileCreationStep3: View {
                         } else {
                             // Show add photo button
                             AddPhotoCell(index: index) {
-                                // Picker is triggered inline
+                                showPhotoSourcePicker = true
                             }
                             .opacity(showContent ? 1 : 0)
                             .offset(y: showContent ? 0 : 20)
@@ -690,51 +717,10 @@ struct ProfileCreationStep3: View {
                     }
                 }
                 .padding(.horizontal, 24)
-
-                // Action buttons
-                HStack(spacing: 16) {
-                    // Photo library picker
-                    PhotosPicker(
-                        selection: $photoItems,
-                        maxSelectionCount: 6 - selectedImages.count,
-                        matching: .images
-                    ) {
-                        HStack(spacing: 8) {
-                            Image(systemName: "photo.on.rectangle")
-                                .font(.system(size: 18, weight: .semibold))
-                            Text("Photo Library")
-                                .font(.system(size: 15, weight: .semibold))
-                        }
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .background(Color(red: 252/255, green: 108/255, blue: 133/255))
-                        .cornerRadius(16)
-                    }
-                    .disabled(selectedImages.count >= 6)
-
-                    // Camera button
-                    Button {
-                        showCamera = true
-                    } label: {
-                        HStack(spacing: 8) {
-                            Image(systemName: "camera.fill")
-                                .font(.system(size: 18, weight: .semibold))
-                            Text("Camera")
-                                .font(.system(size: 15, weight: .semibold))
-                        }
-                        .foregroundColor(Color(red: 252/255, green: 108/255, blue: 133/255))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .background(Color(red: 252/255, green: 108/255, blue: 133/255).opacity(0.1))
-                        .cornerRadius(16)
-                    }
-                    .disabled(selectedImages.count >= 6)
-                }
-                .padding(.horizontal, 24)
                 .padding(.bottom, 40)
             }
         }
+        .ignoresSafeArea(.keyboard)
         .onChange(of: photoItems) { _, newItems in
             Task {
                 for item in newItems {
@@ -745,6 +731,36 @@ struct ProfileCreationStep3: View {
                 }
                 updateSelectedPhotos()
                 photoItems = []
+            }
+        }
+        .confirmationDialog("Add Photo", isPresented: $showPhotoSourcePicker, titleVisibility: .visible) {
+            Button("Photo Library") {
+                showPhotoPicker = true
+            }
+            Button("Camera") {
+                showCamera = true
+            }
+            Button("Cancel", role: .cancel) {}
+        }
+        .fullScreenCover(isPresented: $showPhotoPicker) {
+            PhotosPicker(
+                selection: $photoItems,
+                maxSelectionCount: 6 - selectedImages.count,
+                matching: .images
+            ) {
+                VStack(spacing: 16) {
+                    Image(systemName: "photo.on.rectangle.angled")
+                        .font(.system(size: 60))
+                        .foregroundColor(Color(red: 252/255, green: 108/255, blue: 133/255))
+
+                    Text("Select Photos")
+                        .font(.system(size: 22, weight: .bold))
+
+                    Text("Choose up to \(6 - selectedImages.count) photos")
+                        .font(.system(size: 16))
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .sheet(isPresented: $showCamera) {
@@ -991,6 +1007,7 @@ struct ProfileCreationStep5: View {
                 .padding(.bottom, 40)
             }
         }
+        .ignoresSafeArea(.keyboard)
         .onAppear {
             showContent = true
         }

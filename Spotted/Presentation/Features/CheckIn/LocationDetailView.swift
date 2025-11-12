@@ -252,8 +252,8 @@ struct StoryViewerScreen: View {
 
     @State private var currentIndex: Int = 0
     @State private var progress: CGFloat = 0
-    @State private var timer: Timer?
     @State private var isPaused = false
+    @State private var progressWorkItem: DispatchWorkItem?
     @GestureState private var dragOffset: CGFloat = 0
 
     private let storyDuration: TimeInterval = 5.0
@@ -277,6 +277,14 @@ struct StoryViewerScreen: View {
                     .clipped()
             }
             .ignoresSafeArea()
+
+            // Prefetch next story image (offscreen) for smoother transition
+            if currentIndex + 1 < allStories.count {
+                PhotoPlaceholderView(photoId: allStories[currentIndex + 1].imageUrl, aspectRatio: 9/16)
+                    .frame(width: 1, height: 1)
+                    .opacity(0.001)
+                    .allowsHitTesting(false)
+            }
 
             // Top gradient overlay
             VStack {
@@ -421,36 +429,40 @@ struct StoryViewerScreen: View {
             if let index = allStories.firstIndex(where: { $0.id == story.id }) {
                 currentIndex = index
             }
-            startTimer()
+            startProgress()
         }
         .onDisappear {
-            stopTimer()
+            cancelProgress()
         }
         .statusBarHidden()
     }
 
-    private func startTimer() {
+    private func startProgress() {
+        cancelProgress()
         progress = 0
-        timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+        // Smooth linear animation for the progress bar
+        withAnimation(.linear(duration: storyDuration)) {
+            progress = 1.0
+        }
+        let work = DispatchWorkItem {
             if !isPaused {
-                progress += 0.05 / storyDuration
-                if progress >= 1.0 {
-                    nextStory()
-                }
+                nextStory()
             }
         }
+        progressWorkItem = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + storyDuration, execute: work)
     }
 
-    private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
+    private func cancelProgress() {
+        progressWorkItem?.cancel()
+        progressWorkItem = nil
     }
 
     private func nextStory() {
         if currentIndex < allStories.count - 1 {
             currentIndex += 1
-            stopTimer()
-            startTimer()
+            cancelProgress()
+            startProgress()
         } else {
             dismiss()
         }
@@ -459,11 +471,11 @@ struct StoryViewerScreen: View {
     private func previousStory() {
         if progress < 0.1 && currentIndex > 0 {
             currentIndex -= 1
-            stopTimer()
-            startTimer()
+            cancelProgress()
+            startProgress()
         } else {
-            stopTimer()
-            startTimer()
+            cancelProgress()
+            startProgress()
         }
     }
 }

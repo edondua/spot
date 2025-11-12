@@ -465,7 +465,9 @@ struct ChatViewModern: View {
                     ForEach(conversation.messages) { message in
                         MessageBubble(
                             message: message,
-                            isCurrentUser: message.senderId == viewModel.currentUser.id
+                            isCurrentUser: message.senderId == viewModel.currentUser.id,
+                            currentUser: viewModel.currentUser,
+                            otherUser: otherUser
                         )
                     }
                 }
@@ -492,6 +494,11 @@ struct ChatViewModern: View {
         }
         .navigationTitle(conversation.participants.first ?? "Chat")
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private var otherUser: User? {
+        let otherId = conversation.participants.first { $0 != viewModel.currentUser.id }
+        return otherId.flatMap { viewModel.getUser(by: $0) }
     }
 
     private func sendMessage() async {

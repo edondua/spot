@@ -118,7 +118,25 @@ class MockDataService {
             ("Isabella", 23), ("Paul", 28), ("Sophia", 27), ("Robin", 26),
             ("Maya", 29), ("Lucas", 30), ("Nora", 24), ("Samuel", 28),
             ("Amelie", 26), ("Benjamin", 27), ("Zoe", 25), ("Elias", 29),
-            ("Leah", 28), ("Alexander", 30), ("Mila", 24), ("Adrian", 27)
+            ("Leah", 28), ("Alexander", 30), ("Mila", 24), ("Adrian", 27),
+            // Additional users for better category distribution
+            ("Clara", 26), ("Oscar", 28), ("Hannah", 25), ("Finn", 30),
+            ("Ella", 27), ("Matteo", 29), ("Charlotte", 24), ("Leo", 31),
+            ("Lena", 26), ("Julian", 28), ("Emilia", 25), ("Gabriel", 30),
+            ("Stella", 27), ("Vincent", 29), ("Luna", 24), ("Rafael", 28),
+            ("Aurora", 26), ("Theo", 27), ("Ivy", 25), ("Sebastian", 30),
+            ("Ruby", 28), ("Jasper", 29), ("Hazel", 24), ("Miles", 27),
+            ("Violet", 26), ("Kai", 28), ("Alice", 25), ("Ezra", 30),
+            ("Lily", 27), ("Axel", 29), ("Grace", 24), ("Hugo", 28),
+            ("Aria", 26), ("Owen", 27), ("Chloe", 25), ("Ethan", 30),
+            ("Scarlett", 28), ("Liam", 29), ("Penelope", 24), ("Oliver", 27),
+            ("Isla", 26), ("Noah", 28), ("Willow", 25), ("James", 30),
+            ("Harper", 27), ("Lucas", 29), ("Evelyn", 24), ("Mason", 28),
+            ("Abigail", 26), ("Logan", 27), ("Emily", 25), ("Aiden", 30),
+            ("Avery", 28), ("Jackson", 29), ("Ella", 24), ("Carter", 27),
+            ("Sofia", 26), ("Wyatt", 28), ("Madison", 25), ("Grayson", 30),
+            ("Zara", 27), ("Dylan", 29), ("Natalie", 24), ("Isaac", 28),
+            ("Bella", 26), ("Henry", 27), ("Victoria", 25), ("Jack", 30)
         ]
 
         let bios = [
@@ -161,7 +179,63 @@ class MockDataService {
             "Podcast addict with strong opinions",
             "Sunrise chaser and sunset lover",
             "Trying to perfect my pasta recipe 🍝",
-            "Live music > recorded music always"
+            "Live music > recorded music always",
+            // Additional bios for extended user base
+            "Vintage record collector 📻",
+            "Meditation and mindfulness enthusiast",
+            "Can't resist a good brunch spot",
+            "Hockey fan looking for game buddies",
+            "Sustainable living advocate 🌱",
+            "Amateur astronomer seeking stargazers",
+            "Street food explorer and market lover",
+            "Cycling through Zurich every day 🚴",
+            "Film buff with eclectic taste",
+            "Crossfit junkie, no pain no gain",
+            "Plant parent to 20+ houseplants",
+            "Always down for karaoke night 🎤",
+            "Chess player seeking worthy opponents",
+            "Craft cocktail enthusiast",
+            "History nerd who loves old buildings",
+            "Surfing when I can, skiing when I must",
+            "Salsa dancing Friday nights",
+            "Coding by day, gaming by night",
+            "Rescue dog owner looking for park dates",
+            "Sustainable fashion advocate",
+            "Trying every ramen shop in town 🍜",
+            "Jazz bars are my happy place",
+            "Weekend warrior | Weekday chill",
+            "Horror movie marathons anyone?",
+            "Kombucha brewer and fermentation fan",
+            "Aerial yoga changed my life",
+            "Vintage car enthusiast 🚗",
+            "Tea ceremony practitioner",
+            "Stand-up comedy regular",
+            "Thrift shopping extraordinaire",
+            "Blockchain believer | Crypto curious",
+            "Bouldering gym regular looking for partners",
+            "Whisky tasting connoisseur 🥃",
+            "Graphic designer with strong coffee opinions",
+            "Marathon runner training for my next race",
+            "Love languages: food and travel",
+            "Ukulele player seeking jam sessions",
+            "Debate club champion | Conversation lover",
+            "Sushi making classes on Sundays",
+            "Scuba certified and ready to dive",
+            "Vintage bookstore browser",
+            "Electronic music producer 🎹",
+            "Rock climbing and coffee enthusiast",
+            "Improv comedy performer",
+            "Sourdough bread baker",
+            "Motorcycle rider seeking road trip buddies 🏍️",
+            "Swing dancing enthusiast",
+            "Poetry slam regular",
+            "Urban sketching artist",
+            "Parkour practitioner",
+            "Vegan chef experimenting with flavors",
+            "Escape room addict",
+            "Foraging and wild cooking fan",
+            "Philosophy major turned entrepreneur",
+            "Triathlon training partner wanted"
         ]
 
         let ethnicities = ["Swiss", "German", "Italian", "French", "Spanish", "Mixed", nil, nil]
@@ -199,11 +273,39 @@ class MockDataService {
 
             // Assign interests - ensure each category has users
             let allInterests = ["Short-term Fun", "Long-term Partner", "Gamers", "Creatives", "Foodies", "Travel Buddies", "Binge Watchers", "Sports", "Music Lovers", "Spiritual"]
-            // First user gets first interest, second user gets second interest, etc.
-            // Plus 2-3 additional random interests for variety
-            var userInterests = [allInterests[index % allInterests.count]]
-            let additionalInterests = allInterests.filter { $0 != userInterests[0] }.shuffled().prefix(Int.random(in: 1...3))
-            userInterests.append(contentsOf: additionalInterests)
+
+            // Primary interest - rotate through all categories to ensure even distribution
+            let primaryInterest = allInterests[index % allInterests.count]
+            var userInterests = [primaryInterest]
+
+            // Add 2-4 additional interests for variety, but make them complementary
+            let complementaryInterests: [String: [String]] = [
+                "Short-term Fun": ["Binge Watchers", "Music Lovers", "Sports"],
+                "Long-term Partner": ["Foodies", "Travel Buddies", "Spiritual"],
+                "Gamers": ["Binge Watchers", "Music Lovers", "Creatives"],
+                "Creatives": ["Music Lovers", "Foodies", "Travel Buddies"],
+                "Foodies": ["Travel Buddies", "Long-term Partner", "Creatives"],
+                "Travel Buddies": ["Foodies", "Sports", "Spiritual"],
+                "Binge Watchers": ["Gamers", "Short-term Fun", "Creatives"],
+                "Sports": ["Travel Buddies", "Short-term Fun", "Music Lovers"],
+                "Music Lovers": ["Creatives", "Short-term Fun", "Sports"],
+                "Spiritual": ["Travel Buddies", "Long-term Partner", "Creatives"]
+            ]
+
+            // Add complementary interests
+            if let complementary = complementaryInterests[primaryInterest] {
+                let numAdditional = Int.random(in: 2...3)
+                let selectedComplementary = complementary.shuffled().prefix(numAdditional)
+                userInterests.append(contentsOf: selectedComplementary)
+            }
+
+            // Occasionally add one more random interest for diversity
+            if Bool.random() {
+                let remainingInterests = allInterests.filter { !userInterests.contains($0) }
+                if let randomInterest = remainingInterests.randomElement() {
+                    userInterests.append(randomInterest)
+                }
+            }
 
             // Generate prompts
             let promptQuestions = [
@@ -310,12 +412,11 @@ class MockDataService {
             let sexualities = ["Straight", "Gay", "Lesbian", "Bisexual", "Queer", "Pansexual"]
             let kidsOptions = ["Don't have kids", "Have kids", "Want kids", "Don't want kids", "Open to kids"]
 
-            // Generate realistic portrait URLs from randomuser.me API
-            let gender = index % 2 == 0 ? "women" : "men"
-            let baseId = index % 70 // randomuser.me has 0-99 portraits per gender
-            let photos = (0..<6).map { photoIndex -> String in
-                let portraitId = (baseId + photoIndex) % 70
-                return "https://randomuser.me/api/portraits/\(gender)/\(portraitId).jpg"
+            // Use bundled demo photos (photo1..photo20) so profiles always have images offline
+            let start = (index % 20) + 1
+            let photos = (0..<6).map { offset in
+                let pid = ((start - 1 + offset) % 20) + 1
+                return "photo\(pid)"
             }
 
             let user = User(
@@ -419,10 +520,8 @@ class MockDataService {
             ProfilePrompt(question: "The way to win me over is", answer: "Good conversation over fondue")
         ]
 
-        // Generate portrait URLs for current user
-        let currentUserPhotos = (65..<71).map { portraitId -> String in
-            return "https://randomuser.me/api/portraits/women/\(portraitId).jpg"
-        }
+        // Use bundled demo photos for the current user
+        let currentUserPhotos = (1...6).map { "photo\($0)" }
 
         return User(
             id: "current_user",

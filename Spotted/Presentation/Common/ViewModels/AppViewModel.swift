@@ -23,6 +23,9 @@ class AppViewModel: ObservableObject {
     @Published var sentFriendRequests: Set<String> = [] // Pending requests sent by current user
     @Published var receivedFriendRequests: Set<String> = [] // Pending requests from others
 
+    // Relationship statuses - tracks companionship levels
+    @Published var relationshipStatuses: [String: RelationshipStatus] = [:] // userId: status
+
     // Heatmap data - tracks check-in frequency per location
     @Published var checkInHeatmap: [String: Int] = [:] // locationId: check-in count
     @Published var recentCheckIns: [CheckIn] = [] // Last 50 check-ins for heatmap visualization
@@ -76,7 +79,11 @@ class AppViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     init() {
+        // Generate mock users once for consistent IDs
+        let mockUsers = mockDataService.generateMockUsers()
+
         // Try to load persisted data first
+        var needsUserMigration = false
         do {
             if let savedUser = try persistenceManager.loadCurrentUser() {
                 // Check if user has old photo IDs (need migration to new URLs)
@@ -87,8 +94,7 @@ class AppViewModel: ObservableObject {
                     // Migrate to new photo URLs
                     print("AppViewModel: Migrating user to new photo URLs")
                     self.currentUser = mockDataService.generateCurrentUser()
-                    // Save the new user to persist the migration
-                    try? persistenceManager.saveCurrentUser(self.currentUser)
+                    needsUserMigration = true
                 } else {
                     self.currentUser = savedUser
                     print("AppViewModel: Loaded persisted user data")
@@ -111,17 +117,25 @@ class AppViewModel: ObservableObject {
             self.blockedUsers = try persistenceManager.loadBlockedUsers()
             self.favoriteUsers = try persistenceManager.loadFavoriteUsers()
 
+            // Load heatmap data
+            self.checkInHeatmap = try persistenceManager.loadHeatmap()
+            self.recentCheckIns = try persistenceManager.loadRecentCheckIns()
+
+            // Load relationship statuses
+            self.relationshipStatuses = try persistenceManager.loadRelationshipStatuses()
+
             print("AppViewModel: Loaded all persisted data")
         } catch {
-            // If loading fails, use mock data
+            // If loading fails, use mock data with the same user set
             self.currentUser = mockDataService.generateCurrentUser()
-            self.conversations = mockDataService.generateMockConversations(users: mockDataService.generateMockUsers())
-            self.matches = mockDataService.generateMockMatches(users: mockDataService.generateMockUsers())
+            self.conversations = mockDataService.generateMockConversations(users: mockUsers)
+            self.matches = mockDataService.generateMockMatches(users: mockUsers)
+
             print("AppViewModel: Error loading persisted data, using mock data: \(error)")
         }
 
-        // Always use mock data for these
-        self.allUsers = mockDataService.generateMockUsers()
+        // Always initialize these with mock data
+        self.allUsers = mockUsers
         self.locations = mockDataService.zurichLocations
 
         // Set up demo relationships if no persisted data exists
@@ -129,12 +143,19 @@ class AppViewModel: ObservableObject {
 
         // Set up auto-save on data changes
         setupAutoSave()
+
+        // Save migrated user if needed
+        if needsUserMigration {
+            try? persistenceManager.saveCurrentUser(currentUser)
+        }
     }
 
     // MARK: - Check-in Methods
     func checkIn(at location: Location, caption: String? = nil, imageUrl: String? = nil) {
-        // First, check out from any previous location
-        if let previousCheckIn = currentUser.currentCheckIn {
+        let isSameLocation = currentUser.currentCheckIn?.location.id == location.id
+
+        // First, check out from any previous location (only if different location)
+        if let previousCheckIn = currentUser.currentCheckIn, !isSameLocation {
             // Decrement previous location's active users
             if let index = locations.firstIndex(where: { $0.id == previousCheckIn.location.id }) {
                 locations[index].activeUsers = max(0, locations[index].activeUsers - 1)
@@ -160,8 +181,8 @@ class AppViewModel: ObservableObject {
             newLocation.activeUsers = 1
             locations.append(newLocation)
             print("AppViewModel: Added new location to map: \(location.name)")
-        } else {
-            // Update existing location's active users count
+        } else if !isSameLocation {
+            // Only increment active users if checking in from a different location
             if let index = locations.firstIndex(where: { $0.id == location.id }) {
                 locations[index].activeUsers += 1
             }
@@ -174,12 +195,13 @@ class AppViewModel: ObservableObject {
         // Track analytics
         analyticsManager.track(.checkedIn(location: location.name, userId: currentUser.id))
 
-        // Update heatmap data
+        // Update heatmap data - ALWAYS track check-ins for heatmap, even at same location
         updateHeatmapForCheckIn(checkIn)
 
         // Show success toast
+        let message = isSameLocation ? "Check-in extended at \(location.name)! ⏱️" : "Checked in at \(location.name)! 📍"
         Task { @MainActor in
-            ToastManager.shared.showSuccess("Checked in at \(location.name)! 📍")
+            ToastManager.shared.showSuccess(message)
         }
 
         // Trigger haptic feedback for better UX
@@ -369,6 +391,33 @@ class AppViewModel: ObservableObject {
         }
     }
 
+    func sendMessage(to conversationId: String, text: String, reply: MessageReplyContext?) {
+        guard let index = conversations.firstIndex(where: { $0.id == conversationId }) else { return }
+
+        var message = Message(senderId: currentUser.id, text: text, status: .sending)
+        message.replyTo = reply
+        conversations[index].messages.append(message)
+
+        analyticsManager.track(.messageSent(conversationId: conversationId, messageType: "text"))
+
+        Task {
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            await MainActor.run {
+                if let msgIndex = conversations[index].messages.firstIndex(where: { $0.id == message.id }) {
+                    conversations[index].messages[msgIndex].status = .sent
+                    Task {
+                        try? await Task.sleep(nanoseconds: 1_000_000_000)
+                        await MainActor.run {
+                            if let deliverIndex = conversations[index].messages.firstIndex(where: { $0.id == message.id }) {
+                                conversations[index].messages[deliverIndex].status = .delivered
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     func sendVoiceMemo(to conversationId: String, audioUrl: String, duration: TimeInterval) {
         guard let index = conversations.firstIndex(where: { $0.id == conversationId }) else { return }
 
@@ -412,6 +461,22 @@ class AppViewModel: ObservableObject {
         conversations[index].messages.append(message)
     }
 
+    func sendPhoto(to conversationId: String, photoUrl: String, caption: String? = nil) {
+        guard let index = conversations.firstIndex(where: { $0.id == conversationId }) else { return }
+
+        let message = Message(
+            senderId: currentUser.id,
+            text: caption ?? "Photo",
+            status: .sent,
+            type: .photo,
+            photoUrl: photoUrl
+        )
+        conversations[index].messages.append(message)
+
+        // Track analytics
+        analyticsManager.track(.photoSent(conversationId: conversationId))
+    }
+
     func markMessagesAsRead(in conversationId: String) {
         guard let index = conversations.firstIndex(where: { $0.id == conversationId }) else { return }
 
@@ -422,6 +487,39 @@ class AppViewModel: ObservableObject {
                 conversations[index].messages[msgIndex].status = .read
             }
         }
+    }
+
+    // MARK: - Reactions
+    func toggleReaction(in conversationId: String, messageId: String, emoji: String, by userId: String) {
+        guard let convIndex = conversations.firstIndex(where: { $0.id == conversationId }) else { return }
+        guard let msgIndex = conversations[convIndex].messages.firstIndex(where: { $0.id == messageId }) else { return }
+
+        var reactions = conversations[convIndex].messages[msgIndex].reactions ?? [:] // emoji -> set(userId)
+        var set = reactions[emoji] ?? []
+        if set.contains(userId) {
+            set.remove(userId)
+        } else {
+            set.insert(userId)
+        }
+        reactions[emoji] = set
+        conversations[convIndex].messages[msgIndex].reactions = reactions
+    }
+
+    // MARK: - Typing Indicators
+    @Published var typingUsers: [String: Set<String>] = [:] // conversationId -> set of userIds typing
+
+    func setTyping(in conversationId: String, userId: String, isTyping: Bool) {
+        var set = typingUsers[conversationId] ?? []
+        if isTyping {
+            set.insert(userId)
+        } else {
+            set.remove(userId)
+        }
+        typingUsers[conversationId] = set
+    }
+
+    func isUserTyping(in conversationId: String, userId: String) -> Bool {
+        typingUsers[conversationId]?.contains(userId) ?? false
     }
 
     func getConversation(with userId: String) -> Conversation? {
@@ -482,6 +580,40 @@ class AppViewModel: ObservableObject {
         currentUser = updatedUser
 
         print("AppViewModel: Photos updated - \(photos.count) photos")
+    }
+
+    // Add or update a voice intro on the current user's prompts
+    func saveVoiceIntro(duration: Int, text: String? = nil) {
+        var user = currentUser
+        if let idx = user.prompts.firstIndex(where: { $0.hasVoiceRecording }) {
+            user.prompts[idx].voiceDuration = duration
+        } else if !user.prompts.isEmpty {
+            user.prompts[0].hasVoiceRecording = true
+            user.prompts[0].voiceDuration = duration
+            if let text = text, !text.isEmpty {
+                user.prompts[0] = ProfilePrompt(
+                    id: user.prompts[0].id,
+                    question: user.prompts[0].question,
+                    answer: text,
+                    hasVoiceRecording: true,
+                    voiceDuration: duration
+                )
+            }
+        } else {
+            let prompt = ProfilePrompt(
+                question: "Voice intro",
+                answer: text ?? "",
+                hasVoiceRecording: true,
+                voiceDuration: duration
+            )
+            user.prompts = [prompt]
+        }
+
+        currentUser = user
+
+        Task { @MainActor in
+            ToastManager.shared.showSuccess("Voice intro saved")
+        }
     }
 
     func verifyCurrentUser() {
@@ -691,6 +823,33 @@ class AppViewModel: ObservableObject {
         return allUsers.filter { receivedFriendRequests.contains($0.id) }
     }
 
+    // MARK: - Relationship Status Methods
+
+    func getRelationshipStatus(with userId: String) -> RelationshipStatus? {
+        return relationshipStatuses[userId]
+    }
+
+    func setRelationshipStatus(with userId: String, status: RelationshipStatus) {
+        relationshipStatuses[userId] = status
+
+        // Track analytics
+        analyticsManager.track(.relationshipStatusChanged(userId: currentUser.id, withUserId: userId, status: status.rawValue))
+
+        // Show toast
+        Task { @MainActor in
+            ToastManager.shared.showSuccess("\(status.emoji) Relationship updated to: \(status.rawValue)")
+        }
+    }
+
+    func removeRelationshipStatus(with userId: String) {
+        relationshipStatuses.removeValue(forKey: userId)
+    }
+
+    func getUsersWithRelationshipStatus(_ status: RelationshipStatus) -> [User] {
+        let userIds = relationshipStatuses.filter { $0.value == status }.map { $0.key }
+        return allUsers.filter { userIds.contains($0.id) }
+    }
+
     // MARK: - Story Methods
     func postStory(at location: Location, imageUrl: String, caption: String?) {
         let story = Story(
@@ -856,6 +1015,30 @@ class AppViewModel: ObservableObject {
             }
             .store(in: &cancellables)
 
+        // Save heatmap when it changes
+        $checkInHeatmap
+            .debounce(for: .seconds(2), scheduler: DispatchQueue.main)
+            .sink { [weak self] heatmap in
+                self?.saveHeatmap(heatmap)
+            }
+            .store(in: &cancellables)
+
+        // Save recent check-ins when they change
+        $recentCheckIns
+            .debounce(for: .seconds(2), scheduler: DispatchQueue.main)
+            .sink { [weak self] checkIns in
+                self?.saveRecentCheckIns(checkIns)
+            }
+            .store(in: &cancellables)
+
+        // Save relationship statuses when they change
+        $relationshipStatuses
+            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
+            .sink { [weak self] statuses in
+                self?.saveRelationshipStatuses(statuses)
+            }
+            .store(in: &cancellables)
+
         print("AppViewModel: Auto-save configured")
     }
 
@@ -925,6 +1108,36 @@ class AppViewModel: ObservableObject {
                 try persistenceManager.saveFavoriteUsers(favoriteUsers)
             } catch {
                 print("AppViewModel: Error saving favorite users: \(error)")
+            }
+        }
+    }
+
+    private func saveHeatmap(_ heatmap: [String: Int]) {
+        Task {
+            do {
+                try persistenceManager.saveHeatmap(heatmap)
+            } catch {
+                print("AppViewModel: Error saving heatmap: \(error)")
+            }
+        }
+    }
+
+    private func saveRecentCheckIns(_ checkIns: [CheckIn]) {
+        Task {
+            do {
+                try persistenceManager.saveRecentCheckIns(checkIns)
+            } catch {
+                print("AppViewModel: Error saving recent check-ins: \(error)")
+            }
+        }
+    }
+
+    private func saveRelationshipStatuses(_ statuses: [String: RelationshipStatus]) {
+        Task {
+            do {
+                try persistenceManager.saveRelationshipStatuses(statuses)
+            } catch {
+                print("AppViewModel: Error saving relationship statuses: \(error)")
             }
         }
     }

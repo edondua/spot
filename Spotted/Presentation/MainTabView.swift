@@ -52,6 +52,13 @@ struct MainTabView: View {
                     matchedUser: matchedUser
                 )
                 .environmentObject(viewModel)
+            } else {
+                // Safety: if no matched user is found, immediately dismiss to avoid blocking touches
+                Color.clear
+                    .ignoresSafeArea()
+                    .onAppear {
+                        viewModel.celebratingMatchWithUserId = nil
+                    }
             }
         }
     }

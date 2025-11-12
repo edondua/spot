@@ -131,6 +131,7 @@ struct ToastModifier: ViewModifier {
         ZStack {
             content
 
+            // Overlay only intercepts touches when a toast is visible
             VStack {
                 if let toast = toastManager.currentToast {
                     ToastView(toast: toast) {
@@ -143,6 +144,7 @@ struct ToastModifier: ViewModifier {
 
                 Spacer()
             }
+            .allowsHitTesting(toastManager.currentToast != nil)
             .zIndex(999)
         }
     }

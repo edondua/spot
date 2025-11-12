@@ -12,27 +12,39 @@ struct CategoryDetailView: View {
             user.interests.contains(category.rawValue)
         }
         print("CategoryDetailView: Found \(filtered.count) users for category '\(category.rawValue)' out of \(viewModel.allUsers.count) total users")
+
+        // Debug: Show first few users and their interests
+        if filtered.isEmpty {
+            print("⚠️ CategoryDetailView: NO USERS FOUND for '\(category.rawValue)'!")
+            print("CategoryDetailView: Sample user interests:")
+            for (index, user) in viewModel.allUsers.prefix(3).enumerated() {
+                print("  User \(index): \(user.name) - Interests: \(user.interests.joined(separator: ", "))")
+            }
+        }
+
         return filtered
     }
 
     var body: some View {
         ZStack {
-            // Background gradient
-            LinearGradient(
-                colors: [category.color.opacity(0.1), Color(.systemBackground)],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-
             VStack(spacing: 0) {
-                // Header
-                categoryHeader
-
                 if categoryUsers.isEmpty {
-                    emptyState
+                    // Background gradient for empty state
+                    ZStack {
+                        LinearGradient(
+                            colors: [category.color.opacity(0.1), Color(.systemBackground)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                        .ignoresSafeArea()
+
+                        VStack {
+                            categoryHeader
+                            emptyState
+                        }
+                    }
                 } else if currentIndex < categoryUsers.count {
-                    // Tinder-style card stack
+                    // Tinder-style card stack - fullscreen without header
                     ZStack {
                         // Show next 2 cards in background
                         ForEach(Array(categoryUsers.enumerated().reversed()), id: \.element.id) { index, user in
@@ -51,16 +63,29 @@ struct CategoryDetailView: View {
                                 .allowsHitTesting(index == currentIndex)
                             }
                         }
+
+                        // Action buttons overlay at bottom
+                        VStack {
+                            Spacer()
+                            actionButtons
+                        }
                     }
-                    .padding(.horizontal)
-                    .padding(.top, 20)
-
-                    Spacer()
-
-                    // Action buttons
-                    actionButtons
+                    .ignoresSafeArea()
                 } else {
-                    allDoneState
+                    // Background gradient for all done state
+                    ZStack {
+                        LinearGradient(
+                            colors: [category.color.opacity(0.1), Color(.systemBackground)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                        .ignoresSafeArea()
+
+                        VStack {
+                            categoryHeader
+                            allDoneState
+                        }
+                    }
                 }
             }
         }
@@ -317,18 +342,22 @@ struct SwipeableCard: View {
                                 GridItem(.adaptive(minimum: 100), spacing: 8)
                             ], spacing: 8) {
                                 ForEach(user.interests, id: \.self) { interest in
-                                    if let category = DiscoveryCategory.allCases.first(where: { $0.rawValue == interest }) {
-                                        HStack(spacing: 6) {
-                                            Image(systemName: category.icon)
-                                                .font(.system(size: 12, weight: .bold))
-                                            Text(category.rawValue)
-                                                .font(.system(size: 14, weight: .semibold))
+                                    if let chipCategory = DiscoveryCategory.allCases.first(where: { $0.rawValue == interest }) {
+                                        let destinationCategory = chipCategory
+                                        NavigationLink(destination: CategoryDetailView(category: destinationCategory)) {
+                                            HStack(spacing: 6) {
+                                                Image(systemName: destinationCategory.icon)
+                                                    .font(.system(size: 12, weight: .bold))
+                                                Text(destinationCategory.rawValue)
+                                                    .font(.system(size: 14, weight: .semibold))
+                                            }
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 14)
+                                            .padding(.vertical, 8)
+                                            .background(destinationCategory.color)
+                                            .cornerRadius(20)
                                         }
-                                        .foregroundColor(.white)
-                                        .padding(.horizontal, 14)
-                                        .padding(.vertical, 8)
-                                        .background(category.color)
-                                        .cornerRadius(20)
+                                        .buttonStyle(PlainButtonStyle())
                                     }
                                 }
                             }
@@ -411,8 +440,6 @@ struct SwipeableCard: View {
                 }
             }
             .background(Color(.systemBackground))
-            .cornerRadius(20)
-            .shadow(color: .black.opacity(0.15), radius: 15, x: 0, y: 10)
 
             // Swipe indicators
             if offset.width > 50 {

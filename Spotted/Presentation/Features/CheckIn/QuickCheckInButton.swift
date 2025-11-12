@@ -346,9 +346,15 @@ struct CheckInSheetView: View {
     private func performCheckIn() {
         let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
         impactHeavy.impactOccurred()
+        guard let location = selectedLocation else { return }
 
-        // Here you would actually create the check-in
-        // For now just dismiss
+        // Build optional caption depending on type
+        let note = (checkInType == .withNote || checkInType == .withPhoto) ? (caption.isEmpty ? nil : caption) : nil
+
+        // Create/extend the check-in using the shared view model logic
+        viewModel.checkIn(at: location, caption: note)
+
+        // Close the sheet
         dismiss()
     }
 }

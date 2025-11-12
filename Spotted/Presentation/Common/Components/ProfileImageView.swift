@@ -15,24 +15,9 @@ struct ProfileImageView: View {
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            Circle()
-                .fill(gradientForUser(user))
-                .frame(width: size, height: size)
-                .overlay(
-                    // User initial or icon
-                    Group {
-                        if let initial = user.name.first {
-                            Text(String(initial).uppercased())
-                                .font(.system(size: size * 0.4, weight: .bold, design: .rounded))
-                                .foregroundColor(.white)
-                        }
-                    }
-                )
-                .overlay(
-                    // Subtle pattern overlay
-                    Circle()
-                        .stroke(Color.white.opacity(0.2), lineWidth: 2)
-                )
+            // Try to render actual profile photo first; fallback to first gallery photo
+            let photoId = user.profilePhoto.isEmpty ? (user.photos.first ?? "") : user.profilePhoto
+            ProfilePhotoCircle(photoId: photoId, size: size)
 
             // Verification badge
             if user.isVerified && showVerificationBadge {
@@ -64,6 +49,84 @@ struct ProfileImageView: View {
     }
 }
 
+private struct ProfilePhotoCircle: View {
+    let photoId: String
+    let size: CGFloat
+
+    var body: some View {
+        ZStack {
+            // Photo when available
+            if let uiImage = resolvedImage(photoId) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: size, height: size)
+                    .clipShape(Circle())
+            } else if photoId.hasPrefix("http://") || photoId.hasPrefix("https://") {
+                AsyncImage(url: URL(string: photoId)) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: size, height: size)
+                            .clipShape(Circle())
+                    case .empty:
+                        fallback
+                    case .failure:
+                        fallback
+                    @unknown default:
+                        fallback
+                    }
+                }
+            } else {
+                fallback
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var fallback: some View {
+        ZStack {
+            Circle()
+                .fill(LinearGradient(colors: [.pink, .purple], startPoint: .topLeading, endPoint: .bottomTrailing))
+                .frame(width: size, height: size)
+            Image(systemName: "person.fill")
+                .font(.system(size: size * 0.4))
+                .foregroundColor(.white.opacity(0.8))
+        }
+    }
+
+    private func resolvedImage(_ id: String) -> UIImage? {
+        // Absolute file path
+        if id.hasPrefix("/") {
+            return UIImage(contentsOfFile: id)
+        }
+        // File URL
+        if let url = URL(string: id), url.isFileURL {
+            return UIImage(contentsOfFile: url.path)
+        }
+        // Temp directory fallbacks
+        let tempDir = FileManager.default.temporaryDirectory
+        let candidates = [
+            tempDir.appendingPathComponent(id),
+            tempDir.appendingPathComponent("\(id).jpg"),
+            tempDir.appendingPathComponent("\(id).png")
+        ]
+        for url in candidates {
+            if FileManager.default.fileExists(atPath: url.path),
+               let image = UIImage(contentsOfFile: url.path) {
+                return image
+            }
+        }
+        // Asset catalog
+        if let bundled = UIImage(named: id) {
+            return bundled
+        }
+        return nil
+    }
+}
+
 /// Photo placeholder for profile galleries
 struct PhotoPlaceholderView: View {
     let photoId: String
@@ -91,7 +154,7 @@ struct PhotoPlaceholderView: View {
                     case .success(let image):
                         image
                             .resizable()
-                            .scaledToFill()
+                            .scaledToFit()
                     case .failure:
                         // Failed to load - show gradient placeholder
                         ZStack {
@@ -113,7 +176,7 @@ struct PhotoPlaceholderView: View {
             } else if let uiImage = resolvedImage() {
                 Image(uiImage: uiImage)
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
             } else {
                 // Colorful gradient placeholder
                 ZStack {
@@ -132,8 +195,7 @@ struct PhotoPlaceholderView: View {
                 }
             }
         }
-        .aspectRatio(aspectRatio, contentMode: .fill)
-        .clipped()
+        .aspectRatio(aspectRatio, contentMode: .fit)
     }
 
     private var photoIcon: String {

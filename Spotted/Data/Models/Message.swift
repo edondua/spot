@@ -25,6 +25,7 @@ enum MessageType: String, Codable {
     case voiceMemo
     case gift
     case gif
+    case photo
 }
 
 enum MessageStatus: String, Codable {
@@ -47,6 +48,10 @@ struct Message: Identifiable, Codable, Hashable {
     var voiceMemoDuration: TimeInterval? // Duration in seconds
     var giftEmoji: String? // Gift emoji (🎁, 🌹, ☕️, 🍷, etc.)
     var gifUrl: String? // Remote or local URL for GIF media
+    var photoUrl: String? // Local asset id or file URL for attached photo
+    // Reactions stored as emoji -> set of userIds who reacted with that emoji
+    var reactions: [String: Set<String>]? 
+    var replyTo: MessageReplyContext? // Lightweight context for replied-to message
 
     var timeDisplay: String {
         let formatter = DateFormatter()
@@ -73,7 +78,10 @@ struct Message: Identifiable, Codable, Hashable {
          voiceMemoUrl: String? = nil,
          voiceMemoDuration: TimeInterval? = nil,
          giftEmoji: String? = nil,
-         gifUrl: String? = nil) {
+         gifUrl: String? = nil,
+         photoUrl: String? = nil,
+         reactions: [String: Set<String>]? = [:],
+         replyTo: MessageReplyContext? = nil) {
         self.id = id
         self.senderId = senderId
         self.text = text
@@ -85,7 +93,17 @@ struct Message: Identifiable, Codable, Hashable {
         self.voiceMemoDuration = voiceMemoDuration
         self.giftEmoji = giftEmoji
         self.gifUrl = gifUrl
+        self.photoUrl = photoUrl
+        self.reactions = reactions
+        self.replyTo = replyTo
     }
+}
+
+struct MessageReplyContext: Codable, Hashable {
+    let messageId: String
+    let senderId: String
+    let senderName: String
+    let summary: String
 }
 
 struct Match: Identifiable, Codable, Hashable {

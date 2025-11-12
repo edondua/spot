@@ -47,6 +47,7 @@ class AnalyticsManager {
         case friendRequestDeclined(fromUserId: String, toUserId: String)
         case userBlocked(userId: String, blockedUserId: String)
         case userUnblocked(userId: String, unblockedUserId: String)
+        case relationshipStatusChanged(userId: String, withUserId: String, status: String)
         case userReported(userId: String, reportedUserId: String, reason: String)
         case userFavorited(userId: String, favoritedUserId: String)
         case userUnfavorited(userId: String, unfavoritedUserId: String)
@@ -172,6 +173,7 @@ class AnalyticsManager {
         case .friendRequestDeclined: return "friend_request_declined"
         case .userBlocked: return "user_blocked"
         case .userUnblocked: return "user_unblocked"
+        case .relationshipStatusChanged: return "relationship_status_changed"
         case .userReported: return "user_reported"
         case .userFavorited: return "user_favorited"
         case .userUnfavorited: return "user_unfavorited"
@@ -247,7 +249,10 @@ class AnalyticsManager {
 
         case .userUnblocked(let userId, let unblockedUserId):
             return "userId: \(userId), targetUserId: \(unblockedUserId)"
-            
+
+        case .relationshipStatusChanged(let userId, let withUserId, let status):
+            return "userId: \(userId), withUserId: \(withUserId), status: \(status)"
+
         case .userReported(let userId, let reportedUserId, let reason):
             return "userId: \(userId), reportedUserId: \(reportedUserId), reason: \(reason)"
             

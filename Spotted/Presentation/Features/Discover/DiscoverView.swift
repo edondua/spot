@@ -8,6 +8,7 @@ struct DiscoverView: View {
     @State private var isRefreshing = false
     @State private var searchText = ""
     @FocusState private var isSearchFocused: Bool
+    @State private var openShortTerm = false
 
     // Filter settings (synced with Settings)
     @AppStorage("maxDistance") private var maxDistance: Double = 50
@@ -194,7 +195,10 @@ struct DiscoverView: View {
                         // Normal discovery content
                         ScrollView {
                             VStack(spacing: 20) {
-                                // 1. Featured Category - BIG CARD FIRST
+                                // 1. Swipeable User Cards - PRIMARY FEATURE
+                                swipeableCardsSection
+
+                                // 2. Featured Category
                                 VStack(alignment: .leading, spacing: 16) {
                                     Text("Find Your Vibe")
                                         .font(.system(size: 24, weight: .bold))
@@ -205,16 +209,16 @@ struct DiscoverView: View {
                                         NavigationLink(destination: CategoryDetailView(category: featuredCategory)) {
                                             FeaturedCategoryBox(category: featuredCategory)
                                         }
-                                        .buttonStyle(PlainButtonStyle())
+                                        .buttonStyle(ScaleButtonStyle())
                                         .padding(.horizontal)
                                     }
                                 }
                             }
 
-                            // 2. Free Now - Spontaneous Users
+                            // 3. Free Now - Spontaneous Users
                             spontaneousUsersSection
 
-                            // 3. Live Activity Feed
+                            // 3. Activity (Test-focused, note-like)
                             ActivityFeedView()
 
                             // 4. Rest of category boxes with staggered animation
@@ -226,7 +230,7 @@ struct DiscoverView: View {
                                     NavigationLink(destination: CategoryDetailView(category: category)) {
                                         CategoryBox(category: category)
                                     }
-                                    .buttonStyle(PlainButtonStyle())
+                                    .buttonStyle(ScaleButtonStyle())
                                     .slideIn(delay: Double(index) * 0.1)
                                 }
                             }
@@ -242,6 +246,19 @@ struct DiscoverView: View {
             .navigationTitle("Discover")
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search people, interests, jobs...")
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        // Reset and reload demo data
+                        viewModel.clearAllPersistedData()
+                        viewModel.allUsers = MockDataService.shared.generateMockUsers()
+                        print("✅ Demo data reset! Generated \(viewModel.allUsers.count) new users")
+                    }) {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(Color(red: 252/255, green: 108/255, blue: 133/255))
+                    }
+                }
+
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         showFilters = true
@@ -257,35 +274,65 @@ struct DiscoverView: View {
                 }
             }
             .safeAreaInset(edge: .bottom) {
-                // Undo button
-                if viewModel.lastLikedUserId != nil {
+                VStack(spacing: 10) {
+                    // Primary CTA: Quick Swipe for Short-term Fun
                     Button {
-                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                            viewModel.undoLastLike()
-                        }
+                        let impact = UIImpactFeedbackGenerator(style: .medium)
+                        impact.impactOccurred()
+                        openShortTerm = true
                     } label: {
-                        HStack(spacing: 8) {
-                            Image(systemName: "arrow.uturn.backward")
-                                .font(.system(size: 16, weight: .semibold))
-                            Text("Undo")
-                                .font(.system(size: 16, weight: .semibold))
+                        HStack(spacing: 10) {
+                            Image(systemName: "flame.fill")
+                                .font(.system(size: 16, weight: .bold))
+                            Text("Quick Swipe: Short-term Fun")
+                                .font(.system(size: 16, weight: .bold))
                         }
                         .foregroundColor(.white)
-                        .padding(.horizontal, 24)
+                        .padding(.horizontal, 20)
                         .padding(.vertical, 14)
+                        .frame(maxWidth: .infinity)
                         .background(
                             Capsule()
-                                .fill(Color(red: 252/255, green: 108/255, blue: 133/255))
+                                .fill(LinearGradient(
+                                    colors: [
+                                        Color(red: 252/255, green: 108/255, blue: 133/255),
+                                        Color(red: 234/255, green: 88/255, blue: 120/255)
+                                    ],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                ))
                                 .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 4)
                         )
                     }
-                    .padding(.bottom, 10)
-                    .frame(maxWidth: .infinity)
-                    .background(Color.clear)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-                } else {
-                    EmptyView()
+
+                    // Undo button (shown when available)
+                    if viewModel.lastLikedUserId != nil {
+                        Button {
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                viewModel.undoLastLike()
+                            }
+                        } label: {
+                            HStack(spacing: 8) {
+                                Image(systemName: "arrow.uturn.backward")
+                                    .font(.system(size: 16, weight: .semibold))
+                                Text("Undo")
+                                    .font(.system(size: 16, weight: .semibold))
+                            }
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 14)
+                            .background(
+                                Capsule()
+                                    .fill(Color(red: 252/255, green: 108/255, blue: 133/255))
+                                    .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 4)
+                            )
+                        }
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                    }
                 }
+                .padding(.horizontal)
+                .padding(.bottom, 10)
+                .background(Color.clear)
             }
             .sheet(isPresented: $showFilters) {
                 FilterSheetView(
@@ -341,6 +388,9 @@ struct DiscoverView: View {
                         }
                     }
                 }
+            }
+            .navigationDestination(isPresented: $openShortTerm) {
+                CategoryDetailView(category: .shortTerm)
             }
         }
     }
@@ -417,6 +467,59 @@ struct DiscoverView: View {
         .background(Color(.systemGray6))
         .cornerRadius(16)
         .padding(.horizontal)
+    }
+
+    // PRIMARY: Swipeable user cards section
+    private var swipeableCardsSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text("Discover People")
+                    .font(.system(size: 24, weight: .bold))
+
+                Spacer()
+
+                Text("\(filteredUsers.count)")
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundColor(Color(red: 252/255, green: 108/255, blue: 133/255))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(Color(red: 252/255, green: 108/255, blue: 133/255).opacity(0.15))
+                    .cornerRadius(10)
+            }
+            .padding(.horizontal)
+            .padding(.top, 8)
+
+            if !filteredUsers.isEmpty {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: 16) {
+                        ForEach(Array(filteredUsers.prefix(10).enumerated()), id: \.element.id) { index, user in
+                            UserDiscoveryCard(user: user)
+                                .frame(width: UIScreen.main.bounds.width - 40)
+                                .padding(.leading, index == 0 ? 20 : 0)
+                                .padding(.trailing, index == min(9, filteredUsers.count - 1) ? 20 : 0)
+                        }
+                    }
+                    .padding(.vertical, 8)
+                }
+                .frame(height: 650)
+            } else {
+                // Empty state
+                HStack {
+                    Spacer()
+                    VStack(spacing: 8) {
+                        Image(systemName: "person.2.slash")
+                            .font(.system(size: 40))
+                            .foregroundColor(.gray.opacity(0.5))
+                        Text("No users match your filters")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.vertical, 40)
+                    Spacer()
+                }
+                .padding(.horizontal)
+            }
+        }
     }
 
     // INNOVATIVE: Spontaneous users section
@@ -538,7 +641,6 @@ struct DiscoverView: View {
 // MARK: - Spontaneous User Card
 struct SpontaneousUserCard: View {
     let user: User
-    @State private var isPressed = false
 
     var body: some View {
         NavigationLink(destination: UserProfileView(user: user)) {
@@ -607,16 +709,7 @@ struct SpontaneousUserCard: View {
                     .fill(Color(.systemBackground))
             )
         }
-        .buttonStyle(PlainButtonStyle())
-        .scaleEffect(isPressed ? 0.95 : 1.0)
-        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isPressed)
-        .onLongPressGesture(minimumDuration: 0.0, maximumDistance: .infinity, pressing: { pressing in
-            isPressed = pressing
-            if pressing {
-                let impact = UIImpactFeedbackGenerator(style: .light)
-                impact.impactOccurred()
-            }
-        }, perform: {})
+        .buttonStyle(ScaleButtonStyle())
     }
 }
 
@@ -624,7 +717,6 @@ struct SpontaneousUserCard: View {
 struct FeaturedCategoryBox: View {
     @EnvironmentObject var viewModel: AppViewModel
     let category: DiscoveryCategory
-    @State private var isPressed = false
 
     var userCount: Int {
         viewModel.allUsers.filter { user in
@@ -695,15 +787,6 @@ struct FeaturedCategoryBox: View {
         .background(Color(.systemBackground))
         .cornerRadius(24)
         .shadow(color: category.color.opacity(0.3), radius: 15, x: 0, y: 8)
-        .scaleEffect(isPressed ? 0.96 : 1.0)
-        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isPressed)
-        .onLongPressGesture(minimumDuration: 0.0, maximumDistance: .infinity, pressing: { pressing in
-            isPressed = pressing
-            if pressing {
-                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                impactMed.impactOccurred()
-            }
-        }, perform: {})
     }
 }
 
@@ -711,7 +794,6 @@ struct FeaturedCategoryBox: View {
 struct CategoryBox: View {
     @EnvironmentObject var viewModel: AppViewModel
     let category: DiscoveryCategory
-    @State private var isPressed = false
 
     var userCount: Int {
         viewModel.allUsers.filter { user in
@@ -761,15 +843,6 @@ struct CategoryBox: View {
         )
         .cornerRadius(20)
         .shadow(color: category.color.opacity(0.4), radius: 8, x: 0, y: 4)
-        .scaleEffect(isPressed ? 0.95 : 1.0)
-        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isPressed)
-        .onLongPressGesture(minimumDuration: 0.0, maximumDistance: .infinity, pressing: { pressing in
-            isPressed = pressing
-            if pressing {
-                let impactLight = UIImpactFeedbackGenerator(style: .light)
-                impactLight.impactOccurred()
-            }
-        }, perform: {})
     }
 }
 

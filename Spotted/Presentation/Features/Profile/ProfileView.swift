@@ -42,6 +42,15 @@ private struct ProfileContent: View {
 
     @EnvironmentObject private var viewModel: AppViewModel
     @State private var showContent = false
+    @State private var showVoiceIntroRecorder = false
+
+    // Prefer a voice prompt if available; otherwise the first prompt
+    private var featuredPromptIndex: Int? {
+        if let voiceIndex = user.prompts.firstIndex(where: { $0.hasVoiceRecording }) {
+            return voiceIndex
+        }
+        return user.prompts.isEmpty ? nil : 0
+    }
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -55,26 +64,94 @@ private struct ProfileContent: View {
                         .transition(.opacity)
                 }
 
+                // Hero photo
                 photoCard(at: 0, animated: true)
 
-                promptCards(in: 0..<2)
+                // Featured prompt (voice if available, else first prompt)
+                if let idx = featuredPromptIndex {
+                    PromptCard(prompt: user.prompts[idx], user: allowsSocialActions ? user : nil)
+                        .padding(.horizontal, 20)
+                } else if isCurrentUser {
+                    // CTA to add a voice intro if none exist
+                    Button {
+                        showVoiceIntroRecorder = true
+                    } label: {
+                        HStack(spacing: 10) {
+                            Image(systemName: "mic.circle.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(.white)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Add a voice intro")
+                                    .font(.system(size: 16, weight: .semibold))
+                                Text("Share a quick hello — it helps you stand out")
+                                    .font(.system(size: 12))
+                                    .opacity(0.9)
+                            }
+                            Spacer()
+                        }
+                        .padding(16)
+                        .background(Color(red: 252/255, green: 108/255, blue: 133/255))
+                        .cornerRadius(14)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 20)
+                    }
+                    .buttonStyle(ScaleButtonStyle())
+                }
 
+                // Key stats
                 ComprehensiveStatsSection(user: user)
                     .padding(.horizontal, 20)
 
+                // Photo 1 - After stats
                 photoCard(at: 1)
+
+                // Remaining prompts (excluding the featured one)
+                remainingPrompts(excluding: featuredPromptIndex)
+
+                // Photo 2 - After prompts
                 photoCard(at: 2)
 
-                promptCards(in: 2..<3)
+                // Interests section
+                interestsSection
+                    .padding(.horizontal, 20)
 
+                // Photo 3 - After interests
                 photoCard(at: 3)
 
-                additionalContent
+                // Current check-in
+                currentCheckInSection
+                    .padding(.horizontal, 20)
+
+                // Photo 4 - After check-in
+                photoCard(at: 4)
+
+                // Favorite hangouts
+                favoriteHangoutsSection
+                    .padding(.horizontal, 20)
+
+                // Photo 5 - After hangouts
+                photoCard(at: 5)
+
+                // Social actions
+                if allowsSocialActions {
+                    mutualFriendsSection
+                        .padding(.horizontal, 20)
+                    friendButtonSection
+                        .padding(.horizontal, 20)
+                    matchActionSection
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 20)
+                }
             }
         }
         .onAppear {
             withAnimation(.easeOut(duration: 0.4)) {
                 showContent = true
+            }
+        }
+        .sheet(isPresented: $showVoiceIntroRecorder) {
+            VoiceIntroRecorderSheet { duration, note in
+                viewModel.saveVoiceIntro(duration: duration, text: note)
             }
         }
     }
@@ -143,6 +220,16 @@ private struct ProfileContent: View {
     }
 
     @ViewBuilder
+    private func remainingPrompts(excluding excludeIndex: Int?) -> some View {
+        ForEach(user.prompts.indices, id: \.self) { i in
+            if excludeIndex != i {
+                PromptCard(prompt: user.prompts[i], user: allowsSocialActions ? user : nil)
+                    .padding(.horizontal, 20)
+            }
+        }
+    }
+
+    @ViewBuilder
     private var additionalContent: some View {
         VStack(alignment: .leading, spacing: 16) {
             interestsSection
@@ -171,17 +258,20 @@ private struct ProfileContent: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100), spacing: 8)], spacing: 8) {
                     ForEach(user.interests, id: \.self) { interest in
                         if let category = DiscoveryCategory.allCases.first(where: { $0.rawValue == interest }) {
-                            HStack(spacing: 6) {
-                                Image(systemName: category.icon)
-                                    .font(.system(size: 12, weight: .bold))
-                                Text(category.rawValue)
-                                    .font(.system(size: 14, weight: .semibold))
+                            NavigationLink(destination: CategoryDetailView(category: category)) {
+                                HStack(spacing: 6) {
+                                    Image(systemName: category.icon)
+                                        .font(.system(size: 12, weight: .bold))
+                                    Text(category.rawValue)
+                                        .font(.system(size: 14, weight: .semibold))
+                                }
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 14)
+                                .padding(.vertical, 8)
+                                .background(category.color)
+                                .cornerRadius(20)
                             }
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 8)
-                            .background(category.color)
-                            .cornerRadius(20)
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                 }
@@ -596,12 +686,15 @@ struct PromptCard: View {
 
                     Spacer()
 
-                    // Voice indicator with duration
+                    // Small inline play control for voice prompts
                     if prompt.hasVoiceRecording {
-                        HStack(spacing: 6) {
-                            Image(systemName: "waveform")
-                                .font(.system(size: 12, weight: .semibold))
-                                .foregroundColor(Color(red: 252/255, green: 108/255, blue: 133/255))
+                        HStack(spacing: 8) {
+                            Button(action: { isPlayingVoice.toggle() }) {
+                                Image(systemName: isPlayingVoice ? "pause.circle.fill" : "play.circle.fill")
+                                    .font(.system(size: 16, weight: .bold))
+                                    .foregroundColor(Color(red: 252/255, green: 108/255, blue: 133/255))
+                            }
+                            .buttonStyle(PlainButtonStyle())
 
                             if let duration = prompt.durationDisplay {
                                 Text(duration)
@@ -690,56 +783,54 @@ struct ComprehensiveStatsSection: View {
 
             // Grid layout for stats
             VStack(spacing: 14) {
-                // Row 1: Age & Sexuality
+                // Row 1: Profession & Education
                 HStack(spacing: 12) {
-                    StatItem(icon: "calendar", label: "Age", value: "\(user.age)")
-
-                    if let sexuality = user.sexuality {
-                        StatItem(icon: "heart.circle", label: "Sexuality", value: sexuality)
+                    if let job = user.job {
+                        let company = user.company
+                        StatItem(icon: "briefcase", label: "Profession", value: company != nil ? "\(job) @ \(company!)" : job)
+                    }
+                    if let education = user.education {
+                        StatItem(icon: "book.closed", label: "Education", value: education)
+                    } else if let school = user.school {
+                        StatItem(icon: "book.closed", label: "School", value: school)
                     }
                 }
 
-                // Row 2: Height & Location
+                // Row 2: Location & Height
                 HStack(spacing: 12) {
-                    if let height = user.height {
-                        StatItem(icon: "ruler", label: "Height", value: height)
-                    }
-
                     if let hometown = user.hometown {
                         StatItem(icon: "mappin.circle", label: "Location", value: hometown)
                     }
+                    if let height = user.height {
+                        StatItem(icon: "ruler", label: "Height", value: height)
+                    }
                 }
 
-                // Row 3: Kids & Drinking
+                // Row 3: Age & Looking for
+                HStack(spacing: 12) {
+                    StatItem(icon: "calendar", label: "Age", value: "\(user.age)")
+                    if let lookingFor = user.lookingFor {
+                        StatItem(icon: "sparkles", label: "Looking for", value: lookingFor)
+                    }
+                }
+
+                // Row 4: Drinking & Smoking
+                HStack(spacing: 12) {
+                    if let drinking = user.drinking {
+                        StatItem(icon: "wineglass", label: "Drinking", value: drinking)
+                    }
+                    if let smoking = user.smoking {
+                        StatItem(icon: "smoke", label: "Smoking", value: smoking)
+                    }
+                }
+
+                // Row 5: Kids & Sexuality
                 HStack(spacing: 12) {
                     if let kids = user.kids {
                         StatItem(icon: "figure.2.and.child.holdinghands", label: "Kids", value: kids)
                     }
-
-                    if let drinking = user.drinking {
-                        StatItem(icon: "wineglass", label: "Drinking", value: drinking)
-                    }
-                }
-
-                // Row 4: Smoking & Profession
-                HStack(spacing: 12) {
-                    if let smoking = user.smoking {
-                        StatItem(icon: "smoke", label: "Smoking", value: smoking)
-                    }
-
-                    if let job = user.job {
-                        StatItem(icon: "briefcase", label: "Profession", value: job)
-                    }
-                }
-
-                // Row 5: Home & Looking for
-                HStack(spacing: 12) {
-                    if let hometown = user.hometown {
-                        StatItem(icon: "house", label: "Home", value: hometown)
-                    }
-
-                    if let lookingFor = user.lookingFor {
-                        StatItem(icon: "sparkles", label: "Looking for", value: lookingFor)
+                    if let sexuality = user.sexuality {
+                        StatItem(icon: "heart.circle", label: "Sexuality", value: sexuality)
                     }
                 }
 
@@ -878,6 +969,91 @@ struct ScaleButtonStyle: ButtonStyle {
         configuration.label
             .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
+    }
+}
+
+// MARK: - Voice Intro Recorder Sheet
+struct VoiceIntroRecorderSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    @StateObject private var recorder = AudioRecorderService()
+    @State private var isRecording = false
+    @State private var note: String = ""
+
+    let onSave: (Int, String?) -> Void
+
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 20) {
+                Text("Record a quick voice intro")
+                    .font(.title3).bold()
+                    .padding(.top, 8)
+
+                // Simple recorder UI
+                VStack(spacing: 12) {
+                    Text(timeString(recorder.recordingDuration))
+                        .font(.system(size: 28, weight: .semibold))
+                        .monospacedDigit()
+
+                    Button(action: toggleRecording) {
+                        Circle()
+                            .fill(isRecording ? Color.red : Color.pink)
+                            .frame(width: 72, height: 72)
+                            .overlay(
+                                Image(systemName: isRecording ? "stop.fill" : "mic.fill")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 28, weight: .bold))
+                            )
+                    }
+                }
+                .padding()
+                .background(Color(.systemGray6))
+                .cornerRadius(16)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Optional note")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                    TextField("Add a short caption...", text: $note)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                .padding(.horizontal)
+
+                Spacer()
+            }
+            .padding()
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") { save() }
+                        .disabled(Int(recorder.recordingDuration) == 0 || isRecording)
+                }
+            }
+            .onAppear { recorder.checkPermission() }
+        }
+    }
+
+    private func toggleRecording() {
+        if isRecording {
+            recorder.stopRecording { _, _ in }
+            isRecording = false
+        } else {
+            recorder.startRecording()
+            isRecording = true
+        }
+    }
+
+    private func save() {
+        let duration = Int(max(1, recorder.recordingDuration.rounded()))
+        onSave(duration, note.isEmpty ? nil : note)
+        dismiss()
+    }
+
+    private func timeString(_ t: TimeInterval) -> String {
+        let m = Int(t) / 60
+        let s = Int(t) % 60
+        return String(format: "%d:%02d", m, s)
     }
 }
 

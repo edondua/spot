@@ -10,6 +10,7 @@ struct SpottedMapView: View {
         center: CLLocationCoordinate2D(latitude: 47.3769, longitude: 8.5417), // Default to Zurich
         span: MKCoordinateSpan(latitudeDelta: 0.0167, longitudeDelta: 0.0167)
     )
+    @State private var mapCameraPosition: MapCameraPosition = .automatic
     @State private var selectedLocation: Location?
     @State private var showLocationDetail = false
     @State private var showQuickCheckIn = false
@@ -31,17 +32,22 @@ struct SpottedMapView: View {
     }
 
     private var mainContent: some View {
-        GeometryReader { mainGeometry in
+        let content = GeometryReader { mainGeometry in
             ZStack {
                 // Pure map layer (no annotations) - desaturated to grey - FULLY INTERACTIVE
-                Map(coordinateRegion: $region)
-                    .saturation(0)
-                    .brightness(-0.1)
-                    .edgesIgnoringSafeArea(.all)
+                Map(position: $mapCameraPosition) {
+                }
+                .mapStyle(.standard)
+                .saturation(0)
+                .brightness(-0.1)
+                .edgesIgnoringSafeArea(.all)
+                .onMapCameraChange { context in
+                    region = context.region
+                }
 
                 // Distributed heat map layer (ambient across entire map)
                 GeometryReader { geometry in
-                // Main heat zones at locations
+                // Main heat zones at locations (active ones)
                 ForEach(viewModel.locations.filter { $0.activeUsers > 0 }) { location in
                     // Primary heat zone
                     AnimatedHeatZone(
@@ -57,6 +63,12 @@ struct SpottedMapView: View {
                             selectedLocation = location
                             showLocationDetail = true
                         }
+                    }
+                    .onLongPressGesture(minimumDuration: 0.5) {
+                        let impact = UIImpactFeedbackGenerator(style: .medium)
+                        impact.impactOccurred()
+                        selectedLocation = location
+                        showQuickCheckIn = true
                     }
 
                     // Secondary ambient zones around busy spots
@@ -192,7 +204,34 @@ struct SpottedMapView: View {
                                         showLocationDetail = true
                                     }
                                 }
+                                .onLongPressGesture(minimumDuration: 0.5) {
+                                    let impact = UIImpactFeedbackGenerator(style: .medium)
+                                    impact.impactOccurred()
+                                    selectedLocation = location
+                                    showQuickCheckIn = true
+                                }
                             }
+                        }
+                    }
+
+                    // Inactive locations (no one checked in)
+                    ForEach(viewModel.locations.filter { $0.activeUsers == 0 }) { location in
+                        InactiveLocationMarker(
+                            location: location,
+                            mapRegion: $region,
+                            geometrySize: geometry.size
+                        )
+                        .onTapGesture {
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                selectedLocation = location
+                                showLocationDetail = true
+                            }
+                        }
+                        .onLongPressGesture(minimumDuration: 0.5) {
+                            let impact = UIImpactFeedbackGenerator(style: .medium)
+                            impact.impactOccurred()
+                            selectedLocation = location
+                            showQuickCheckIn = true
                         }
                     }
                 }
@@ -235,8 +274,12 @@ struct SpottedMapView: View {
             if !hasInitializedLocation, let userLoc = locationManager.userLocation {
                 withAnimation {
                     region.center = userLoc.coordinate
+                    mapCameraPosition = .region(region)
                     hasInitializedLocation = true
                 }
+            } else {
+                // Set initial camera position
+                mapCameraPosition = .region(region)
             }
         }
         .onChange(of: locationManager.userLocation) { oldLoc, newLoc in
@@ -244,6 +287,7 @@ struct SpottedMapView: View {
             if !hasInitializedLocation, let userLoc = newLoc {
                 withAnimation {
                     region.center = userLoc.coordinate
+                    mapCameraPosition = .region(region)
                     hasInitializedLocation = true
                 }
             }
@@ -272,7 +316,17 @@ struct SpottedMapView: View {
         .sheet(isPresented: $showFilters) {
             FilterSheetSimpleView()
         }
+        .sheet(isPresented: $showQuickCheckIn) {
+            if let location = selectedLocation {
+                CheckInDetailView(location: location, isPresented: $showQuickCheckIn)
+                    .environmentObject(viewModel)
+                    .presentationDetents([.large])
+                    .presentationDragIndicator(.visible)
+            }
         }
+        }
+
+        return content
     }
 
     // MARK: - Clean Header
@@ -1410,6 +1464,45 @@ struct Triangle: Shape {
         path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
         path.closeSubpath()
         return path
+    }
+}
+
+// MARK: - Inactive Location Marker
+struct InactiveLocationMarker: View {
+    let location: Location
+    @Binding var mapRegion: MKCoordinateRegion
+    let geometrySize: CGSize
+
+    var screenPosition: CGPoint {
+        let coordinate = location.coordinate.clLocationCoordinate
+
+        let latDelta = mapRegion.center.latitude - coordinate.latitude
+        let lonDelta = mapRegion.center.longitude - coordinate.longitude
+
+        let x = geometrySize.width / 2 - (lonDelta / mapRegion.span.longitudeDelta) * geometrySize.width
+        let y = geometrySize.height / 2 + (latDelta / mapRegion.span.latitudeDelta) * geometrySize.height
+
+        return CGPoint(x: x, y: y)
+    }
+
+    var body: some View {
+        ZStack {
+            // Faded background circle
+            Circle()
+                .fill(Color.gray.opacity(0.15))
+                .frame(width: 44, height: 44)
+
+            // Border
+            Circle()
+                .stroke(Color.gray.opacity(0.3), lineWidth: 2)
+                .frame(width: 44, height: 44)
+
+            // Icon
+            Image(systemName: location.type.icon)
+                .font(.system(size: 18, weight: .medium))
+                .foregroundColor(.gray.opacity(0.6))
+        }
+        .position(screenPosition)
     }
 }
 

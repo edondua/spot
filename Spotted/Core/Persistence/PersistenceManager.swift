@@ -51,7 +51,19 @@ class PersistenceManager {
     private var storiesURL: URL {
         documentsDirectory.appendingPathComponent("stories.json")
     }
-    
+
+    private var heatmapURL: URL {
+        documentsDirectory.appendingPathComponent("heatmap.json")
+    }
+
+    private var recentCheckInsURL: URL {
+        documentsDirectory.appendingPathComponent("recentCheckIns.json")
+    }
+
+    private var relationshipStatusesURL: URL {
+        documentsDirectory.appendingPathComponent("relationshipStatuses.json")
+    }
+
     // MARK: - Save Methods
     
     func saveCurrentUser(_ user: User) throws {
@@ -109,7 +121,25 @@ class PersistenceManager {
         try data.write(to: storiesURL)
         print("PersistenceManager: Saved \(stories.count) stories")
     }
-    
+
+    func saveHeatmap(_ heatmap: [String: Int]) throws {
+        let data = try encoder.encode(heatmap)
+        try data.write(to: heatmapURL)
+        print("PersistenceManager: Saved heatmap with \(heatmap.count) locations")
+    }
+
+    func saveRecentCheckIns(_ checkIns: [CheckIn]) throws {
+        let data = try encoder.encode(checkIns)
+        try data.write(to: recentCheckInsURL)
+        print("PersistenceManager: Saved \(checkIns.count) recent check-ins")
+    }
+
+    func saveRelationshipStatuses(_ statuses: [String: RelationshipStatus]) throws {
+        let data = try encoder.encode(statuses)
+        try data.write(to: relationshipStatusesURL)
+        print("PersistenceManager: Saved \(statuses.count) relationship statuses")
+    }
+
     // MARK: - Load Methods
     
     func loadCurrentUser() throws -> User? {
@@ -205,13 +235,49 @@ class PersistenceManager {
             print("PersistenceManager: No saved stories found")
             return []
         }
-        
+
         let data = try Data(contentsOf: storiesURL)
         let stories = try decoder.decode([Story].self, from: data)
         print("PersistenceManager: Loaded \(stories.count) stories")
         return stories
     }
-    
+
+    func loadHeatmap() throws -> [String: Int] {
+        guard fileManager.fileExists(atPath: heatmapURL.path) else {
+            print("PersistenceManager: No saved heatmap found")
+            return [:]
+        }
+
+        let data = try Data(contentsOf: heatmapURL)
+        let heatmap = try decoder.decode([String: Int].self, from: data)
+        print("PersistenceManager: Loaded heatmap with \(heatmap.count) locations")
+        return heatmap
+    }
+
+    func loadRecentCheckIns() throws -> [CheckIn] {
+        guard fileManager.fileExists(atPath: recentCheckInsURL.path) else {
+            print("PersistenceManager: No saved recent check-ins found")
+            return []
+        }
+
+        let data = try Data(contentsOf: recentCheckInsURL)
+        let checkIns = try decoder.decode([CheckIn].self, from: data)
+        print("PersistenceManager: Loaded \(checkIns.count) recent check-ins")
+        return checkIns
+    }
+
+    func loadRelationshipStatuses() throws -> [String: RelationshipStatus] {
+        guard fileManager.fileExists(atPath: relationshipStatusesURL.path) else {
+            print("PersistenceManager: No saved relationship statuses found")
+            return [:]
+        }
+
+        let data = try Data(contentsOf: relationshipStatusesURL)
+        let statuses = try decoder.decode([String: RelationshipStatus].self, from: data)
+        print("PersistenceManager: Loaded \(statuses.count) relationship statuses")
+        return statuses
+    }
+
     // MARK: - Clear Methods
     
     func clearAllData() throws {
@@ -223,7 +289,10 @@ class PersistenceManager {
             friendsURL,
             blockedUsersURL,
             favoriteUsersURL,
-            storiesURL
+            storiesURL,
+            heatmapURL,
+            recentCheckInsURL,
+            relationshipStatusesURL
         ]
         
         for url in urls {

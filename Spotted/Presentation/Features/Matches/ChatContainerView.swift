@@ -1,10 +1,13 @@
 import SwiftUI
+import UIKit
 
 /// Hinge-style container that allows switching between chat and profile
 struct ChatContainerView: View {
     @EnvironmentObject var viewModel: AppViewModel
     let conversation: Conversation
-    @State private var selectedTab = 0
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    private enum DetailTab: Hashable { case chat, profile }
+    @State private var selectedTab: DetailTab = .chat
 
     var otherUser: User? {
         let otherUserId = conversation.participants.first { $0 != viewModel.currentUser.id }
@@ -12,44 +15,56 @@ struct ChatContainerView: View {
     }
 
     var body: some View {
-        ZStack {
+        Group {
             if let user = otherUser {
-                // Full screen swipeable content
-                TabView(selection: $selectedTab) {
-                    // Chat view
-                    ChatContentView(conversation: conversation)
-                        .tag(0)
+                if horizontalSizeClass == .regular {
+                    // Side-by-side layout on regular width
+                    HStack(spacing: 0) {
+                        ChatContentView(conversation: conversation)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                    // Profile view - full screen
-                    ScrollView {
-                        UserProfileContentView(user: user)
+                        Divider()
+
+                        profilePanel(user: user)
+                            .frame(width: 360)
+                            .background(Color(.systemBackground))
                     }
-                    .tag(1)
-                }
-                .tabViewStyle(.page(indexDisplayMode: .never))
+                } else {
+                    // Compact width: segmented toggle to switch views
+                    VStack(spacing: 0) {
+                        Picker("Detail", selection: $selectedTab) {
+                            Text("Chat").tag(DetailTab.chat)
+                            Text("Profile").tag(DetailTab.profile)
+                        }
+                        .pickerStyle(.segmented)
+                        .padding(.horizontal, 16)
+                        .padding(.top, 8)
 
-                // Subtle page indicator at top
-                VStack {
-                    HStack(spacing: 8) {
-                        // Chat indicator
-                        Circle()
-                            .fill(selectedTab == 0 ? Color(red: 252/255, green: 108/255, blue: 133/255) : Color.gray.opacity(0.3))
-                            .frame(width: 8, height: 8)
-
-                        // Profile indicator
-                        Circle()
-                            .fill(selectedTab == 1 ? Color(red: 252/255, green: 108/255, blue: 133/255) : Color.gray.opacity(0.3))
-                            .frame(width: 8, height: 8)
+                        if selectedTab == .chat {
+                            ChatContentView(conversation: conversation)
+                        } else {
+                            profilePanel(user: user)
+                        }
                     }
-                    .padding(.top, 8)
-
-                    Spacer()
                 }
             }
         }
         .navigationTitle(otherUser?.name ?? "Chat")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .tabBar)
+        .onAppear {
+            // For brand-new matches (no messages) on compact width, show Profile first
+            if horizontalSizeClass != .regular, conversation.messages.isEmpty {
+                selectedTab = .profile
+            }
+        }
+    }
+
+    // MARK: - Profile panel
+    @ViewBuilder
+    private func profilePanel(user: User) -> some View {
+        UserProfileContentView(user: user)
+            .toolbar(.hidden, for: .navigationBar)
     }
 }
 
@@ -61,9 +76,12 @@ struct ChatContentView: View {
     @State private var scrollProxy: ScrollViewProxy?
     @State private var isRecording = false
     @State private var showGifPicker = false
+    @State private var showPhotoPicker = false
     @State private var recordingOffset: CGFloat = 0
     @State private var shouldCancelRecording = false
     @StateObject private var audioRecorder = AudioRecorderService()
+    @State private var typingWorkItem: DispatchWorkItem?
+    @State private var replyContext: MessageReplyContext?
 
     var otherUser: User? {
         let otherUserId = conversation.participants.first { $0 != viewModel.currentUser.id }
@@ -75,26 +93,54 @@ struct ChatContentView: View {
             // Messages
             ScrollViewReader { proxy in
                 ScrollView {
-                    LazyVStack(spacing: 16) {
-                        ForEach(conversation.messages) { message in
-                            MessageBubble(
+                    LazyVStack(spacing: 12) {
+                        ForEach(Array(conversation.messages.enumerated()), id: \.element.id) { index, message in
+                            let previous = index > 0 ? conversation.messages[index - 1] : nil
+                            let isCurrentUser = message.senderId == viewModel.currentUser.id
+                            let otherUser = self.otherUser
+                            let showAvatar = !isCurrentUser && shouldShowAvatar(current: message, previous: previous)
+                            let isLastOutgoing = isLastOutgoingMessage(messages: conversation.messages, index: index, currentUserId: viewModel.currentUser.id)
+
+                            if isNewDay(current: message, previous: previous) {
+                                DaySeparator(date: message.timestamp)
+                                    .padding(.vertical, 6)
+                            }
+
+                            MessageRow(
                                 message: message,
-                                isCurrentUser: message.senderId == viewModel.currentUser.id
+                                isCurrentUser: isCurrentUser,
+                                showAvatar: showAvatar,
+                                avatarUser: otherUser,
+                                isLastOutgoing: isLastOutgoing,
+                                conversationId: conversation.id,
+                                onReply: { msg in
+                                    replyContext = makeReplyContext(from: msg, otherUser: otherUser)
+                                }
                             )
                             .id(message.id)
                         }
                     }
-                    .padding()
+                    .padding(.horizontal)
+                    .padding(.top, 8)
                 }
                 .onAppear {
                     scrollProxy = proxy
                     scrollToBottom()
                     viewModel.markMessagesAsRead(in: conversation.id)
                 }
+                .onChange(of: conversation.messages.count) { _ in
+                    scrollToBottom()
+                }
             }
 
             // Input bar
             VStack(spacing: 12) {
+                if let ctx = replyContext {
+                    ReplyComposerBar(context: ctx) {
+                        replyContext = nil
+                    }
+                    .padding(.horizontal)
+                }
                 if showGifPicker {
                     GifPickerView(onGifSelected: { gif in
                         sendGif(gif)
@@ -103,11 +149,38 @@ struct ChatContentView: View {
                     .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
 
+                if showPhotoPicker {
+                    PhotoAttachmentPickerView(onPhotoSelected: { photoId in
+                        viewModel.sendPhoto(to: conversation.id, photoUrl: photoId)
+                        showPhotoPicker = false
+                    })
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+
                 HStack(spacing: 10) {
+                    // Typing indicator (other user)
+                    if let other = otherUser, viewModel.isUserTyping(in: conversation.id, userId: other.id) {
+                        TypingIndicatorRow(user: other)
+                            .padding(.horizontal, 16)
+                    }
+                    // Photo button
+                    Button(action: {
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                            showPhotoPicker.toggle()
+                            if showPhotoPicker { showGifPicker = false }
+                        }
+                    }) {
+                        Image(systemName: "photo.fill")
+                            .font(.system(size: 20, weight: .semibold))
+                            .foregroundColor(showPhotoPicker ? Color(red: 252/255, green: 108/255, blue: 133/255) : .gray)
+                            .frame(width: 44, height: 44)
+                    }
+
                     // GIF button
                     Button(action: {
                         withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                             showGifPicker.toggle()
+                            if showGifPicker { showPhotoPicker = false }
                         }
                     }) {
                         Image(systemName: "photo.on.rectangle.angled")
@@ -123,6 +196,9 @@ struct ChatContentView: View {
                             .padding(.horizontal, 16)
                             .padding(.vertical, 11)
                             .disabled(isRecording)
+                            .onChange(of: messageText) { _ in
+                                handleTypingChanged()
+                            }
                     }
                     .background(Color(.systemGray6))
                     .cornerRadius(24)
@@ -197,6 +273,22 @@ struct ChatContentView: View {
             }
             .background(Color(.systemBackground))
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
+            scrollToBottom()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillChangeFrameNotification)) { _ in
+            scrollToBottom()
+        }
+    }
+
+    private func handleTypingChanged() {
+        viewModel.setTyping(in: conversation.id, userId: viewModel.currentUser.id, isTyping: !messageText.isEmpty)
+        typingWorkItem?.cancel()
+        let w = DispatchWorkItem {
+            viewModel.setTyping(in: conversation.id, userId: viewModel.currentUser.id, isTyping: false)
+        }
+        typingWorkItem = w
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: w)
     }
 
     private func scrollToBottom() {
@@ -206,13 +298,33 @@ struct ChatContentView: View {
         }
     }
 
+    private func makeReplyContext(from message: Message, otherUser: User?) -> MessageReplyContext {
+        let senderName = message.senderId == viewModel.currentUser.id ? "You" : (otherUser?.name ?? "Someone")
+        let summary: String
+        switch message.type {
+        case .text:
+            summary = message.text
+        case .voiceMemo:
+            let dur = Int(message.voiceMemoDuration ?? 0)
+            summary = "Voice message (\(dur)s)"
+        case .gift:
+            summary = "Gift \(message.giftEmoji ?? "🎁")"
+        case .gif:
+            summary = message.text.isEmpty ? "GIF" : message.text
+        case .photo:
+            summary = message.text.isEmpty ? "Photo" : message.text
+        }
+        return MessageReplyContext(messageId: message.id, senderId: message.senderId, senderName: senderName, summary: summary)
+    }
+
     private func sendMessage() {
         guard !messageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
 
         let trimmedMessage = messageText.trimmingCharacters(in: .whitespacesAndNewlines)
-        viewModel.sendMessage(to: conversation.id, text: trimmedMessage)
+        viewModel.sendMessage(to: conversation.id, text: trimmedMessage, reply: replyContext)
 
         messageText = ""
+        replyContext = nil
 
         let impact = UIImpactFeedbackGenerator(style: .light)
         impact.impactOccurred()
@@ -266,6 +378,28 @@ struct ChatContentView: View {
         let impact = UIImpactFeedbackGenerator(style: .light)
         impact.impactOccurred()
     }
+}
+
+// MARK: - Helper Functions
+private func isNewDay(current: Message, previous: Message?) -> Bool {
+    guard let prev = previous else { return true }
+    let cal = Calendar.current
+    return !cal.isDate(prev.timestamp, inSameDayAs: current.timestamp)
+}
+
+private func shouldShowAvatar(current: Message, previous: Message?) -> Bool {
+    guard let prev = previous else { return true }
+    if prev.senderId != current.senderId { return true }
+    // Show avatar if time gap > 5 minutes to start a new visual group
+    return current.timestamp.timeIntervalSince(prev.timestamp) > 5 * 60
+}
+
+private func isLastOutgoingMessage(messages: [Message], index: Int, currentUserId: String) -> Bool {
+    guard messages.indices.contains(index) else { return false }
+    let isOutgoing = messages[index].senderId == currentUserId
+    if !isOutgoing { return false }
+    // No later message from current user
+    return !messages[(index+1)..<messages.count].contains { $0.senderId == currentUserId }
 }
 
 /// User profile content without navigation wrapper
